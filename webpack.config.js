@@ -1,5 +1,5 @@
-let path = require("path");
-let MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let path = require("path")
+let MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 let conf = {
   entry: "./src/index.js",
@@ -71,7 +71,7 @@ let conf = {
     alias: {
       "~": path.resolve(__dirname, "src"),
       "~c": path.resolve(__dirname, "src/components"),
-      "~p": path.resolve(__dirname, "src/containers"),
+      "~p": path.resolve(__dirname, "src/pages"),
       "~s": path.resolve(__dirname, "src/store")
     }
   },
@@ -105,6 +105,6 @@ let conf = {
       }
     }
   }
-};
+}
 
-module.exports = conf;
+module.exports = conf

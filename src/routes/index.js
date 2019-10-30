@@ -1,5 +1,5 @@
-import LoginPage from "~p/login";
-import Apps from "~p/apps";
+import LoginPage from "~p/Login"
+import AppsPage from "~p/Apps"
 
 let routes = [
   {
@@ -11,18 +11,18 @@ let routes = [
   {
     name: "apps",
     url: "/apps",
-    component: Apps,
+    component: AppsPage,
     exact: true
   }
-];
+]
 
-let routesMap = {};
+let routesMap = {}
 
 routes.forEach(route => {
   if (route.hasOwnProperty("name")) {
-    routesMap[route.name] = route.url;
+    routesMap[route.name] = route.url
   }
-});
+})
 
-export default routes;
-export { routesMap };
+export default routes
+export { routesMap }
