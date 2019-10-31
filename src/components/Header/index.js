@@ -1,16 +1,17 @@
-import React, { PureComponent } from "react"
+import React from "react"
 import { makeStyles, withStyles } from "@material-ui/core/styles"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
-import MenuIcon from "@material-ui/icons/Menu"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import MenuItem from "@material-ui/core/MenuItem"
 import Menu from "@material-ui/core/Menu"
+import { Link } from "react-router-dom"
 
 import { blue, white } from "~v"
+import { URI_TO_APPS } from "~/constants"
 import Logo from "~c/Logo"
+import classes from "./styles.module.scss"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,8 +34,8 @@ const StyledToolbar = withStyles({
   root: {}
 })(Toolbar)
 
-export default function MenuAppBar() {
-  const classes = useStyles()
+export default function MenuAppBar({ color = "white" }) {
+  const cls = useStyles()
   const [auth, setAuth] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -52,15 +53,17 @@ export default function MenuAppBar() {
   }
 
   return (
-    <div className={classes.root}>
-      <AppBar className={classes.appBar} position="static">
+    <div className={cls.root}>
+      <AppBar className={cls.appBar} position="static">
         <StyledToolbar>
-          <div className="logo">
-            <Logo />
+          <div className={classes.logo}>
+            <Logo color={color} />
           </div>
-          <Typography variant="h6" className={classes.title}>
-            Split Stores
-          </Typography>
+          <div className={classes.nav}>
+            <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
+              Applications
+            </Link>
+          </div>
           {auth && (
             <div>
               <IconButton
