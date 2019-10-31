@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import { observer } from "mobx-react";
 
 import styles from "./login.module.scss";
 
@@ -36,33 +37,47 @@ const StyledButton = withStyles({
   }
 })(Button);
 
-function LoginPage() {
-  return (
-    <div className={styles["login-wrapper"]}>
-      <Paper className={styles["login-form-wrapper"]}>
-        <h2 className={styles.H2}>Log in Split Stores</h2>
-
-        <div className={styles["input-wrapper"]}>
-          <StyledInput
-            label="E-mail"
-            type="email"
-            autoComplete="current-password"
-            margin="normal"
-            variant="outlined"
-          />
-          <StyledInput
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            margin="normal"
-            variant="outlined"
-          />
+@observer
+class LoginPage extends React.Component {
+  render() {
+    return (
+      <div className={styles["login-wrapper"]}>
+        <div className={styles["login-logo"]}>
+          <img src="../../../static/images/SplitStoresIcon_white.svg" />
+          <span className={styles["login-logo-text"]}>Split Stores</span>
         </div>
-        <StyledButton className={styles.button}>log in</StyledButton>
-      </Paper>
-    </div>
-  );
+        <Paper className={styles["login-form-wrapper"]}>
+          <h2 className={styles.H2}>Log in Split Stores</h2>
+
+          <div className={styles["input-wrapper"]}>
+            <StyledInput
+              label="E-mail"
+              type="email"
+              autoComplete="current-password"
+              margin="normal"
+              variant="outlined"
+              required
+            />
+            <StyledInput
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              margin="normal"
+              variant="outlined"
+              required
+            />
+          </div>
+          <StyledButton
+            className={styles.button}
+            onClick={() => console.log("hello")}
+          >
+            log in
+          </StyledButton>
+        </Paper>
+      </div>
+    );
+  }
 }
 
 export default LoginPage;
