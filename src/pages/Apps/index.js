@@ -1,9 +1,13 @@
 import React, { Component } from "react"
-import { Divider } from "@material-ui/core"
+import Header from "../../components/Header"
 
 class Apps extends React.Component {
   render() {
-    return <div>Apps Page</div>
+    return (
+      <div>
+        <Header />
+      </div>
+    )
   }
 }
 
