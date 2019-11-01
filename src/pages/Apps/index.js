@@ -1,9 +1,18 @@
 import React, { Component } from "react"
-import { Divider } from "@material-ui/core"
+import Container from "@material-ui/core/Container"
+import Header from "../../components/Header"
+import GradientBg from "../../components/GradientBg"
 
 class Apps extends React.Component {
   render() {
-    return <div>Apps Page</div>
+    return (
+      <>
+        <GradientBg>
+          <Header color="blue" />
+          <Container>Apps</Container>
+        </GradientBg>
+      </>
+    )
   }
 }
 

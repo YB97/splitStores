@@ -1,0 +1,30 @@
+@import "~v/styles.scss";
+
+.group {
+  background: $blue;
+}
+.logo {
+  display: inline-block;
+  display: flex;
+  text-decoration: none;
+}
+
+.logo-text {
+  display: flex;
+  align-items: center;
+  font-family: "Exo", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.logo-icon {
+  margin-right: 11px;
+  .white {
+    background: white;
+    fill: white;
+  }
+  .blue {
+    background: #244bdd;
+    fill: #244bdd;
+  }
+}

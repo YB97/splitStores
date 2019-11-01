@@ -1,16 +1,17 @@
 import LoginPage from "~p/Login"
 import AppsPage from "~p/Apps"
+import { URI_TO_APPS, URI_TO_LOGIN } from "~/constants"
 
 let routes = [
   {
     name: "login",
-    url: "/login",
+    url: URI_TO_LOGIN,
     component: LoginPage,
     exact: true
   },
   {
     name: "apps",
-    url: "/apps",
+    url: URI_TO_APPS,
     component: AppsPage,
     exact: true
   }
