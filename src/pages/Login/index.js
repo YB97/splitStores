@@ -6,8 +6,10 @@ import { withStyles } from "@material-ui/core/styles"
 import { observer } from "mobx-react"
 
 import GradientBg from "../../components/GradientBg"
+import Logo from "../../components/Logo"
 
 import styles from "./login.module.scss"
+import { style } from "@material-ui/system"
 
 const StyledInput = withStyles({
   root: {
@@ -45,13 +47,11 @@ class LoginPage extends React.Component {
     return (
       <GradientBg>
         <div className={styles["login-wrapper"]}>
-          <div className={styles["login-logo"]}>
-            <img src="../../../static/images/SplitStoresIcon_white.svg" />
-            <span className={styles["login-logo-text"]}>Split Stores</span>
+          <div className={styles.logo}>
+            <Logo font="light" />
           </div>
           <Paper className={styles["login-form-wrapper"]}>
             <h2 className={styles.H2}>Log in Split Stores</h2>
-
             <div className={styles["input-wrapper"]}>
               <StyledInput
                 label="E-mail"
