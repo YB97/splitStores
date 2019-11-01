@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import routes from "./routes"
 import "./global.scss"
-import stores from "~s"
+import stores from "./stores"
 
 class App extends Component {
   render() {

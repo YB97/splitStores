@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import classes from "./styles.module.scss"
 
-export default function({ color = "blue", link = "#" }) {
+export default function({ color = "blue", link = "#", font = "normal" }) {
   let inverseColor = "blue"
   if (color === "blue") {
     inverseColor = "white"
@@ -31,7 +31,7 @@ export default function({ color = "blue", link = "#" }) {
           </g>
         </svg>
       </div>
-      <div className={`${classes["logo-text"]}`}>
+      <div className={`${classes["logo-text"]} font--${font}`}>
         <span className={inverseColor}>Split Stores</span>
       </div>
     </Link>
