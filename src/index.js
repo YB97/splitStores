@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "mobx-react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { Component } from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "mobx-react"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
-import routes from "./routes";
-import "./styles.scss";
-import stores from '~s';
+import routes from "./routes"
+import "./global.scss"
+import stores from "~s"
 
 class App extends Component {
   render() {
@@ -17,9 +17,9 @@ class App extends Component {
           exact={route.exact}
           key={route.url}
         />
-      );
-    });
-    return <Router>{routesComponents}</Router>;
+      )
+    })
+    return <Router>{routesComponents}</Router>
   }
 }
 
@@ -28,4 +28,4 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById("app")
-);
+)

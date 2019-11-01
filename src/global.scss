@@ -1,0 +1,19 @@
+$blue: #244bdd;
+$white: white;
+$text: #333333;
+
+.white {
+  color: $white;
+}
+.blue {
+  color: $blue;
+}
+
+.bg-white {
+  background: $white;
+  fill: $white;
+}
+.bg-blue {
+  background: $blue;
+  fill: $blue;
+}

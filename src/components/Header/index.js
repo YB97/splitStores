@@ -17,10 +17,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  appBar: {
-    background: "rgba(36,75,221, 1)",
-    opacity: "1"
-  },
   title: {
     flexGrow: 1,
     color: white,
@@ -34,15 +30,20 @@ const StyledToolbar = withStyles({
   root: {}
 })(Toolbar)
 
+const canShowNavList = () => {
+  return window.location.pathname !== URI_TO_APPS && auth
+}
+
 export default function MenuAppBar({ color = "white" }) {
   const cls = useStyles()
   const [auth, setAuth] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
-
-  const handleChange = event => {
-    setAuth(event.target.checked)
-  }
+  const navList = canShowNavList() && (
+    <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
+      Applications
+    </Link>
+  )
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget)
@@ -54,16 +55,13 @@ export default function MenuAppBar({ color = "white" }) {
 
   return (
     <div className={cls.root}>
-      <AppBar className={cls.appBar} position="static">
+      <AppBar className={`${classes["app-bar"]} bg-${color}`} position="static">
         <StyledToolbar>
           <div className={classes.logo}>
-            <Logo color={color} />
+            {/* Яна тут глянь. Я вот хз норм ли так в пропсе писать  */}
+            <Logo color={color} href={canShowNavList() && URI_TO_APPS} />
           </div>
-          <div className={classes.nav}>
-            <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
-              Applications
-            </Link>
-          </div>
+          <div className={classes.nav}>{navList}</div>
           {auth && (
             <div>
               <IconButton

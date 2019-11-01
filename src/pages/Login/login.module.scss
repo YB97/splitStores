@@ -1,18 +1,11 @@
 .login-wrapper {
-  margin: 0;
-  width: 100%;
+  // font-family: "Exo", sans-serif; Это нужно?
   height: 100vh;
-  // font-family: "Exo", sans-serif;
   color: #fff;
-  background: linear-gradient(-45deg, #ee7752, #e98568, #455dd4, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  margin: 0;
 }
 
 @keyframes gradientBG {
