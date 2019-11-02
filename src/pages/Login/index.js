@@ -8,8 +8,7 @@ import { observer } from "mobx-react"
 import GradientBg from "../../components/GradientBg"
 import Logo from "../../components/Logo"
 
-import styles from "./login.module.scss"
-import { style } from "@material-ui/system"
+import styles from "./login.module.scss";
 
 const StyledInput = withStyles({
   root: {
@@ -43,6 +42,10 @@ const StyledButton = withStyles({
 
 @observer
 class LoginPage extends React.Component {
+  submitHandler = event => {
+    event.preventDefault();
+  };
+
   render() {
     return (
       <GradientBg>
@@ -52,7 +55,7 @@ class LoginPage extends React.Component {
           </div>
           <Paper className={styles["login-form-wrapper"]}>
             <h2 className={styles.H2}>Log in Split Stores</h2>
-            <form onSubmit={() => console.log("submit")}>
+            <form onSubmit={() => this.submitHandler(event)}>
               <div className={styles["input-wrapper"]}>
                 <StyledInput
                   label="E-mail"
@@ -74,6 +77,7 @@ class LoginPage extends React.Component {
               </div>
               <StyledButton
                 className={styles.button}
+                type="submit"
                 onClick={() => console.log("hello")}
               >
                 log in
