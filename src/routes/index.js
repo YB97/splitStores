@@ -1,6 +1,6 @@
-import LoginPage from "~p/Login"
-import AppsPage from "~p/Apps"
-import { URI_TO_APPS, URI_TO_LOGIN } from "~/constants"
+import LoginPage from "../pages/Login"
+import Welcome from "../pages/Welcome"
+import { URI_TO_APPS, URI_TO_LOGIN, URI_TO_WELCOME } from "../constants"
 
 let routes = [
   {
@@ -10,9 +10,9 @@ let routes = [
     exact: true
   },
   {
-    name: "apps",
-    url: URI_TO_APPS,
-    component: AppsPage,
+    name: "welcome",
+    url: URI_TO_WELCOME,
+    component: Welcome,
     exact: true
   }
 ]
