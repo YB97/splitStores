@@ -1,4 +1,4 @@
-import { observable } from "mobx";
+import { observable, action } from "mobx";
 
 class LoginStore {
   @observable email;
@@ -9,7 +9,8 @@ class LoginStore {
   }
 
   @action
-  onSubmitHandler = (email, password) => {
-    
-  }
+  onSubmitHandler(email, password) {}
+
+
+
 }
