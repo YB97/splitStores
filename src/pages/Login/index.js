@@ -1,15 +1,15 @@
-import React from "react";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import { observer } from "mobx-react";
+import React from "react"
+import Paper from "@material-ui/core/Paper"
+import TextField from "@material-ui/core/TextField"
+import Button from "@material-ui/core/Button"
+import { withStyles } from "@material-ui/core/styles"
+import { observer } from "mobx-react"
 
-import GradientBg from "../../components/GradientBg";
-import Logo from "../../components/Logo";
+import GradientBg from "../../components/GradientBg"
+import Logo from "../../components/Logo"
 
-import styles from "./login.module.scss";
-import { style } from "@material-ui/system";
+import styles from "./login.module.scss"
+import { style } from "@material-ui/system"
 
 const StyledInput = withStyles({
   root: {
@@ -28,7 +28,7 @@ const StyledInput = withStyles({
       }
     }
   }
-})(TextField);
+})(TextField)
 
 const StyledButton = withStyles({
   root: {
@@ -39,7 +39,7 @@ const StyledButton = withStyles({
       backgroundColor: "#1B3DBC"
     }
   }
-})(Button);
+})(Button)
 
 @observer
 class LoginPage extends React.Component {
@@ -85,8 +85,8 @@ class LoginPage extends React.Component {
           </span>
         </div>
       </GradientBg>
-    );
+    )
   }
 }
 
-export default LoginPage;
+export default LoginPage

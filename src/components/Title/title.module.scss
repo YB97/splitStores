@@ -1,0 +1,15 @@
+.component {
+  display: flex;
+  flex-flow: row wrap;
+  .white {
+    color: white;
+  }
+}
+
+.title {
+  margin: 0;
+}
+
+.subtitle {
+  color: black;
+}
