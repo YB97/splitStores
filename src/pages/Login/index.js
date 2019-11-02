@@ -9,6 +9,7 @@ import { observer, inject } from "mobx-react";
 import GradientBg from "../../components/GradientBg";
 import Logo from "../../components/Logo";
 import ErrorText from "../../components/ErrorText";
+import validation from "../../helpers/validation";
 
 import styles from "./login.module.scss";
 
@@ -29,7 +30,7 @@ const StyledInput = withStyles({
       }
     }
   }
-})(TextField)
+})(TextField);
 
 const StyledButton = withStyles({
   root: {
@@ -40,7 +41,7 @@ const StyledButton = withStyles({
       backgroundColor: "#1B3DBC"
     }
   }
-})(Button)
+})(Button);
 
 @inject("stores")
 @observer
@@ -49,10 +50,13 @@ class LoginPage extends React.Component {
     event.preventDefault();
   };
 
+  state = {
+    emailValidation: null
+  };
+
   render() {
-    // console.log("login", this.props.stores.login.email);
     const { email, password, setEmail, setPass } = this.props.stores.login;
-    console.log("email", email);
+
     return (
       <GradientBg>
         <Container>
@@ -71,10 +75,26 @@ class LoginPage extends React.Component {
                     margin="normal"
                     variant="outlined"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={e => {
+                      setEmail(e.target.value);
+                      this.setState({
+                        emailValidation: validation("email", e.target.value)
+                      });
+                    }}
+                    error={
+                      this.state.emailValidation &&
+                      !this.state.emailValidation.isValid
+                    }
                     required
                   />
-                  <ErrorText>Some error</ErrorText>
+                  {this.state.emailValidation &&
+                    !this.state.emailValidation.isValid && (
+                      <ErrorText>
+                        {this.state.emailValidation.errorText}
+                      </ErrorText>
+                    )}
+                </div>
+                <div className={styles["input-wrapper"]}>
                   <StyledInput
                     id="outlined-password-input"
                     label="Password"
@@ -97,13 +117,13 @@ class LoginPage extends React.Component {
               </form>
             </Paper>
             <span className={styles["login-small-text"]}>
-              Do not have an account? <u>Sign In!></u>
+              Do not have an account? <u>Sign In!</u>
             </span>
           </div>
         </Container>
       </GradientBg>
-    )
+    );
   }
 }
 
-export default LoginPage
+export default LoginPage;
