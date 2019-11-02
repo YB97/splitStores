@@ -56,6 +56,10 @@ class LoginPage extends React.Component {
 
   render() {
     const { email, password, setEmail, setPass } = this.props.stores.login;
+    const isBtnDisabled =
+      (this.state.emailValidation && !this.state.emailValidation.isValid) ||
+      !email.length ||
+      !password.length;
 
     return (
       <GradientBg>
@@ -111,6 +115,8 @@ class LoginPage extends React.Component {
                   className={styles.button}
                   type="submit"
                   onClick={() => console.log("hello")}
+                  href="/apps"
+                  disabled={isBtnDisabled}
                 >
                   log in
                 </StyledButton>
