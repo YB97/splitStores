@@ -1,5 +1,9 @@
+import LoginStore from "./login";
+
 class RootStore {
-  constructor() {}
+  constructor() {
+    this.login = new LoginStore(this);
+  }
 }
 
 export default new RootStore();
