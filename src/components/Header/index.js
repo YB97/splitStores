@@ -1,16 +1,16 @@
-import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import { Link } from "react-router-dom";
+import React from "react"
+import { makeStyles, withStyles } from "@material-ui/core/styles"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import IconButton from "@material-ui/core/IconButton"
+import AccountCircle from "@material-ui/icons/AccountCircle"
+import MenuItem from "@material-ui/core/MenuItem"
+import Menu from "@material-ui/core/Menu"
+import { Link } from "react-router-dom"
 
-import { URI_TO_APPS } from "~/constants";
-import Logo from "~c/Logo";
-import classes from "./styles.module.scss";
+import { URI_TO_APPS, URI_TO_WELCOME } from "../../constants"
+import Logo from "~c/Logo"
+import classes from "./styles.module.scss"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,34 +23,39 @@ const useStyles = makeStyles(theme => ({
     fontSize: "24px",
     fontWeight: 500
   }
-}));
+}))
 
 const StyledToolbar = withStyles({
   root: {}
-})(Toolbar);
+})(Toolbar)
 
 const canShowNavList = auth => {
-  return window.location.pathname !== URI_TO_APPS && auth;
-};
+  const currentPathname = window.location.pathname
+  return (
+    currentPathname !== URI_TO_APPS &&
+    currentPathname === URI_TO_WELCOME &&
+    auth
+  )
+}
 
 export default function MenuAppBar({ color = "white" }) {
-  const cls = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const cls = useStyles()
+  const [auth, setAuth] = React.useState(true)
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
   const navList = canShowNavList(auth) && (
     <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
       Applications
     </Link>
-  );
+  )
 
   const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <div className={cls.root}>
@@ -95,5 +100,5 @@ export default function MenuAppBar({ color = "white" }) {
         </StyledToolbar>
       </AppBar>
     </div>
-  );
+  )
 }
