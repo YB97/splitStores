@@ -1,5 +1,6 @@
 import LoginPage from "../pages/Login"
 import Welcome from "../pages/Welcome"
+import Apps from "../pages/Apps"
 import { URI_TO_APPS, URI_TO_LOGIN, URI_TO_WELCOME } from "../constants"
 
 let routes = [
@@ -13,6 +14,12 @@ let routes = [
     name: "welcome",
     url: URI_TO_WELCOME,
     component: Welcome,
+    exact: true
+  },
+  {
+    name: "apps",
+    url: URI_TO_APPS,
+    component: Apps,
     exact: true
   }
 ]
