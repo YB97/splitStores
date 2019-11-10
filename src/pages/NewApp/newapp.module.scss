@@ -1,10 +1,18 @@
+.newapp {
+  background: #fafafa;
+  min-height: 100vh;
+}
 .title {
   display: flex;
   margin-top: 70px;
   margin-bottom: 57px;
   justify-content: space-between;
 }
+.content {
+  margin-top: 54px;
+}
 .content-title-wrap {
   display: flex;
   justify-content: center;
+  margin-bottom: 52px;
 }

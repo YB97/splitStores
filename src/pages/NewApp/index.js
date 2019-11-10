@@ -13,11 +13,11 @@ export default function Apps() {
   const history = useHistory()
 
   const clickHandler = () => {
-    console.log("TODO")
+    console.log("TODO: history.push")
   }
 
   return (
-    <div className={classes.apps}>
+    <div className={classes.newapp}>
       <div className="header">
         <Header />
       </div>
@@ -35,7 +35,16 @@ export default function Apps() {
             </h3>
           </div>
           <div className="cards-wrapper">
-            <Grid container>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={3}
+            >
+              <Grid item xs={5}>
+                <Card />
+              </Grid>
               <Grid item xs={5}>
                 <Card />
               </Grid>
