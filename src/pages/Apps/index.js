@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom"
 import Header from "../../components/Header"
 import Title from "../../components/Title"
 import Button from "../../components/Button"
-import AppsCard from "../../components/AppsCard"
+import AppsCard from "../../components/Card"
 import { URI_TO_NEW_APPS } from "../../constants"
 
 import classes from "./apps.module.scss"
