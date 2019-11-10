@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
+import StyledSelect from "../../components/StyledSelect";
 import { URI_TO_NEW_EXPERIMENT } from "../../constants";
 
 import classes from "./experiments.module.scss";
@@ -21,12 +22,29 @@ class Experiments extends PureComponent {
   render() {
     const { experiments } = this.props.stores.experiments;
 
+    const dataMock = [
+      {
+        name: "Play",
+        icon: "../../static/images/apps/facebook.png"
+      },
+      {
+        name: "One",
+        icon: "../../static/images/apps/facebook.png"
+      }
+    ];
     return (
       <div className={classes.exp}>
         <div className="header">
           <Header />
         </div>
         <Container>
+          <div className={classes.select}>
+            <StyledSelect
+              data={dataMock}
+              onClickHandler={val => console.log(val)}
+              width="300px"
+            />
+          </div>
           <div className={classes.title}>
             <div className={classes["title-text"]}>
               <Title title="Experiments" />
@@ -47,6 +65,7 @@ class Experiments extends PureComponent {
             <Card
               type="experiments"
               storeImgUrl="../../static/images/google-play.svg"
+              onClickHandler={() => console.log("click")}
             />
           )}
         </Container>
