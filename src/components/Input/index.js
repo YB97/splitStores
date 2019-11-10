@@ -1,11 +1,15 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import React from "react"
+import { withStyles } from "@material-ui/core/styles"
+import TextField from "@material-ui/core/TextField"
 
-import ErrorText from "../ErrorText";
+import ErrorText from "../ErrorText"
+
+import classes from "./input.module.scss"
 
 const StyledInput = withStyles({
   root: {
+    width: "100%",
+    margin: "0",
     "& label.Mui-focused": {
       color: "#244BDD"
     },
@@ -21,20 +25,24 @@ const StyledInput = withStyles({
       }
     }
   }
-})(TextField);
+})(TextField)
 
 function Input({
-  label,
-  type,
-  autoComplete,
-  value,
+  label = "",
+  title = "",
+  helpText = "",
+  type = "text",
+  autoComplete = "",
+  value = "",
+  placeholder = "",
   onChange,
   error = null,
   errorText = null,
-  required
+  required = false
 }) {
   return (
     <>
+      <span className={classes.title}>{title}</span>
       <StyledInput
         label={label}
         type={type}
@@ -44,11 +52,15 @@ function Input({
         value={value}
         onChange={onChange}
         error={error}
+        placeholder={placeholder}
         required={required}
       />
+      {helpText && !error && (
+        <span className={classes["help-text"]}>{helpText}</span>
+      )}
       {error && errorText && <ErrorText>{errorText}</ErrorText>}
     </>
-  );
+  )
 }
 
-export default Input;
+export default Input

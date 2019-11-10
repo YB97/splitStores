@@ -7,7 +7,8 @@ export default function({
   bg = "#244BDD",
   color = "#fff",
   href = "",
-  click,
+  click = () => {},
+  variant = "",
   children
 }) {
   const StyledButton = withStyles({
