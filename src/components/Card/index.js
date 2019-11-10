@@ -11,11 +11,12 @@ export default function Card({
   visitorsCount = "0",
   clicksCount = "0",
   appsImgUrl = "../../../static/images/apps/facebook.png",
-  storeImgUrl = "../../../static/images/google-play-bw.svg"
+  storeImgUrl = "../../../static/images/google-play-bw.svg",
+  onClickHandler
 }) {
   return (
     <>
-      <div className={classes.card}>
+      <div className={classes.card} onClick={onClickHandler}>
         {type === "apps" && (
           <>
             <div className={classes["main-content"]}>
