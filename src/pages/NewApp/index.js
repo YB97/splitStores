@@ -4,16 +4,16 @@ import { useHistory } from "react-router-dom"
 import Header from "../../components/Header"
 import Title from "../../components/Title"
 import Button from "../../components/Button"
-import AppsCard from "../../components/AppsCard"
-import { URI_TO_NEW_APPS } from "../../constants"
+import Card from "./components/Card"
 
-import classes from "./apps.module.scss"
+import classes from "./newapp.module.scss"
+import { Grid } from "@material-ui/core"
 
 export default function Apps() {
   const history = useHistory()
 
   const clickHandler = () => {
-    history.push(URI_TO_NEW_APPS)
+    console.log("TODO")
   }
 
   return (
@@ -24,16 +24,22 @@ export default function Apps() {
       <Container>
         <div className={classes.title}>
           <div className={classes["title-text"]}>
-            <Title
-              title="Apps"
-              subtitle="This is the application control room. Here you can create and manage your apps."
-            />
+            <Title title="Add new app" />
           </div>
-          <Button click={clickHandler}>Add App</Button>
+          <Button click={clickHandler}>next</Button>
         </div>
         <div className={classes.content}>
-          <div className={classes.card}>
-            <AppsCard />
+          <div className={classes["content-title-wrap"]}>
+            <h3 className={classes["content-title"]}>
+              Is your app already availiable on the AppStore or Google Play?
+            </h3>
+          </div>
+          <div className="cards-wrapper">
+            <Grid container>
+              <Grid item xs={5}>
+                <Card />
+              </Grid>
+            </Grid>
           </div>
         </div>
       </Container>
