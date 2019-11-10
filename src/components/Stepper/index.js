@@ -28,7 +28,7 @@ export default function ({
   })(Steplabel)
 
   return (
-    <Stepper className={className} activeStep={activeStep} alternativeLabe={alternativeLabel}>
+    <Stepper className={className} activeStep={activeStep} alternativeLabel={alternativeLabel}>
       {console.log(steps)}
       {steps.map((step, index) => {
         return (
