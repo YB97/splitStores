@@ -1,6 +1,5 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
@@ -12,25 +11,6 @@ import Logo from "../../components/Logo";
 import validation from "../../helpers/validation";
 
 import styles from "./login.module.scss";
-
-const StyledInput = withStyles({
-  root: {
-    "& label.Mui-focused": {
-      color: "#244BDD"
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green"
-    },
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: "#939393"
-      },
-      "&.Mui-focused fieldset": {
-        border: "1px solid #244BDD"
-      }
-    }
-  }
-})(TextField);
 
 const StyledButton = withStyles({
   root: {
