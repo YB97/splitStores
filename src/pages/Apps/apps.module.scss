@@ -1,0 +1,32 @@
+.apps {
+  background: #fafafa;
+  min-height: 100vh;
+}
+.title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  @media (max-width: 768px) {
+    align-items: flex-end;
+  }
+  @media (max-width: 576px) {
+    flex-wrap: wrap;
+  }
+}
+.title-text {
+  width: 70%;
+  @media (max-width: 768px) {
+    width: 70%;
+  }
+  @media (max-width: 576px) {
+    margin-bottom: 35px;
+  }
+}
+.content {
+  margin-top: 20px;
+}
+.card {
+  margin-top: 15px;
+}

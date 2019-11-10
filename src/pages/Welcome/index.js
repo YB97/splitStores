@@ -4,7 +4,7 @@ import Header from "../../components/Header"
 import GradientBg from "../../components/GradientBg"
 import Title from "../../components/Title"
 import Button from "../../components/Button"
-import { URI_TO_APPS } from "../../constants"
+import { URI_TO_NEW_APPS } from "../../constants"
 
 import classes from "./welcome.module.scss"
 
@@ -32,7 +32,7 @@ class Apps extends PureComponent {
                 </small>
                 <div className={classes["welcome-btn"]}>
                   <Button
-                    href={URI_TO_APPS}
+                    href={URI_TO_NEW_APPS}
                     click={() => {
                       console.log("HandleClick")
                     }}
