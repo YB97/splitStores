@@ -46,7 +46,7 @@ export default function Apps() {
                 <Card />
               </Grid>
               <Grid item xs={5}>
-                <Card />
+                <Card withBtn={true} />
               </Grid>
             </Grid>
           </div>
