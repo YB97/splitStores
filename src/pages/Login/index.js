@@ -1,17 +1,17 @@
-import React from "react"
-import Paper from "@material-ui/core/Paper"
-import TextField from "@material-ui/core/TextField"
-import Button from "@material-ui/core/Button"
-import Container from "@material-ui/core/Container"
-import { withStyles } from "@material-ui/core/styles"
-import { observer, inject } from "mobx-react"
+import React from "react";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import { withStyles } from "@material-ui/core/styles";
+import { observer, inject } from "mobx-react";
 
-import GradientBg from "../../components/GradientBg"
-import Logo from "../../components/Logo"
-import ErrorText from "../../components/ErrorText"
-import validation from "../../helpers/validation"
+import GradientBg from "../../components/GradientBg";
+import Input from "../../components/Input";
+import Logo from "../../components/Logo";
+import validation from "../../helpers/validation";
 
-import styles from "./login.module.scss"
+import styles from "./login.module.scss";
 
 const StyledInput = withStyles({
   root: {
@@ -30,7 +30,7 @@ const StyledInput = withStyles({
       }
     }
   }
-})(TextField)
+})(TextField);
 
 const StyledButton = withStyles({
   root: {
@@ -41,25 +41,25 @@ const StyledButton = withStyles({
       backgroundColor: "#1B3DBC"
     }
   }
-})(Button)
+})(Button);
 
 @inject("stores")
 @observer
 class LoginPage extends React.Component {
   submitHandler = event => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   state = {
     emailValidation: null
-  }
+  };
 
   render() {
-    const { email, password, setEmail, setPass } = this.props.stores.login
+    const { email, password, setEmail, setPass } = this.props.stores.login;
     const isBtnDisabled =
       (this.state.emailValidation && !this.state.emailValidation.isValid) ||
       !email.length ||
-      !password.length
+      !password.length;
 
     return (
       <GradientBg>
@@ -72,40 +72,34 @@ class LoginPage extends React.Component {
               <h2 className={styles.H2}>Log in Split Stores</h2>
               <form onSubmit={() => this.submitHandler(event)}>
                 <div className={styles["input-wrapper"]}>
-                  <StyledInput
+                  <Input
                     label="E-mail"
                     type="email"
-                    autoComplete="current-password"
-                    margin="normal"
-                    variant="outlined"
                     value={email}
+                    autoComplete="email"
                     onChange={e => {
-                      setEmail(e.target.value)
+                      setEmail(e.target.value);
                       this.setState({
                         emailValidation: validation("email", e.target.value)
-                      })
+                      });
                     }}
                     error={
                       this.state.emailValidation &&
                       !this.state.emailValidation.isValid
                     }
+                    errorText={
+                      this.state.emailValidation &&
+                      !this.state.emailValidation.isValid &&
+                      this.state.emailValidation.errorText
+                    }
                     required
                   />
-                  {this.state.emailValidation &&
-                    !this.state.emailValidation.isValid && (
-                      <ErrorText>
-                        {this.state.emailValidation.errorText}
-                      </ErrorText>
-                    )}
                 </div>
                 <div className={styles["input-wrapper"]}>
-                  <StyledInput
-                    id="outlined-password-input"
+                  <Input
                     label="Password"
                     type="password"
                     autoComplete="current-password"
-                    margin="normal"
-                    variant="outlined"
                     value={password}
                     onChange={e => setPass(e.target.value)}
                     required
@@ -128,8 +122,8 @@ class LoginPage extends React.Component {
           </div>
         </Container>
       </GradientBg>
-    )
+    );
   }
 }
 
-export default LoginPage
+export default LoginPage;
