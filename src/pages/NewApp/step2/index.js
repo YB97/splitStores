@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Container, Grid } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import Header from "../../../components/Header";
 import Title from "../../../components/Title";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import StyledSelect from "../../../components/StyledSelect";
+import { URI_TO_NEW_APPS } from "../../../constants";
 
 import classes from "./step2.module.scss";
 
@@ -16,6 +18,9 @@ export default function() {
     }
   };
   const [step2, setStep2] = useState(defaultStateStep2);
+  const [store, setStore] = useState("app-store");
+  const history = useHistory();
+
   const appleStoreData = [
     { name: "Books" },
     { name: "Business" },
@@ -125,6 +130,10 @@ export default function() {
     { name: "Widgets" }
   ];
 
+  const onClickHandler = () => {
+    history.push(URI_TO_NEW_APPS);
+  };
+
   return (
     <div className={classes["step2"]}>
       <div className="header">
@@ -135,7 +144,7 @@ export default function() {
           <Title title="Add new app" />
         </div>
         <div className={classes["nav-btn"]}>
-          <Button>PREVIOUS STEP</Button>
+          <Button click={onClickHandler}>PREVIOUS STEP</Button>
         </div>
         <div className={classes["content"]}>
           <Grid container spacing={2}>
@@ -163,6 +172,8 @@ export default function() {
                       name="store"
                       className={`${classes.hidden} ${classes.input}`}
                       type="radio"
+                      checked={store === "app-store"}
+                      onChange={() => setStore("app-store")}
                     />
                     <label htmlFor="app-store" className={classes["checkbox"]}>
                       <div className={classes["checkbox-img-wrap"]}>
@@ -190,6 +201,8 @@ export default function() {
                       name="store"
                       className={`${classes.hidden} ${classes.input}`}
                       type="radio"
+                      checked={store === "google-play"}
+                      onChange={() => setStore("google-play")}
                     />
                     <label
                       htmlFor="google-play"
@@ -241,21 +254,31 @@ export default function() {
                 <span className={classes["control-title"]}>
                   Store Category*
                 </span>
-                <StyledSelect width="100%" data={appleStoreData} />
-                TODO: Select
+                <StyledSelect
+                  width="100%"
+                  data={
+                    store === "app-store" ? appleStoreData : googleStoreData
+                  }
+                />
               </div>
             </Grid>
             <Grid spacing={2} xs={5}>
-              <div className="icon-wrapper">
+              <div className={classes["icon-wrapper"]}>
                 <div className="icon">
                   <div className="icon-img-wrap">
                     <img src="" alt="" />
+                  </div>
+                  <div className="input-wrapper">
+                    <input type="file" />
                   </div>
                   <div className="icon-text">Add Icon</div>
                 </div>
               </div>
             </Grid>
           </Grid>
+        </div>
+        <div className={classes["add-btn"]}>
+          <Button>ADD APPLICATION</Button>
         </div>
       </Container>
     </div>
