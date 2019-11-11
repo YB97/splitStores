@@ -37,7 +37,7 @@ const CustomInput = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   margin: {
-    margin: theme.spacing(1)
+    margin: 0
   }
 }));
 
@@ -74,7 +74,9 @@ function StyledSelect({
           </MenuItem>
           {data.map((item, idx) => (
             <MenuItem value={item.name} key={`${item.name} ${idx}`}>
-              <img className={classes.img} src={item.icon} alt="applogo" />
+              {item.icon && (
+                <img className={classes.img} src={item.icon} alt="applogo" />
+              )}
               <span className={classes.item}>{item.name}</span>
             </MenuItem>
           ))}
