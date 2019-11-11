@@ -1,7 +1,7 @@
 import React from "react"
 import Stepper from "@material-ui/core/Stepper"
 import Step from "@material-ui/core/Step"
-import Steplabel from "@material-ui/core/Steplabel"
+import StepLabel from "@material-ui/core/StepLabel"
 import {withStyles} from "@material-ui/core/styles"
 
 export default function ({
@@ -25,17 +25,16 @@ export default function ({
       fontSize: "24px",
       lineHeight: "28px"
     }
-  })(Steplabel)
+  })(StepLabel)
 
   return (
     <Stepper className={className} activeStep={activeStep} alternativeLabel={alternativeLabel}>
-      {console.log(steps)}
       {steps.map((step, index) => {
         return (
           <Step key={index}>
-            <Steplabel StepIconComponent={StyledStepIconLabel}>
+            <StepLabel StepIconComponent={StyledStepIconLabel}>
               {step}
-            </Steplabel>
+            </StepLabel>
           </Step>
         )
       })}

@@ -6,11 +6,7 @@ import {
   FormControl,
   Select,
   MenuItem,
-  InputLabel,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio
+  InputLabel
 } from "@material-ui/core"
 
 import FormHelperText from "@material-ui/core/FormHelperText"
@@ -19,18 +15,22 @@ import OutlinedInput from "@material-ui/core/OutlinedInput"
 import Header from "../../components/Header"
 import Title from "../../components/Title"
 import Stepper from "../../components/Stepper"
+import CardRadioControl from "../../components/CardRadioControl"
 import Button from "../../components/Button"
 
 import classes from "./newexperiment.module.scss"
 
 export default function NewExperiment() {
   const steps = ["set up", "details", "variations"]
+  const [actionInstallValue, setActionInstallValue] = React.useState('')
   const [deviceValue, setDeviceValue] = React.useState('')
 
   const handleChange = event => {
     setDeviceValue(event.target.value)
   }
-
+  const handleInstallActionChange = event => {
+    setActionInstallValue(event.target.value)
+  }
   return (
     <div
       className={classes.newexperiment}
@@ -80,13 +80,27 @@ export default function NewExperiment() {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
-              <FormControl component="fieldset" className={classes.formControl} fullWidth>
-                <FormLabel component="legend" className={classes.inputLabel}>Define platform device</FormLabel>
-                <RadioGroup aria-label="gender" name="gender1" value={deviceValue} onChange={handleChange}>
-                  <FormControlLabel value="phone" control={<Radio/>} label="Android phone"/>
-                  <FormControlLabel value="tablet" control={<Radio/>} label="Android tablet"/>
-                </RadioGroup>
-              </FormControl>
+              <CardRadioControl
+                name="deviceSelect"
+                title={<div className={classes.inputLabel}>Define platform device</div>}
+                values={[
+                  {
+                    value: 'phone',
+                    id: 'phone',
+                    img: '../../../static/images/apps/facebook.png',
+                    text: 'Android phone'
+                  },
+                  {
+                    value: 'tablet',
+                    id: 'tablet',
+                    img: '../../../static/images/apps/facebook.png',
+                    text: 'Android tablet'
+                  }
+                ]}
+                currentValue={deviceValue}
+                className={classes.formControl}
+                handleChange={handleChange}
+              />
               <FormControl
                 fullWidth
                 className={classes.formControl}
@@ -161,6 +175,32 @@ export default function NewExperiment() {
                   This name will only be displayed on the dashboard
                 </FormHelperText>
               </FormControl>
+
+              <CardRadioControl
+                name="install_action"
+                title={(
+                  <div className={classes.inputLabel}>
+                    What to do, when the user wants to install your application?
+                  </div>
+                )}
+                values={[
+                  {
+                    value: 'user_email',
+                    id: 'user_email',
+                    img: '../../../static/images/apps/facebook.png',
+                    text: 'Collect user’s email'
+                  },
+                  {
+                    value: 'custom_link',
+                    id: 'custom_link',
+                    img: '../../../static/images/apps/facebook.png',
+                    text: 'Go to custom link'
+                  }
+                ]}
+                currentValue={actionInstallValue}
+                className={classes.formControl}
+                handleChange={handleInstallActionChange}
+              />
               <div className={classes.buttonWrap}>
                 <Button>Next</Button>
               </div>
