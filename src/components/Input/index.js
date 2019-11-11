@@ -35,7 +35,7 @@ function Input({
   autoComplete = "",
   value = "",
   placeholder = "",
-  onChange,
+  onChange = () => {},
   error = null,
   errorText = null,
   required = false

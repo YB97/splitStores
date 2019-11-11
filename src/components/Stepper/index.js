@@ -1,44 +1,41 @@
-import React from "react"
-import Stepper from "@material-ui/core/Stepper"
-import Step from "@material-ui/core/Step"
-import Steplabel from "@material-ui/core/Steplabel"
-import {withStyles} from "@material-ui/core/styles"
+import React from "react";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import Steplabel from "@material-ui/core/Steplabel";
+import { withStyles } from "@material-ui/core/styles";
 
-export default function ({
-  bg = "#E3603B",
-  color = "#fff",
-  activeStep,
-  steps,
-  className,
-  alternativeLabel = true
-}) {
-  const StyledStepIconLabel = withStyles({
-    root: {
-      backgroundColor: bg,
-      color,
-      height: "50px",
-      width: "50px",
-      display: "flex",
-      borderRadius: "50%",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: "24px",
-      lineHeight: "28px"
+import classes from "./stepper.module.scss";
+
+const StyledStepIconLabel = withStyles({
+  root: {
+    "& .MuiStepIcon-root.MuiStepIcon-active": {
+      color: "#E3603B"
+    },
+    "& .MuiStepLabel-iconContainer": {
+      padding: 0
+    },
+    "& .MuiStepIcon-root.MuiStepIcon-completed": {
+      color: "#E3603B"
     }
-  })(Steplabel)
+  }
+})(Steplabel);
 
+export default function({ activeStep, steps, alternativeLabel = true }) {
   return (
-    <Stepper className={className} activeStep={activeStep} alternativeLabel={alternativeLabel}>
-      {console.log(steps)}
+    <Stepper
+      className={classes["step-wrapper"]}
+      activeStep={activeStep}
+      alternativeLabel={alternativeLabel}
+    >
       {steps.map((step, index) => {
         return (
-          <Step key={index}>
+          <Step key={`${step}:${index}`}>
             <Steplabel StepIconComponent={StyledStepIconLabel}>
               {step}
             </Steplabel>
           </Step>
-        )
+        );
       })}
     </Stepper>
-  )
+  );
 }
