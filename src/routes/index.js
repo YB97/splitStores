@@ -1,10 +1,11 @@
-import LoginPage from "../pages/Login"
-import Welcome from "../pages/Welcome"
-import Apps from "../pages/Apps"
-import NewApp from "../pages/NewApp"
-import NewAppStep2 from "../pages/NewApp/step2"
-import Experiments from "../pages/Experiments"
-import NewExperiment from "../pages/NewExperiment"
+import LoginPage from "../pages/Login";
+import Welcome from "../pages/Welcome";
+import Apps from "../pages/Apps";
+import NewApp from "../pages/NewApp";
+import NewAppStep2 from "../pages/NewApp/step2";
+import Experiments from "../pages/Experiments";
+import NewExperiment from "../pages/NewExperiment";
+import NewExperimentStep2 from "../pages/NewExperiment/step2";
 import {
   URI_TO_APPS,
   URI_TO_LOGIN,
@@ -12,8 +13,9 @@ import {
   URI_TO_NEW_APPS,
   URI_TO_NEW_APPS_STEP_2,
   URI_TO_EXPERIMENTS,
-  URI_TO_NEW_EXPERIMENT
-} from "../constants"
+  URI_TO_NEW_EXPERIMENT,
+  URI_TO_NEW_EXPERIMENT_STEP_2
+} from "../constants";
 
 let routes = [
   {
@@ -57,16 +59,22 @@ let routes = [
     url: URI_TO_NEW_EXPERIMENT,
     component: NewExperiment,
     exact: true
+  },
+  {
+    name: "newExperimentStep2",
+    url: URI_TO_NEW_EXPERIMENT_STEP_2,
+    component: NewExperimentStep2,
+    exact: true
   }
-]
+];
 
-let routesMap = {}
+let routesMap = {};
 
 routes.forEach(route => {
   if (route.hasOwnProperty("name")) {
-    routesMap[route.name] = route.url
+    routesMap[route.name] = route.url;
   }
-})
+});
 
-export default routes
-export { routesMap }
+export default routes;
+export { routesMap };

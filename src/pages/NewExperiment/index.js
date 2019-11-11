@@ -1,55 +1,57 @@
-import React from "react"
-
+import React from "react";
+import { useHistory } from "react-router-dom";
 import {
   Container,
   Grid,
   FormControl,
   Select,
   MenuItem,
-  InputLabel
+  InputLabel,
+  OutlinedInput,
+  FormHelperText
 } from "@material-ui/core"
 
-import FormHelperText from "@material-ui/core/FormHelperText"
-import OutlinedInput from "@material-ui/core/OutlinedInput"
-
-import Header from "../../components/Header"
-import Title from "../../components/Title"
-import Stepper from "../../components/Stepper"
+import Header from "../../components/Header";
+import Title from "../../components/Title";
+import Stepper from "../../components/Stepper";
+import Button from "../../components/Button";
 import CardRadioControl from "../../components/CardRadioControl"
-import Button from "../../components/Button"
+import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
 
 import classes from "./newexperiment.module.scss"
 
 export default function NewExperiment() {
-  const steps = ["set up", "details", "variations"]
-  const [actionInstallValue, setActionInstallValue] = React.useState('')
-  const [deviceValue, setDeviceValue] = React.useState('')
+  const steps = ["set up", "details", "variations"];
+  const history = useHistory();
+
+  const [actionInstallValue, setActionInstallValue] = React.useState('');
+  const [deviceValue, setDeviceValue] = React.useState('');
 
   const handleChange = event => {
-    setDeviceValue(event.target.value)
-  }
+    setDeviceValue(event.target.value);
+  };
   const handleInstallActionChange = event => {
     setActionInstallValue(event.target.value)
-  }
+  };
+  const onClickHandler = () => {
+    history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
+  };
+
+
   return (
-    <div
-      className={classes.newexperiment}
-    >
+    <div className={classes.newexperiment}>
       <div className={classes.header}>
-        <Header/>
+        <Header />
       </div>
       <Container>
         <Grid container justify="center">
           <Grid item sm={8} lg={6}>
             <div className={classes.wrapper}>
-              <Title
-                title="Create new experiment"
-              />
-              <Stepper activeStep={0} steps={steps} className={classes.stepper}/>
-              <FormControl
-                fullWidth
-                className={classes.formControl}
-              >
+              <div className={classes["title-wrapper"]}>
+                <Title title="Create new experiment" />
+              </div>
+              <Stepper activeStep={0} steps={steps} />
+              <FormControl fullWidth className={classes.formControl}>
                 <InputLabel
                   disableAnimation
                   shrink={false}
@@ -70,11 +72,14 @@ export default function NewExperiment() {
                     <em>None</em>
                   </MenuItem>
                   <MenuItem value={10}>
-                    <img src="../../../static/images/apps/facebook.png"
-                         className={classes.selectImage}
-                         alt=""
-                         width={39}
-                         height={39}/>Play for game
+                    <img
+                      src="../../../static/images/apps/facebook.png"
+                      className={classes.selectImage}
+                      alt=""
+                      width={39}
+                      height={39}
+                    />
+                    Play for game
                   </MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
@@ -130,10 +135,7 @@ export default function NewExperiment() {
                 </Select>
               </FormControl>
 
-              <FormControl
-                fullWidth
-                className={classes.formControl}
-              >
+              <FormControl fullWidth className={classes.formControl}>
                 <InputLabel
                   disableAnimation
                   shrink={false}
@@ -158,10 +160,7 @@ export default function NewExperiment() {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
-              <FormControl
-                fullWidth
-                className={classes.formControl}
-              >
+              <FormControl fullWidth className={classes.formControl}>
                 <InputLabel
                   disableAnimation
                   shrink={false}
@@ -170,7 +169,11 @@ export default function NewExperiment() {
                 >
                   Set the name to your experiment
                 </InputLabel>
-                <OutlinedInput id="nameInput" variant="outlined" placeholder="Name..."/>
+                <OutlinedInput
+                  id="nameInput"
+                  variant="outlined"
+                  placeholder="Name..."
+                />
                 <FormHelperText>
                   This name will only be displayed on the dashboard
                 </FormHelperText>
@@ -202,12 +205,12 @@ export default function NewExperiment() {
                 handleChange={handleInstallActionChange}
               />
               <div className={classes.buttonWrap}>
-                <Button>Next</Button>
+                <Button click={onClickHandler}>Next</Button>
               </div>
             </div>
           </Grid>
         </Grid>
       </Container>
     </div>
-  )
+  );
 }

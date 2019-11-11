@@ -1,4 +1,5 @@
 import React from "react"
+
 import classes from "./title.module.scss"
 
 export default function Title({ title = "", subtitle = "", color = "" }) {
