@@ -7,131 +7,55 @@ import Title from "../../../components/Title";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import StyledSelect from "../../../components/StyledSelect";
+
+import optimizeImage from "../../../helpers/optimizeImage";
+
 import { URI_TO_NEW_APPS } from "../../../constants";
 
 import classes from "./step2.module.scss";
+import { ENGINE_METHOD_DSA } from "constants";
 
 export default function() {
   const defaultStateStep2 = {
     appName: {
       value: ""
-    }
+    },
+    file: {}
   };
+
+  function handleFileAsDataUri(file) {
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = (function(file) {
+        return function(e) {
+          const binaryData = e.target.result;
+          const base64String = window.btoa(binaryData);
+          const value = `data:${file.type};base64,${base64String}`;
+          resolve(value);
+        };
+      })(file);
+
+      reader.readAsBinaryString(file);
+    });
+  }
+
   const [step2, setStep2] = useState(defaultStateStep2);
   const [store, setStore] = useState("app-store");
   const history = useHistory();
 
-  const appleStoreData = [
-    { name: "Books" },
-    { name: "Business" },
-    { name: "Catalogs" },
-    { name: "Education" },
-    { name: "Entertainment" },
-    { name: "Finance" },
-    { name: "Food & Drink" },
-    { name: "Game: Action" },
-    { name: "Game: Adventure" },
-    { name: "Game: Arcade" },
-    { name: "Game: Board" },
-    { name: "Game: Card" },
-    { name: "Game: Casino" },
-    { name: "Game: Dice" },
-    { name: "Game: Educational" },
-    { name: "Game: Family" },
-    { name: "Game: Kids" },
-    { name: "Game: Music" },
-    { name: "Game: Puzzle" },
-    { name: "Game: Racing" },
-    { name: "Game: Role Playing" },
-    { name: "Game: Simulation" },
-    { name: "Game: Sports" },
-    { name: "Game: Strategy" },
-    { name: "Game: Trivia" },
-    { name: "Game: World Games" },
-    { name: "Health & Fitness" },
-    { name: "Lifestyle" },
-    { name: "Medical" },
-    { name: "Musical" },
-    { name: "Navigation" },
-    { name: "News" },
-    { name: "Newsstand" },
-    { name: "Photo & Video" },
-    { name: "Productivity" },
-    { name: "Reference" },
-    { name: "Shopping" },
-    { name: "Social Networking" },
-    { name: "Sports" },
-    { name: "Stickers" },
-    { name: "Travel" },
-    { name: "Utilities" },
-    { name: "Weather" }
-  ];
-
-  const googleStoreData = [
-    { name: "Art & Design Auto & Vehicles Beauty" },
-    { name: "Books & Reference" },
-    { name: "Business" },
-    { name: "Comics" },
-    { name: "Communication" },
-    { name: "Dating" },
-    { name: "Education" },
-    { name: "Entertainment" },
-    { name: "Events" },
-    { name: "Family" },
-    { name: "Family: Action & Adventure" },
-    { name: "Family: Brain Games" },
-    { name: "Family: Creativity" },
-    { name: "Family: Education" },
-    { name: "Family: Music & Video" },
-    { name: "Family: Pretend Play" },
-    { name: "Finance" },
-    { name: "Food & Drink" },
-    { name: "Game: Action" },
-    { name: "Game: Adventure" },
-    { name: "Game: Arcade" },
-    { name: "Game: Board" },
-    { name: "Game: Card" },
-    { name: "Game: Casino" },
-    { name: "Game: Casual" },
-    { name: "Game: Educational" },
-    { name: "Game: Family" },
-    { name: "Game: Music" },
-    { name: "Game: Puzzle" },
-    { name: "Game: Racing" },
-    { name: "Game: Role Playing" },
-    { name: "Game: Simulation" },
-    { name: "Game: Sports" },
-    { name: "Game: Strategy" },
-    { name: "Game: Trivia" },
-    { name: "Game: Word" },
-    { name: "Games" },
-    { name: "Health & Fitness" },
-    { name: "House & Home" },
-    { name: "Libraries & Demo" },
-    { name: "Lifestyle" },
-    { name: "Live Wallpaper" },
-    { name: "Maps & Navigation" },
-    { name: "Medical" },
-    { name: "Music & Audio" },
-    { name: "News & Magazines" },
-    { name: "Parenting" },
-    { name: "Personalization" },
-    { name: "Photography" },
-    { name: "Productivity" },
-    { name: "Shopping" },
-    { name: "Social" },
-    { name: "Sports" },
-    { name: "Tools" },
-    { name: "Travel" },
-    { name: "Travel & local" },
-    { name: "Video Players & Editors" },
-    { name: "Wear OS by Google" },
-    { name: "Weather" },
-    { name: "Widgets" }
-  ];
+  const fileInput = React.createRef();
 
   const onClickHandler = () => {
     history.push(URI_TO_NEW_APPS);
+  };
+  const changeHandler = e => {
+    const file = fileInput.current.files[0];
+    optimizeImage(file, 0.9, 200, 200).then(blob => {
+      handleFileAsDataUri(blob).then(value => {
+        const newFile = { name: file.name, value };
+        setStep2({ ...step2, file: newFile });
+      });
+    });
   };
 
   return (
@@ -148,7 +72,7 @@ export default function() {
         </div>
         <div className={classes["content"]}>
           <Grid container spacing={2}>
-            <Grid direction={"column"} container xs={6}>
+            <Grid item xs={6}>
               <div className={classes["control"]}>
                 <Input
                   title="App name*"
@@ -216,7 +140,7 @@ export default function() {
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <g clip-path="url(#clip0)">
+                          <g>
                             <path
                               d="M34.822 30.3562L29.3288 24.9551L9.16357 44.8405L34.822 30.3562Z"
                               fill="#BEBEBE"
@@ -234,11 +158,6 @@ export default function() {
                               fill="#BEBEBE"
                             />
                           </g>
-                          <defs>
-                            <clipPath id="clip0">
-                              <rect width="46" height="46" fill="white" />
-                            </clipPath>
-                          </defs>
                         </svg>
                       </div>
                       <div className={classes["checkbox-text"]}>
@@ -262,16 +181,40 @@ export default function() {
                 />
               </div>
             </Grid>
-            <Grid spacing={2} xs={5}>
+            <Grid item xs={5}>
               <div className={classes["icon-wrapper"]}>
                 <div className="icon">
                   <div className="icon-img-wrap">
                     <img src="" alt="" />
                   </div>
                   <div className="input-wrapper">
-                    <input type="file" />
+                    {/* {TODO: create the File component} */}
+                    <label
+                      htmlFor="file"
+                      className={`${classes["file-label"]} ${
+                        step2.file.name ? classes["file-add"] : ""
+                      }`}
+                    >
+                      {step2.file.value ? (
+                        <img src={step2.file.value} alt="" />
+                      ) : (
+                        <>
+                          <span className={classes["file-content"]}>+</span>
+                          <div className={classes["icon-text"]}>
+                            {step2.file.name || "Add icon"}
+                          </div>
+                        </>
+                      )}
+                    </label>
+                    <input
+                      ref={fileInput}
+                      accept=".jpg, .jpeg, .png"
+                      onChange={changeHandler}
+                      className={classes.file}
+                      id="file"
+                      type="file"
+                    />
                   </div>
-                  <div className="icon-text">Add Icon</div>
                 </div>
               </div>
             </Grid>
@@ -284,3 +227,112 @@ export default function() {
     </div>
   );
 }
+
+const appleStoreData = [
+  { name: "Books" },
+  { name: "Business" },
+  { name: "Catalogs" },
+  { name: "Education" },
+  { name: "Entertainment" },
+  { name: "Finance" },
+  { name: "Food & Drink" },
+  { name: "Game: Action" },
+  { name: "Game: Adventure" },
+  { name: "Game: Arcade" },
+  { name: "Game: Board" },
+  { name: "Game: Card" },
+  { name: "Game: Casino" },
+  { name: "Game: Dice" },
+  { name: "Game: Educational" },
+  { name: "Game: Family" },
+  { name: "Game: Kids" },
+  { name: "Game: Music" },
+  { name: "Game: Puzzle" },
+  { name: "Game: Racing" },
+  { name: "Game: Role Playing" },
+  { name: "Game: Simulation" },
+  { name: "Game: Sports" },
+  { name: "Game: Strategy" },
+  { name: "Game: Trivia" },
+  { name: "Game: World Games" },
+  { name: "Health & Fitness" },
+  { name: "Lifestyle" },
+  { name: "Medical" },
+  { name: "Musical" },
+  { name: "Navigation" },
+  { name: "News" },
+  { name: "Newsstand" },
+  { name: "Photo & Video" },
+  { name: "Productivity" },
+  { name: "Reference" },
+  { name: "Shopping" },
+  { name: "Social Networking" },
+  { name: "Sports" },
+  { name: "Stickers" },
+  { name: "Travel" },
+  { name: "Utilities" },
+  { name: "Weather" }
+];
+
+const googleStoreData = [
+  { name: "Art & Design Auto & Vehicles Beauty" },
+  { name: "Books & Reference" },
+  { name: "Business" },
+  { name: "Comics" },
+  { name: "Communication" },
+  { name: "Dating" },
+  { name: "Education" },
+  { name: "Entertainment" },
+  { name: "Events" },
+  { name: "Family" },
+  { name: "Family: Action & Adventure" },
+  { name: "Family: Brain Games" },
+  { name: "Family: Creativity" },
+  { name: "Family: Education" },
+  { name: "Family: Music & Video" },
+  { name: "Family: Pretend Play" },
+  { name: "Finance" },
+  { name: "Food & Drink" },
+  { name: "Game: Action" },
+  { name: "Game: Adventure" },
+  { name: "Game: Arcade" },
+  { name: "Game: Board" },
+  { name: "Game: Card" },
+  { name: "Game: Casino" },
+  { name: "Game: Casual" },
+  { name: "Game: Educational" },
+  { name: "Game: Family" },
+  { name: "Game: Music" },
+  { name: "Game: Puzzle" },
+  { name: "Game: Racing" },
+  { name: "Game: Role Playing" },
+  { name: "Game: Simulation" },
+  { name: "Game: Sports" },
+  { name: "Game: Strategy" },
+  { name: "Game: Trivia" },
+  { name: "Game: Word" },
+  { name: "Games" },
+  { name: "Health & Fitness" },
+  { name: "House & Home" },
+  { name: "Libraries & Demo" },
+  { name: "Lifestyle" },
+  { name: "Live Wallpaper" },
+  { name: "Maps & Navigation" },
+  { name: "Medical" },
+  { name: "Music & Audio" },
+  { name: "News & Magazines" },
+  { name: "Parenting" },
+  { name: "Personalization" },
+  { name: "Photography" },
+  { name: "Productivity" },
+  { name: "Shopping" },
+  { name: "Social" },
+  { name: "Sports" },
+  { name: "Tools" },
+  { name: "Travel" },
+  { name: "Travel & local" },
+  { name: "Video Players & Editors" },
+  { name: "Wear OS by Google" },
+  { name: "Weather" },
+  { name: "Widgets" }
+];
