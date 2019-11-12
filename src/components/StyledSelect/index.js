@@ -47,7 +47,9 @@ function StyledSelect({
   width = "100%",
   data = [],
   onClickHandler = val => {},
-  setAsDefault = ""
+  setAsDefault = "",
+  noBlankValue = false,
+  disabled = false
 }) {
   // @ts-ignore
   const styles = useStyles();
@@ -70,10 +72,13 @@ function StyledSelect({
           value={field}
           onChange={handleChange}
           input={<CustomInput />}
+          disabled={disabled}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
+          {!noBlankValue && (
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+          )}
           {data.map((item, idx) => (
             <MenuItem value={item.name} key={`${item.name} ${idx}`}>
               {item.icon && (

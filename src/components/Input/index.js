@@ -39,11 +39,13 @@ function Input({
   error = null,
   errorText = null,
   required = false,
-  disabled = false
+  disabled = false,
+  multiline = false,
+  rows="4"
 }) {
   return (
     <>
-      <span className={classes.title}>{title}</span>
+      {title && <span className={classes.title}>{title}</span>}
       <StyledInput
         label={label}
         type={type}
@@ -56,6 +58,8 @@ function Input({
         placeholder={placeholder}
         required={required}
         disabled={disabled}
+        multiline={multiline}
+        rows={rows}
       />
       {helpText && !error && (
         <span className={classes["help-text"]}>{helpText}</span>

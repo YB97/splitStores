@@ -22,10 +22,12 @@ const CustomCheckbox = withStyles({
 function StyledCheckbox({
   label = "Default",
   checked = false,
+  width = "100%",
   onChange = () => {}
 }) {
   return (
     <FormControlLabel
+      style={{ width }}
       control={
         <CustomCheckbox
           checked={checked}
