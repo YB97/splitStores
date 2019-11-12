@@ -48,8 +48,7 @@ function StyledSelect({
   data = [],
   onClickHandler = val => {},
   setAsDefault = "",
-  noBlankValue = false,
-  disabled = false
+  noBlankValue = false
 }) {
   // @ts-ignore
   const styles = useStyles();
