@@ -1,10 +1,10 @@
-import React from "react"
-import { withStyles } from "@material-ui/core/styles"
-import TextField from "@material-ui/core/TextField"
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
-import ErrorText from "../ErrorText"
+import ErrorText from "../ErrorText";
 
-import classes from "./input.module.scss"
+import classes from "./input.module.scss";
 
 const StyledInput = withStyles({
   root: {
@@ -25,7 +25,7 @@ const StyledInput = withStyles({
       }
     }
   }
-})(TextField)
+})(TextField);
 
 function Input({
   label = "",
@@ -38,7 +38,8 @@ function Input({
   onChange = () => {},
   error = null,
   errorText = null,
-  required = false
+  required = false,
+  disabled = false
 }) {
   return (
     <>
@@ -54,13 +55,14 @@ function Input({
         error={error}
         placeholder={placeholder}
         required={required}
+        disabled={disabled}
       />
       {helpText && !error && (
         <span className={classes["help-text"]}>{helpText}</span>
       )}
       {error && errorText && <ErrorText>{errorText}</ErrorText>}
     </>
-  )
+  );
 }
 
-export default Input
+export default Input;
