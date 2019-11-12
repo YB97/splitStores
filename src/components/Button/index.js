@@ -1,7 +1,7 @@
-import React from "react"
-import Button from "@material-ui/core/Button"
-import { withStyles } from "@material-ui/core/styles"
-import styles from "./button.module.scss"
+import React from "react";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import styles from "./button.module.scss";
 
 export default function({
   bg = "#244BDD",
@@ -18,13 +18,16 @@ export default function({
       padding: "9px 25px",
       "&:hover": {
         backgroundColor: "#1B3DBC"
+      },
+      "&:disabled": {
+        color: "gray !important"
       }
     }
-  })(Button)
+  })(Button);
 
   return (
     <StyledButton href={href} className={styles.button} onClick={click}>
       {children}
     </StyledButton>
-  )
+  );
 }

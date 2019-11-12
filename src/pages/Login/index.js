@@ -85,15 +85,17 @@ class LoginPage extends React.Component {
                     required
                   />
                 </div>
-                <StyledButton
-                  className={styles.button}
-                  type="submit"
-                  onClick={() => console.log("hello")}
-                  href="/apps"
-                  disabled={isBtnDisabled}
-                >
-                  log in
-                </StyledButton>
+                <div className="button">
+                  <StyledButton
+                    className={styles.button}
+                    type="submit"
+                    onClick={() => console.log("hello")}
+                    href="/apps"
+                    disabled={isBtnDisabled}
+                  >
+                    log in
+                  </StyledButton>
+                </div>
               </form>
             </Paper>
             <span className={styles["login-small-text"]}>

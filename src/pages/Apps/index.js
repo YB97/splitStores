@@ -1,21 +1,25 @@
-import React from "react"
-import Container from "@material-ui/core/Container"
-import { useHistory } from "react-router-dom"
+import React from "react";
+import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
 
-import Header from "../../components/Header"
-import Title from "../../components/Title"
-import Button from "../../components/Button"
-import AppsCard from "../../components/Card"
-import { URI_TO_NEW_APPS } from "../../constants"
+import Header from "../../components/Header";
+import Title from "../../components/Title";
+import Button from "../../components/Button";
+import Card from "../../components/Card";
+import { URI_TO_NEW_APPS } from "../../constants";
 
-import classes from "./apps.module.scss"
+import classes from "./apps.module.scss";
 
 export default function Apps() {
-  const history = useHistory()
+  const history = useHistory();
 
   const clickHandler = () => {
-    history.push(URI_TO_NEW_APPS)
-  }
+    history.push(URI_TO_NEW_APPS);
+  };
+
+  const cardClickHandler = () => {
+    history.push("/app");
+  };
 
   return (
     <div className={classes.apps}>
@@ -34,10 +38,10 @@ export default function Apps() {
         </div>
         <div className={classes.content}>
           <div className={classes.card}>
-            <AppsCard />
+            <Card onClickHandler={cardClickHandler} />
           </div>
         </div>
       </Container>
     </div>
-  )
+  );
 }
