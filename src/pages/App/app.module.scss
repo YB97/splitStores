@@ -1,0 +1,22 @@
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 73px;
+}
+
+.control {
+  margin-bottom: 30px;
+}
+
+.main {
+  margin-top: 35px;
+}
+.card {
+  margin-top: 50px;
+}
+.checkbox-cards {
+  label {
+    padding: 48px 40px;
+  }
+}

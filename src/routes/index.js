@@ -1,6 +1,7 @@
 import LoginPage from "../pages/Login";
 import Welcome from "../pages/Welcome";
 import Apps from "../pages/Apps";
+import App from "../pages/App";
 import NewApp from "../pages/NewApp";
 import NewAppStep2 from "../pages/NewApp/step2";
 import Experiments from "../pages/Experiments";
@@ -32,6 +33,12 @@ let routes = [
   },
   {
     name: "apps",
+    url: "/app",
+    component: App,
+    exact: true
+  },
+  {
+    name: "app",
     url: URI_TO_APPS,
     component: Apps,
     exact: true
