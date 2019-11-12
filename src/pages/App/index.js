@@ -46,12 +46,7 @@ export default function() {
                   />
                 </div>
                 <div className={classes.control}>
-                  <Select
-                    setAsDefault="Google"
-                    title="Store Category*"
-                    value="213213"
-                    disabled={true}
-                  />
+                  <Select title="Store Category*" disabled={true} />
                 </div>
               </Grid>
               <Grid item xs={12} lg={6}>
