@@ -1,20 +1,20 @@
-import React from "react"
-import Container from "@material-ui/core/Container"
-import { useHistory } from "react-router-dom"
-import Header from "../../components/Header"
-import Title from "../../components/Title"
-import Button from "../../components/Button"
-import Card from "./components/Card"
+import React from "react";
+import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
+import Header from "../../components/Header";
+import Title from "../../components/Title";
+import Button from "../../components/Button";
+import Card from "./components/Card";
 
-import classes from "./newapp.module.scss"
-import { Grid } from "@material-ui/core"
+import classes from "./newapp.module.scss";
+import { Grid } from "@material-ui/core";
 
 export default function Apps() {
-  const history = useHistory()
+  const history = useHistory();
 
   const clickHandler = () => {
-    console.log("TODO: history.push")
-  }
+    console.log("TODO: history.push");
+  };
 
   return (
     <div className={classes.newapp}>
@@ -42,10 +42,10 @@ export default function Apps() {
               alignItems="center"
               spacing={3}
             >
-              <Grid item xs={5}>
+              <Grid item xs={12} sm={6} lg={5}>
                 <Card />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={12} sm={6} lg={5}>
                 <Card withBtn={true} />
               </Grid>
             </Grid>
@@ -53,5 +53,5 @@ export default function Apps() {
         </div>
       </Container>
     </div>
-  )
+  );
 }

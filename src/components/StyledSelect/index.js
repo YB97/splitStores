@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -30,7 +30,6 @@ const CustomInput = withStyles(theme => ({
     "&:focus": {
       borderRadius: 4,
       borderColor: "#244BDD"
-      // boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
     }
   }
 }))(InputBase);
@@ -43,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 function StyledSelect({
   title = "",
+  disabled = false,
   label = "",
   width = "100%",
   data = [],
