@@ -11,7 +11,7 @@ import DatePicker from "../../../components/DatePicker";
 
 import classes from "./step2.module.scss";
 
-function NewExperimentStep2() {
+export default function NewExperimentStep2() {
   const steps = ["set up", "details", "variations"];
   const [appIsFree, setAppIsFree] = useState(true);
   const [inAppPurch, setInAppPurch] = useState(false);
@@ -167,5 +167,3 @@ function NewExperimentStep2() {
     </>
   );
 }
-
-export default NewExperimentStep2;
