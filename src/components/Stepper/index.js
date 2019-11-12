@@ -1,7 +1,7 @@
 import React from "react";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
-import Steplabel from "@material-ui/core/Steplabel";
+import StepLabel from "@material-ui/core/StepLabel";
 import { withStyles } from "@material-ui/core/styles";
 
 import classes from "./stepper.module.scss";
@@ -18,7 +18,7 @@ const StyledStepIconLabel = withStyles({
       color: "#E3603B"
     }
   }
-})(Steplabel);
+})(StepLabel);
 
 export default function({ activeStep, steps, alternativeLabel = true }) {
   return (
@@ -30,9 +30,9 @@ export default function({ activeStep, steps, alternativeLabel = true }) {
       {steps.map((step, index) => {
         return (
           <Step key={`${step}:${index}`}>
-            <Steplabel StepIconComponent={StyledStepIconLabel}>
+            <StepLabel StepIconComponent={StyledStepIconLabel}>
               {step}
-            </Steplabel>
+            </StepLabel>
           </Step>
         );
       })}

@@ -35,11 +35,9 @@ function resizeImg(img, quality, maxWidth, maxHeight, type = 'image/jpeg') {
       height = Math.round((height *= maxWidth / width));
       width = maxWidth;
     }
-  } else {
-    if (height > maxHeight) {
-      width = Math.round((width *= maxHeight / height));
-      height = maxHeight;
-    }
+  } else if (height > maxHeight) {
+    width = Math.round((width *= maxHeight / height));
+    height = maxHeight;
   }
 
   //  рисуем на canvas
