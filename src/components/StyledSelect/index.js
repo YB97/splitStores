@@ -42,8 +42,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function StyledSelect({
+  title = "",
   label = "",
-  width = "200px",
+  width = "100%",
   data = [],
   onClickHandler = val => {},
   setAsDefault = ""
@@ -58,6 +59,7 @@ function StyledSelect({
 
   return (
     <>
+      <span className={classes.title}>{title}</span>
       <FormControl className={styles.margin} style={{ width }}>
         {label && (
           <InputLabel id="demo-customized-select-label">{label}</InputLabel>
