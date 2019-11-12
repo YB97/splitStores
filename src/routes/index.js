@@ -17,7 +17,8 @@ import {
   URI_TO_EXPERIMENTS,
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_2,
-  URI_TO_NEW_EXPERIMENT_STEP_3
+  URI_TO_NEW_EXPERIMENT_STEP_3,
+  URI_TO_APP
 } from "../constants";
 
 let routes = [
@@ -34,13 +35,13 @@ let routes = [
     exact: true
   },
   {
-    name: "apps",
-    url: "/app",
+    name: "app",
+    url: URI_TO_APP,
     component: App,
     exact: true
   },
   {
-    name: "app",
+    name: "apps",
     url: URI_TO_APPS,
     component: Apps,
     exact: true
