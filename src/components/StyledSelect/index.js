@@ -60,7 +60,7 @@ function StyledSelect({
 
   return (
     <>
-      <span className={classes.title}>{title}</span>
+      {title && <span className={classes.title}>{title}</span>}
       <FormControl className={styles.margin} style={{ width }}>
         {label && (
           <InputLabel id="demo-customized-select-label">{label}</InputLabel>

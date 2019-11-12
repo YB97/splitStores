@@ -21,72 +21,80 @@ class NewExperimentStore {
     this.rootStore = rootStore;
   }
 
-  @action
+  @action.bound
   setAppName(name) {
     this.appName = name;
   }
 
-  @action
+  @action.bound
   setDeveloperName(name) {
     this.developerName = name;
   }
 
-  @action
+  @action.bound
   setAppIsFree(value) {
     this.appIsFree = Boolean(value);
   }
 
-  @action
+  @action.bound
   setPrice(value) {
     this.price = value;
+    console.log("price ", value);
   }
 
-  @action
+  @action.bound
   setCurrency(value) {
     this.currency = value;
+    console.log("currency ", value);
   }
 
-  @action
+  @action.bound
   setOffersInApp(value) {
     this.offersInApp = Boolean(value);
   }
 
-  @action
+  @action.bound
   setAppDesc(value) {
     this.appDesc = value;
   }
 
-  @action
+  @action.bound
   setShortAppDesc(value) {
     this.shortAppDesc = value;
   }
 
-  @action
+  @action.bound
   setAppCategory(value) {
     this.appCategory = value;
   }
 
-  @action
+  @action.bound
   setAppRestrictions(value) {
     this.appRestrictions = value;
   }
 
-  @action
+  @action.bound
   setReleaseDate(date) {
+    console.log("release date", date);
     this.releaseDate = date;
   }
 
-  @action
+  @action.bound
+  setReleaseNotes(value) {
+    this.releaseNotes = value;
+  }
+
+  @action.bound
   setAppSize(size) {
     this.appSize = size;
   }
 
-  @action
+  @action.bound
   setAppVersion(version) {
     this.appVersion = version;
   }
 
-  @action
+  @action.bound
   setUserRating(value) {
     this.userRating = value;
   }
