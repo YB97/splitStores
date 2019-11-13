@@ -12,12 +12,24 @@
   margin-bottom: 8px;
 }
 
-.title-wrapper {
+.mainTitleWrapper {
   text-align: center;
+  margin-top: 70px;
+  margin-bottom: 40px;
+}
+
+.titleWrapper {
+  text-align: center;
+  margin-top: 65px;
+  margin-bottom: 45px;
 }
 
 .formControl {
   margin-top: 40px;
+}
+
+.cardWrapper {
+  margin-top: 36px;
 }
 
 .inputLabel {
@@ -40,7 +52,20 @@
   margin-right: 16px;
 }
 
-.buttonWrap {
-  margin-top: 60px;
+.buttonsWrap {
+  margin-top: 40px;
   text-align: center;
+}
+
+.fullwidthButton {
+
+}
+
+.butonGroupWrap  {
+  margin-top: 55px;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 483px;
+  margin-left: auto;
+  margin-right: auto;
 }

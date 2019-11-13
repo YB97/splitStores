@@ -33,21 +33,29 @@ export default function NewExperiment() {
         <Grid container justify="center">
           <Grid item sm={8} lg={6}>
             <div className={classes.wrapper}>
-              <div className={classes["title-wrapper"]}>
+              <div className={classes.mainTitleWrapper}>
                 <Title title="Create new experiment" />
               </div>
               <Stepper activeStep={2} steps={steps} />
-
-              <div className={classes["title-wrapper"]}>
+              <div className={classes.titleWrapper}>
                 <Title title="Testing Icon on Landing page" />
               </div>
-              <TestingIconCard variationName="Variant A"/>
-              <TestingIconCard variationName="Variant B"/>
 
-              <div className={classes.buttonWrap}>
-                <Button click={onClickHandler}>Add new variation</Button>
-                <Button click={onClickHandler}>Publish experiment</Button>
-                <Button click={onClickHandler}>Save and publish later</Button>
+              <div className={classes.cardWrapper}>
+                <TestingIconCard variationName="Variant A" />
+              </div>
+              <div className={classes.cardWrapper}>
+                <TestingIconCard variationName="Variant B" />
+              </div>
+
+              <div className={classes.buttonsWrap}>
+                <div className={classes.fullwidthButton}>
+                  <Button click={onClickHandler} variant="outlined" color="#E3603B" fullWidth>Add new variation</Button>
+                </div>
+                <div className={classes.butonGroupWrap}>
+                  <Button click={onClickHandler} size="small">Publish experiment</Button>
+                  <Button click={onClickHandler} bg="#B0B0B0;" size="small">Save and publish later</Button>
+                </div>
               </div>
             </div>
           </Grid>

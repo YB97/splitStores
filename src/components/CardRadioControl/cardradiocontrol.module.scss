@@ -50,6 +50,10 @@
   &:checked~.label {
     border-color: #244BDD;
     border-width: 2px;
+
+    .image {
+      opacity: 1;
+    }
   }
 
   &:focus~.label {
@@ -62,9 +66,10 @@
 }
 
 .image {
-  height: 39px;
-  width: 39px;
+  height: 62px;
+  width: 62px;
   object-fit: contain;
+  opacity: 0.70;
 }
 
 .text {

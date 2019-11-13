@@ -9,3 +9,4 @@ export const URI_TO_EXPERIMENTS = "/experiments";
 export const URI_TO_NEW_EXPERIMENT = "/newexperiment";
 export const URI_TO_NEW_EXPERIMENT_STEP_2 = "/newexperiment/step2";
 export const URI_TO_NEW_EXPERIMENT_STEP_3 = "/newexperiment/step3";
+export const URI_TO_APP = "/app";

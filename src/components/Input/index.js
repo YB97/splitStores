@@ -10,6 +10,7 @@ const StyledInput = withStyles({
   root: {
     width: "100%",
     margin: "0",
+    backgroundColor: "white",
     "& label.Mui-focused": {
       color: "#244BDD"
     },
@@ -30,6 +31,7 @@ const StyledInput = withStyles({
 function Input({
   label = "",
   title = "",
+  titleCentered = false,
   helpText = "",
   type = "text",
   autoComplete = "",
@@ -45,7 +47,10 @@ function Input({
 }) {
   return (
     <>
-      {title && <span className={classes.title}>{title}</span>}
+      {title &&
+        <div className={classes.title + " " + (titleCentered && classes.titleCentered)}>
+          {title}
+        </div>}
       <StyledInput
         label={label}
         type={type}
