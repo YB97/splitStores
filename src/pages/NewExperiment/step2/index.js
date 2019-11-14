@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { withRouter } from "react-router-dom";
 import { Container, Grid } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
 
@@ -10,7 +11,10 @@ import StyledCheckbox from "../../../components/StyledCheckbox";
 import StyledSelect from "../../../components/StyledSelect";
 import DatePicker from "../../../components/DatePicker";
 import Button from "../../../components/Button";
-
+import {
+  URI_TO_NEW_EXPERIMENT,
+  URI_TO_NEW_EXPERIMENT_STEP_3
+} from "../../../constants";
 
 import classes from "./step2.module.scss";
 
@@ -46,12 +50,29 @@ class NewExperimentStep2 extends PureComponent {
       appVersion,
       setAppVersion,
       userRating,
-      setUserRating
+      setUserRating,
+      downloadsCount,
+      setDownloadsCount,
+      oneStarsCount,
+      setOneStarsCount,
+      twoStarsCount,
+      setTwoStarsCount,
+      threeStarsCount,
+      setThreeStarsCount,
+      fourStarsCount,
+      setFourStarsCount,
+      fiveStarsCount,
+      setFiveStarsCount
     } = this.props.stores.newExperiments;
 
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
-    const onClickHandler = () => {};
+    const onClickHandler = () => {
+      this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
+    };
+    const onBackClickHandler = () => {
+      this.props.history.push(URI_TO_NEW_EXPERIMENT);
+    };
 
     return (
       <>
@@ -72,7 +93,7 @@ class NewExperimentStep2 extends PureComponent {
                 </div>
                 <div className={classes["input-wrapper"]}>
                   <Input
-                    label="App Store App name"
+                    label="App name"
                     value={appName}
                     onChange={e => setAppName(e.target.value)}
                     helpText="Specify the app name that you want users to see on the experiment page"
@@ -106,7 +127,6 @@ class NewExperimentStep2 extends PureComponent {
                     </div>
                     <div className={classes["price-select-wrapper"]}>
                       <StyledSelect
-                        // value={currency}
                         width="100%"
                         data={currencyList}
                         onClickHandler={val => setCurrency(val)}
@@ -191,6 +211,24 @@ class NewExperimentStep2 extends PureComponent {
                     />
                   </div>
                 </div>
+                <div className={classes["app-ver-wrapper"]}>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Downloads</div>
+                    <Input
+                      value={downloadsCount}
+                      placeholder="12"
+                      onChange={e => setDownloadsCount(e.target.value)}
+                    />
+                  </div>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Rewiews Count</div>
+                    <Input
+                      value={appVersion}
+                      placeholder="1.2.4"
+                      onChange={e => setDownloadsCount(e.target.value)}
+                    />
+                  </div>
+                </div>
                 <div>
                   <div className={classes["label"]}>Average user rating</div>
                   <Input
@@ -199,8 +237,60 @@ class NewExperimentStep2 extends PureComponent {
                     onChange={e => setUserRating(e.target.value)}
                   />
                 </div>
+                <div className={classes["app-ver-wrapper"]}>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Users Stars 1</div>
+                    <Input
+                      type="number"
+                      value={oneStarsCount}
+                      placeholder="12"
+                      onChange={e => setOneStarsCount(e.target.value)}
+                    />
+                  </div>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Users Stars 2</div>
+                    <Input
+                      type="number"
+                      value={twoStarsCount}
+                      placeholder="1.2.4"
+                      onChange={e => setTwoStarsCount(e.target.value)}
+                    />
+                  </div>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Users Stars 3</div>
+                    <Input
+                      type="number"
+                      value={threeStarsCount}
+                      placeholder="1.2.4"
+                      onChange={e => setThreeStarsCount(e.target.value)}
+                    />
+                  </div>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Users Stars 4</div>
+                    <Input
+                      type="number"
+                      value={fourStarsCount}
+                      placeholder="1.2.4"
+                      onChange={e => setFourStarsCount(e.target.value)}
+                    />
+                  </div>
+                  <div className={classes["app-ver-inp"]}>
+                    <div className={classes["label"]}>Users Stars 5</div>
+                    <Input
+                      type="number"
+                      value={fiveStarsCount}
+                      placeholder="1.2.4"
+                      onChange={e => setFiveStarsCount(e.target.value)}
+                    />
+                  </div>
+                </div>
                 <div className={classes.buttonWrap}>
-                  <Button click={onClickHandler}>Next</Button>
+                  <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
+                    Back
+                  </Button>
+                  <Button size="small" click={onClickHandler}>
+                    Next
+                  </Button>
                 </div>
               </div>
             </Grid>
@@ -211,4 +301,4 @@ class NewExperimentStep2 extends PureComponent {
   }
 }
 
-export default NewExperimentStep2;
+export default withRouter(NewExperimentStep2);

@@ -16,6 +16,14 @@ class NewExperimentStore {
   @observable appSize;
   @observable appVersion;
   @observable userRating;
+  @observable downloadsCount = 0;
+  @observable androidRewiewsCount = 0;
+  @observable iosRewiewsCount = 0;
+  @observable oneStarsCount = 0;
+  @observable twoStarsCount = 0;
+  @observable threeStarsCount = 0;
+  @observable fourStarsCount = 0;
+  @observable fiveStarsCount = 0;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -97,6 +105,56 @@ class NewExperimentStore {
   @action.bound
   setUserRating(value) {
     this.userRating = value;
+  }
+
+  @action.bound
+  setDownloadsCount(num) {
+    this.downloadsCount = num;
+  }
+
+  @action.bound
+  setAndroidRewiewsCount(num) {
+    this.androidRewiewsCount = num;
+  }
+
+  @action.bound
+  setIosRewiewsCount(num) {
+    this.iosRewiewsCount = num;
+  }
+
+  @action.bound
+  setOneStarsCount(num) {
+    if (num >= 0) {
+      this.oneStarsCount = num;
+    }
+  }
+
+  @action.bound
+  setTwoStarsCount(num) {
+    if (num >= 0) {
+      this.twoStarsCount = num;
+    }
+  }
+
+  @action.bound
+  setThreeStarsCount(num) {
+    if (num >= 0) {
+      this.threeStarsCount = num;
+    }
+  }
+
+  @action.bound
+  setFourStarsCount(num) {
+    if (num >= 0) {
+      this.fourStarsCount = num;
+    }
+  }
+
+  @action.bound
+  setFiveStarsCount(num) {
+    if (num >= 0) {
+      this.fiveStarsCount = num;
+    }
   }
 }
 

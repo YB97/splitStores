@@ -11,13 +11,13 @@ import {
 
 import Header from "../../components/Header";
 import Title from "../../components/Title";
+import Input from "../../components/Input";
 import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import CardRadioControl from "../../components/CardRadioControl"
 import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
 
 import classes from "./newexperiment.module.scss"
-import Input from "../../components/Input";
 
 export default function NewExperiment() {
   const steps = ["set up", "details", "variations"];
@@ -26,6 +26,7 @@ export default function NewExperiment() {
   const [actionInstallValue, setActionInstallValue] = React.useState('');
   const [deviceValue, setDeviceValue] = React.useState('');
   const [experimentName, setExperimentName] = React.useState('');
+  
   const handleDeviceValueChange = event => {
     setDeviceValue(event.target.value);
   };
