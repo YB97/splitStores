@@ -9,15 +9,17 @@ export default function({
   href = "",
   click = () => {},
   variant = "",
+  size = "",
+  fullWidth = false,
   children
 }) {
   const StyledButton = withStyles({
     root: {
-      backgroundColor: bg,
+      backgroundColor: !variant && bg,
       color,
-      padding: "9px 25px",
+      padding: !size && "9px 25px",
       "&:hover": {
-        backgroundColor: "#1B3DBC"
+        backgroundColor: bg === "#244BDD" && "#1B3DBC"
       },
       "&:disabled": {
         color: "gray !important"
@@ -26,7 +28,14 @@ export default function({
   })(Button);
 
   return (
-    <StyledButton href={href} className={styles.button} onClick={click}>
+    <StyledButton
+      href={href}
+      className={styles.button}
+      onClick={click}
+      variant={variant}
+      size={size}
+      fullWidth={fullWidth}
+    >
       {children}
     </StyledButton>
   );

@@ -7,6 +7,7 @@ import NewAppStep2 from "../pages/NewApp/step2";
 import Experiments from "../pages/Experiments";
 import NewExperiment from "../pages/NewExperiment";
 import NewExperimentStep2 from "../pages/NewExperiment/step2";
+import NewExperimentStep3 from "../pages/NewExperiment/step3";
 import {
   URI_TO_APPS,
   URI_TO_LOGIN,
@@ -16,6 +17,7 @@ import {
   URI_TO_EXPERIMENTS,
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_2,
+  URI_TO_NEW_EXPERIMENT_STEP_3,
   URI_TO_APP
 } from "../constants";
 
@@ -72,6 +74,12 @@ let routes = [
     name: "newExperimentStep2",
     url: URI_TO_NEW_EXPERIMENT_STEP_2,
     component: NewExperimentStep2,
+    exact: true
+  },
+  {
+    name: "newExperimentStep3",
+    url: URI_TO_NEW_EXPERIMENT_STEP_3,
+    component: NewExperimentStep3,
     exact: true
   }
 ];

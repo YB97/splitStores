@@ -9,12 +9,14 @@ import Input from "../../../components/Input";
 import StyledCheckbox from "../../../components/StyledCheckbox";
 import StyledSelect from "../../../components/StyledSelect";
 import DatePicker from "../../../components/DatePicker";
+import Button from "../../../components/Button";
+
 
 import classes from "./step2.module.scss";
 
 @inject("stores")
 @observer
-class NewExperimentStep2 extends React.PureComponent {
+class NewExperimentStep2 extends PureComponent {
   render() {
     const {
       appName,
@@ -49,6 +51,7 @@ class NewExperimentStep2 extends React.PureComponent {
 
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
+    const onClickHandler = () => {};
 
     return (
       <>
@@ -195,6 +198,9 @@ class NewExperimentStep2 extends React.PureComponent {
                     placeholder="4.5"
                     onChange={e => setUserRating(e.target.value)}
                   />
+                </div>
+                <div className={classes.buttonWrap}>
+                  <Button click={onClickHandler}>Next</Button>
                 </div>
               </div>
             </Grid>

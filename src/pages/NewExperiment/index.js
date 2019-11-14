@@ -7,8 +7,6 @@ import {
   Select,
   MenuItem,
   InputLabel,
-  OutlinedInput,
-  FormHelperText
 } from "@material-ui/core"
 
 import Header from "../../components/Header";
@@ -19,6 +17,7 @@ import CardRadioControl from "../../components/CardRadioControl"
 import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
 
 import classes from "./newexperiment.module.scss"
+import Input from "../../components/Input";
 
 export default function NewExperiment() {
   const steps = ["set up", "details", "variations"];
@@ -26,12 +25,15 @@ export default function NewExperiment() {
 
   const [actionInstallValue, setActionInstallValue] = React.useState('');
   const [deviceValue, setDeviceValue] = React.useState('');
-
-  const handleChange = event => {
+  const [experimentName, setExperimentName] = React.useState('');
+  const handleDeviceValueChange = event => {
     setDeviceValue(event.target.value);
   };
   const handleInstallActionChange = event => {
     setActionInstallValue(event.target.value)
+  };
+  const handleExperimentNameChange = event => {
+    setExperimentName(event.target.value)
   };
   const onClickHandler = () => {
     history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
@@ -73,7 +75,7 @@ export default function NewExperiment() {
                   </MenuItem>
                   <MenuItem value={10}>
                     <img
-                      src="../../../static/images/apps/facebook.png"
+                      src="../../../static/images/apps/clash-royale.jpg"
                       className={classes.selectImage}
                       alt=""
                       width={39}
@@ -92,19 +94,19 @@ export default function NewExperiment() {
                   {
                     value: 'phone',
                     id: 'phone',
-                    img: '../../../static/images/apps/facebook.png',
+                    img: '../../../static/images/devices/android-phone.svg',
                     text: 'Android phone'
                   },
                   {
                     value: 'tablet',
                     id: 'tablet',
-                    img: '../../../static/images/apps/facebook.png',
+                    img: '../../../static/images/devices/android-tablet.svg',
                     text: 'Android tablet'
                   }
                 ]}
                 currentValue={deviceValue}
                 className={classes.formControl}
-                handleChange={handleChange}
+                handleChange={handleDeviceValueChange}
               />
               <FormControl
                 fullWidth
@@ -160,25 +162,16 @@ export default function NewExperiment() {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
-              <FormControl fullWidth className={classes.formControl}>
-                <InputLabel
-                  disableAnimation
-                  shrink={false}
-                  htmlFor="nameInput"
-                  className={classes.inputLabel}
-                >
-                  Set the name to your experiment
-                </InputLabel>
-                <OutlinedInput
-                  id="nameInput"
-                  variant="outlined"
+              <div className={classes.formControl}>
+                <Input
+                  title="Set the name to your experiment"
+                  titleCentered
+                  value={experimentName}
+                  onChange={handleExperimentNameChange}
                   placeholder="Name..."
+                  helpText="This name will only be displayed on the dashboard"
                 />
-                <FormHelperText>
-                  This name will only be displayed on the dashboard
-                </FormHelperText>
-              </FormControl>
-
+              </div>
               <CardRadioControl
                 name="install_action"
                 title={(
@@ -190,13 +183,13 @@ export default function NewExperiment() {
                   {
                     value: 'user_email',
                     id: 'user_email',
-                    img: '../../../static/images/apps/facebook.png',
+                    img: '../../../static/images/user-actions/e-mail-envelope.svg',
                     text: 'Collect user’s email'
                   },
                   {
                     value: 'custom_link',
                     id: 'custom_link',
-                    img: '../../../static/images/apps/facebook.png',
+                    img: '../../../static/images/user-actions/link.svg',
                     text: 'Go to custom link'
                   }
                 ]}
