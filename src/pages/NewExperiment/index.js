@@ -1,13 +1,7 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import {
-  Container,
-  Grid,
-  FormControl,
-  Select,
-  MenuItem,
-  InputLabel
-} from "@material-ui/core";
+import React, { PureComponent } from "react";
+import { Container, Grid } from "@material-ui/core";
+import { inject, observer } from "mobx-react";
+import { withRouter } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Title from "../../components/Title";
@@ -20,172 +14,156 @@ import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
 
 import classes from "./newexperiment.module.scss";
 
-export default function NewExperiment() {
-  const steps = ["set up", "details", "variations"];
-  const history = useHistory();
+@inject("stores")
+@observer
+class NewExperiment extends PureComponent {
+  st = this.props.stores.newExperiments;
 
-  const [actionInstallValue, setActionInstallValue] = React.useState("");
-  const [deviceValue, setDeviceValue] = React.useState("");
-  const [experimentName, setExperimentName] = React.useState("");
+  onClickHandler = () => {
+    this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
+  };
 
-  const handleDeviceValueChange = event => {
-    setDeviceValue(event.target.value);
-  };
-  const handleInstallActionChange = event => {
-    setActionInstallValue(event.target.value);
-  };
-  const handleExperimentNameChange = event => {
-    setExperimentName(event.target.value);
-  };
-  const onClickHandler = () => {
-    history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
-  };
-  const selectAppDataMock = [
-    { name: "Play", icon: "../../static/images/apps/facebook.png" },
-    { name: "Game1", icon: "../../static/images/apps/clash-royale.jpg" },
-    { name: "Game3" }
-  ];
+  render() {
+    const {
+      appName,
+      setAppName,
+      device,
+      setDevice,
+      testPage,
+      setTestPage,
+      elementForTest,
+      setElementForTest,
+      experimentName,
+      setExperimentName,
+      actionOnInstall,
+      setActionOnInstall
+    } = this.st;
+    const steps = ["set up", "details", "variations"];
+    const selectAppDataMock = [
+      { name: "Play", icon: "../../static/images/apps/facebook.png" },
+      { name: "Game1", icon: "../../static/images/apps/clash-royale.jpg" },
+      { name: "Game3" }
+    ];
+    const selectPageData = [{ name: "Landing Pages" }];
+    const selectElementData = [
+      { name: "Icon" },
+      { name: "Screenshots" },
+      { name: "Description" },
+      { name: "App Name" }
+    ];
 
-  return (
-    <div className={classes.newexperiment}>
-      <div className={classes.header}>
-        <Header />
-      </div>
-      <Container>
-        <Grid container justify="center">
-          <Grid item sm={8} lg={6}>
-            <div className={classes.wrapper}>
-              <div className={classes["title-wrapper"]}>
-                <Title title="Create new experiment" />
-              </div>
-              <Stepper activeStep={0} steps={steps} />
-              <StyledSelect
-                width="100%"
-                title="Select the app"
-                data={selectAppDataMock}
-                setAsDefault={selectAppDataMock[0].name}
-                onClickHandler={val => console.log("select", val)}
-                noBlankValue
-              />
-              <CardRadioControl
-                name="deviceSelect"
-                title={
-                  <div className={classes.inputLabel}>
-                    Define platform device
-                  </div>
-                }
-                values={[
-                  {
-                    value: "phone",
-                    id: "phone",
-                    img: "../../../static/images/devices/android-phone.svg",
-                    text: "Android phone"
-                  },
-                  {
-                    value: "tablet",
-                    id: "tablet",
-                    img: "../../../static/images/devices/android-tablet.svg",
-                    text: "Android tablet"
-                  }
-                ]}
-                currentValue={deviceValue}
-                className={classes.formControl}
-                handleChange={handleDeviceValueChange}
-              />
-              <FormControl fullWidth className={classes.formControl}>
-                <InputLabel
-                  disableAnimation
-                  shrink={false}
-                  id="pageSelectLabel"
-                  className={classes.inputLabel}
-                >
-                  Define the page you’d like to test
-                </InputLabel>
-                <Select
-                  labelId="pageSelectLabel"
-                  id="pageSelect"
-                  variant="outlined"
-                  defaultValue={10}
-                  displayEmpty
-                  className={classes.select}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Play for game</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl fullWidth className={classes.formControl}>
-                <InputLabel
-                  disableAnimation
-                  shrink={false}
-                  id="elementSelectLabel"
-                  className={classes.inputLabel}
-                >
-                  Define the element you’d like to test
-                </InputLabel>
-                <Select
-                  labelId="elementSelectLabel"
-                  id="elementSelect"
-                  variant="outlined"
-                  defaultValue={10}
-                  displayEmpty
-                  className={classes.select}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>123</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-              <div className={classes.formControl}>
-                <Input
-                  title="Set the name to your experiment"
-                  titleCentered
-                  value={experimentName}
-                  onChange={handleExperimentNameChange}
-                  placeholder="Name..."
-                  helpText="This name will only be displayed on the dashboard"
+    return (
+      <div className={classes.newexperiment}>
+        <div className={classes.header}>
+          <Header />
+        </div>
+        <Container>
+          <Grid container justify="center">
+            <Grid item sm={8} lg={6}>
+              <div className={classes.wrapper}>
+                <div className={classes["title-wrapper"]}>
+                  <Title title="Create new experiment" />
+                </div>
+                <Stepper activeStep={0} steps={steps} />
+                <StyledSelect
+                  width="100%"
+                  title="Select the app"
+                  titleCenter
+                  data={selectAppDataMock}
+                  setAsDefault={appName}
+                  onClickHandler={val => setAppName(val)}
+                  noBlankValue
                 />
-              </div>
-              <CardRadioControl
-                name="install_action"
-                title={
-                  <div className={classes.inputLabel}>
-                    What to do, when the user wants to install your application?
-                  </div>
-                }
-                values={[
-                  {
-                    value: "user_email",
-                    id: "user_email",
-                    img:
-                      "../../../static/images/user-actions/e-mail-envelope.svg",
-                    text: "Collect user’s email"
-                  },
-                  {
-                    value: "custom_link",
-                    id: "custom_link",
-                    img: "../../../static/images/user-actions/link.svg",
-                    text: "Go to custom link"
+                <CardRadioControl
+                  name="deviceSelect"
+                  title={
+                    <div className={classes.inputLabel}>
+                      Define platform device
+                    </div>
                   }
-                ]}
-                currentValue={actionInstallValue}
-                className={classes.formControl}
-                handleChange={handleInstallActionChange}
-              />
-              <div className={classes.buttonWrap}>
-                <Button click={onClickHandler}>Next</Button>
+                  values={[
+                    {
+                      value: "phone",
+                      id: "phone",
+                      img: "../../../static/images/devices/android-phone.svg",
+                      text: "Android phone"
+                    },
+                    {
+                      value: "tablet",
+                      id: "tablet",
+                      img: "../../../static/images/devices/android-tablet.svg",
+                      text: "Android tablet"
+                    }
+                  ]}
+                  currentValue={device}
+                  className={classes.formControl}
+                  handleChange={e => setDevice(e.target.value)}
+                />
+                <StyledSelect
+                  width="100%"
+                  title="Define the page you’d like to test"
+                  titleCenter
+                  data={selectPageData}
+                  setAsDefault={testPage}
+                  onClickHandler={val => setTestPage(val)}
+                  noBlankValue
+                />
+                <StyledSelect
+                  width="100%"
+                  title="Define the element you’d like to test"
+                  titleCenter
+                  data={selectElementData}
+                  setAsDefault={elementForTest}
+                  onClickHandler={val => setElementForTest(val)}
+                  noBlankValue
+                />
+                <div className={classes.formControl}>
+                  <Input
+                    title="Set the name to your experiment"
+                    titleCentered
+                    value={experimentName}
+                    onChange={e => setExperimentName(e.target.value)}
+                    placeholder="Name..."
+                    helpText="This name will only be displayed on the dashboard"
+                  />
+                </div>
+                <CardRadioControl
+                  name="install_action"
+                  title={
+                    <div className={classes.inputLabel}>
+                      What to do, when the user wants to install your
+                      application?
+                    </div>
+                  }
+                  values={[
+                    {
+                      value: "user_email",
+                      id: "user_email",
+                      img:
+                        "../../../static/images/user-actions/e-mail-envelope.svg",
+                      text: "Collect user’s email"
+                    },
+                    {
+                      value: "custom_link",
+                      id: "custom_link",
+                      img: "../../../static/images/user-actions/link.svg",
+                      text: "Go to custom link"
+                    }
+                  ]}
+                  currentValue={actionOnInstall}
+                  className={classes.formControl}
+                  handleChange={e => setActionOnInstall(e.target.value)}
+                />
+                <div className={classes.buttonWrap}>
+                  <Button click={this.onClickHandler}>Next</Button>
+                </div>
               </div>
-            </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </div>
-  );
+        </Container>
+      </div>
+    );
+  }
 }
+
+export default withRouter(NewExperiment);

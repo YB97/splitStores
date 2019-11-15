@@ -82,6 +82,11 @@
   font-size: 18px;
   color: #848484;
   margin-right: 24px;
+  transition: all 0.2s ease;
+  &:hover {
+    color: #244bdd;
+    text-decoration: underline;
+  }
   @media (max-width: 576px) {
     font-size: 12px;
     margin-right: 13px;

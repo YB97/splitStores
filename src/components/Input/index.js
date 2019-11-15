@@ -43,14 +43,20 @@ function Input({
   required = false,
   disabled = false,
   multiline = false,
-  rows="4"
+  rows = "4",
+  defaultValue = ""
 }) {
   return (
     <>
-      {title &&
-        <div className={classes.title + " " + (titleCentered && classes.titleCentered)}>
+      {title && (
+        <div
+          className={
+            classes.title + " " + (titleCentered && classes.titleCentered)
+          }
+        >
           {title}
-        </div>}
+        </div>
+      )}
       <StyledInput
         label={label}
         type={type}
@@ -65,6 +71,7 @@ function Input({
         disabled={disabled}
         multiline={multiline}
         rows={rows}
+        defaultValue={defaultValue}
       />
       {helpText && !error && (
         <span className={classes["help-text"]}>{helpText}</span>

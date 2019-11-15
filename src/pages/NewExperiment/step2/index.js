@@ -23,6 +23,8 @@ import classes from "./step2.module.scss";
 class NewExperimentStep2 extends PureComponent {
   render() {
     const {
+      testPage,
+      elementForTest,
       appName,
       setAppName,
       developerName,
@@ -89,7 +91,9 @@ class NewExperimentStep2 extends PureComponent {
                 <Stepper activeStep={1} steps={steps} />
                 <div className={classes["subtitle"]}>
                   {/* TODO: Icon, Landing Page брать из стора!! */}
-                  <span>Testing Icon on Landing page</span>
+                  <span>
+                    Testing {elementForTest} on {testPage}
+                  </span>
                 </div>
                 <div className={classes["input-wrapper"]}>
                   <Input

@@ -2,6 +2,11 @@ import { observable, action } from "mobx";
 
 class NewExperimentStore {
   @observable appName;
+  @observable device;
+  @observable testPage;
+  @observable elementForTest;
+  @observable experimentName;
+  @observable actionOnInstall;
   @observable developerName;
   @observable appIsFree = true;
   @observable price = 0;
@@ -35,6 +40,31 @@ class NewExperimentStore {
   }
 
   @action.bound
+  setDevice(name) {
+    this.device = name;
+  }
+
+  @action.bound
+  setTestPage(value) {
+    this.testPage = value;
+  }
+
+  @action.bound
+  setElementForTest(value) {
+    this.elementForTest = value;
+  }
+
+  @action.bound
+  setExperimentName(value) {
+    this.experimentName = value;
+  }
+  
+  @action.bound
+  setActionOnInstall(value) {
+    this.actionOnInstall = value;
+  }
+
+  @action.bound
   setDeveloperName(name) {
     this.developerName = name;
   }
@@ -47,13 +77,11 @@ class NewExperimentStore {
   @action.bound
   setPrice(value) {
     this.price = value;
-    console.log("price ", value);
   }
 
   @action.bound
   setCurrency(value) {
     this.currency = value;
-    console.log("currency ", value);
   }
 
   @action.bound
@@ -83,7 +111,6 @@ class NewExperimentStore {
 
   @action.bound
   setReleaseDate(date) {
-    console.log("release date", date);
     this.releaseDate = date;
   }
 

@@ -35,15 +35,15 @@ let routes = [
     exact: true
   },
   {
-    name: "app",
-    url: URI_TO_APP,
-    component: App,
-    exact: true
-  },
-  {
     name: "apps",
     url: URI_TO_APPS,
     component: Apps,
+    exact: true
+  },
+  {
+    name: "app",
+    url: URI_TO_APP,
+    component: App,
     exact: true
   },
   {
@@ -92,5 +92,21 @@ routes.forEach(route => {
   }
 });
 
+let urlBuilder = function(name, params) {
+  if (!routesMap.hasOwnProperty(name)) {
+    return null;
+  }
+
+  let url = routesMap[name]; // news/:id
+  console.log("url", url);
+
+  for (let key in params) {
+    url = url.replace(":" + key, params[key]);
+  }
+  console.log("url", url);
+
+  return url;
+};
+
 export default routes;
-export { routesMap };
+export { routesMap, urlBuilder };

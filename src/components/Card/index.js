@@ -12,7 +12,8 @@ export default function Card({
   clicksCount = "0",
   appsImgUrl = "../../../static/images/apps/facebook.png",
   storeImgUrl = "../../../static/images/google-play-bw.svg",
-  onClickHandler
+  onClickHandler,
+  onExperimentsClick
 }) {
   return (
     <>
@@ -33,7 +34,10 @@ export default function Card({
               </div>
             </div>
             <div className={classes["info"]}>
-              <div className={classes["experiments"]}>
+              <div
+                className={classes["experiments"]}
+                onClick={onExperimentsClick}
+              >
                 <span className={classes["experiments-count"]}>
                   {experimentsCount}
                 </span>{" "}
@@ -41,7 +45,11 @@ export default function Card({
               </div>
               <div className={classes["card-image"]}>
                 <div className={classes["img-wrapper"]}>
-                  <img className={classes.img} src={appsImgUrl} alt="logoapp" />
+                  <img
+                    className={classes.img}
+                    src={storeImgUrl}
+                    alt="logoapp"
+                  />
                 </div>
               </div>
             </div>

@@ -48,7 +48,8 @@ function StyledSelect({
   data = [],
   onClickHandler = val => {},
   setAsDefault = "",
-  noBlankValue = false
+  noBlankValue = false,
+  titleCenter = false
 }) {
   // @ts-ignore
   const styles = useStyles();
@@ -60,7 +61,14 @@ function StyledSelect({
 
   return (
     <>
-      {title && <span className={classes.title}>{title}</span>}
+      {title && (
+        <span
+          className={classes.title}
+          style={titleCenter ? { textAlign: "center" } : {}}
+        >
+          {title}
+        </span>
+      )}
       <FormControl className={styles.margin} style={{ width }}>
         {label && (
           <InputLabel id="demo-customized-select-label">{label}</InputLabel>
