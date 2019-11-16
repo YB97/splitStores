@@ -64,7 +64,6 @@ class NewExperimentStore {
   deleteVariation(id) {
     const idx = this.variations.findIndex(variation => variation.id === id);
     this.variations.splice(idx, 1);
-    console.log(toJS(this.variations));
   }
 
   @action.bound
