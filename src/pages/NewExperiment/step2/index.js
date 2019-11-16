@@ -90,7 +90,6 @@ class NewExperimentStep2 extends PureComponent {
                 </div>
                 <Stepper activeStep={1} steps={steps} />
                 <div className={classes["subtitle"]}>
-                  {/* TODO: Icon, Landing Page брать из стора!! */}
                   <span>
                     Testing {elementForTest} on {testPage}
                   </span>

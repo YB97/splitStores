@@ -1,6 +1,6 @@
 .wrapper {
-  background: #FFFFFF;
-  border: 1px solid #244BDD;
+  background: #ffffff;
+  border: 1px solid #244bdd;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   padding: 41px 32px 48px;
@@ -40,6 +40,7 @@
   height: 100px;
   border-radius: 23px;
   object-fit: cover;
+  background-color: #f1f1f1;
 }
 
 .buttonWrap {
@@ -47,7 +48,7 @@
 }
 
 .buttonHelpText {
-  color: #AAAAAA;
+  color: #aaaaaa;
   font-size: 12px;
   line-height: 14px;
   float: left;

@@ -29,6 +29,16 @@ class NewExperimentStore {
   @observable threeStarsCount = 0;
   @observable fourStarsCount = 0;
   @observable fiveStarsCount = 0;
+  @observable variations = [
+    {
+      name: "Variation 1",
+      uploadedIcon: ""
+    },
+    {
+      name: "Variation 2",
+      uploadedIcon: ""
+    }
+  ];
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -58,7 +68,7 @@ class NewExperimentStore {
   setExperimentName(value) {
     this.experimentName = value;
   }
-  
+
   @action.bound
   setActionOnInstall(value) {
     this.actionOnInstall = value;

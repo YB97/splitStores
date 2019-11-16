@@ -21,7 +21,8 @@ export default function({
       border: `1px solid ${variant === "outlined" && color}`,
       padding: !size && "9px 25px",
       "&:hover": {
-        backgroundColor: !variant && darken(bg, 0.2)
+        backgroundColor:
+          (!variant && darken(bg, 0.2)) || (variant === "outlined" && "#fff")
       },
       "&:disabled": {
         color: "gray !important"
