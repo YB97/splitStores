@@ -51,6 +51,7 @@ class Apps extends PureComponent {
                   appsImgUrl={app.icon}
                   publishDate={moment(app.creation_date).format("DD/MM/YYYY")}
                   experimentsCount={app.experiments_count}
+                  storeType={app.store}
                 />
               </div>
             ))}

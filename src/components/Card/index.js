@@ -11,11 +11,16 @@ export default function Card({
   visitorsCount = "0",
   clicksCount = "0",
   appsImgUrl = "../../../static/images/apps/facebook.png",
-  storeImgUrl = "../../../static/images/google-play-bw.svg",
+  storeImgUrl = null,
   onClickHandler,
   withExpHover = false,
-  onExperimentsClick = () => {}
+  onExperimentsClick = () => {},
+  storeType = "Google Play"
 }) {
+  const storeImg =
+    storeType === "Google Play"
+      ? "../../../static/images/google-play.svg"
+      : "../../../static/images/apple.svg";
   return (
     <>
       <div className={classes.card} onClick={onClickHandler}>
@@ -54,7 +59,7 @@ export default function Card({
                 <div className={classes["img-wrapper"]}>
                   <img
                     className={classes.img}
-                    src={storeImgUrl}
+                    src={storeImgUrl || storeImg}
                     alt="logoapp"
                   />
                 </div>
