@@ -99,24 +99,28 @@ class NewExperiment extends PureComponent {
                   className={classes.formControl}
                   handleChange={e => setDevice(e.target.value)}
                 />
-                <StyledSelect
-                  width="100%"
-                  title="Define the page you’d like to test"
-                  titleCenter
-                  data={selectPageData}
-                  setAsDefault={testPage}
-                  onClickHandler={val => setTestPage(val)}
-                  noBlankValue
-                />
-                <StyledSelect
-                  width="100%"
-                  title="Define the element you’d like to test"
-                  titleCenter
-                  data={selectElementData}
-                  setAsDefault={elementForTest}
-                  onClickHandler={val => setElementForTest(val)}
-                  noBlankValue
-                />
+                <div className={classes["select-wrapper"]}>
+                  <StyledSelect
+                    width="100%"
+                    title="Define the page you’d like to test"
+                    titleCenter
+                    data={selectPageData}
+                    setAsDefault={testPage}
+                    onClickHandler={val => setTestPage(val)}
+                    noBlankValue
+                  />
+                </div>
+                <div className={classes["select-wrapper"]}>
+                  <StyledSelect
+                    width="100%"
+                    title="Define the element you’d like to test"
+                    titleCenter
+                    data={selectElementData}
+                    setAsDefault={elementForTest}
+                    onClickHandler={val => setElementForTest(val)}
+                    noBlankValue
+                  />
+                </div>
                 <div className={classes.formControl}>
                   <Input
                     title="Set the name to your experiment"
