@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, toJS } from "mobx";
 
 class NewExperimentStore {
   @observable appName;
@@ -31,10 +31,12 @@ class NewExperimentStore {
   @observable fiveStarsCount = 0;
   @observable variations = [
     {
+      id: 1,
       name: "Variation 1",
       uploadedIcon: ""
     },
     {
+      id: 2,
       name: "Variation 2",
       uploadedIcon: ""
     }
@@ -52,9 +54,17 @@ class NewExperimentStore {
   @action.bound
   addNewVariation() {
     this.variations.push({
-      name: `Variation ${this.variations.length + 1}`,
+      id: this.variations[this.variations.length - 1].id + 1,
+      name: `Variation ${this.variations[this.variations.length - 1].id + 1}`,
       uploadedIcon: ""
     });
+  }
+
+  @action.bound
+  deleteVariation(id) {
+    const idx = this.variations.findIndex(variation => variation.id === id);
+    this.variations.splice(idx, 1);
+    console.log(toJS(this.variations));
   }
 
   @action.bound

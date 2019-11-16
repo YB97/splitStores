@@ -23,7 +23,8 @@ class NewExperimentStep3 extends PureComponent {
       elementForTest,
       variations,
       setVariationName,
-      addNewVariation
+      addNewVariation,
+      deleteVariation
     } = this.props.stores.newExperiments;
     const { history } = this.props;
 
@@ -54,6 +55,7 @@ class NewExperimentStep3 extends PureComponent {
                       variationName={variation.name}
                       icon={variation.uploadedIcon}
                       onInputChange={e => setVariationName(e.target.value, id)}
+                      onDelete={() => deleteVariation(variation.id)}
                     />
                   </div>
                 ))}
