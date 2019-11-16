@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, darken } from "@material-ui/core/styles";
 
 import styles from "./button.module.scss";
 
@@ -9,7 +9,7 @@ export default function({
   color = "#fff",
   href = "",
   click = () => {},
-  variant = "",
+  variant = null,
   size = "small",
   fullWidth = false,
   children
@@ -18,9 +18,10 @@ export default function({
     root: {
       backgroundColor: !variant && bg,
       color,
+      border: `1px solid ${variant === "outlined" && color}`,
       padding: !size && "9px 25px",
       "&:hover": {
-        backgroundColor: bg === "#244BDD" && "#1B3DBC"
+        backgroundColor: !variant && darken(bg, 0.2)
       },
       "&:disabled": {
         color: "gray !important"

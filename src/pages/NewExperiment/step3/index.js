@@ -1,28 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import {
-  Container,
-  Grid
-} from "@material-ui/core"
+import { Container, Grid } from "@material-ui/core";
 
 import Header from "../../../components/Header";
 import Title from "../../../components/Title";
 import Stepper from "../../../components/Stepper";
 import Button from "../../../components/Button";
-import TestingIconCard from "../../../components/TestingIconCard"
+import TestingIconCard from "../../../components/TestingIconCard";
 import { URI_TO_NEW_EXPERIMENT_STEP_3 } from "../../../constants";
 
-import classes from "./step3.module.scss"
+import classes from "./step3.module.scss";
 
 export default function NewExperiment() {
   const steps = ["set up", "details", "variations"];
   const history = useHistory();
 
-
   const onClickHandler = () => {
     history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
   };
-
 
   return (
     <div className={classes.newexperiment}>
@@ -50,11 +45,22 @@ export default function NewExperiment() {
 
               <div className={classes.buttonsWrap}>
                 <div className={classes.fullwidthButton}>
-                  <Button click={onClickHandler} variant="outlined" color="#E3603B" fullWidth>Add new variation</Button>
+                  <Button
+                    click={onClickHandler}
+                    variant="outlined"
+                    color="#E3603B"
+                    fullWidth
+                  >
+                    Add new variation
+                  </Button>
                 </div>
                 <div className={classes.butonGroupWrap}>
-                  <Button click={onClickHandler} size="small">Publish experiment</Button>
-                  <Button click={onClickHandler} bg="#B0B0B0;" size="small">Save and publish later</Button>
+                  <Button click={onClickHandler} size="small">
+                    Publish experiment
+                  </Button>
+                  <Button click={onClickHandler} bg="#B0B0B0" size="small">
+                    Save and publish later
+                  </Button>
                 </div>
               </div>
             </div>

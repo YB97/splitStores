@@ -44,7 +44,7 @@ class Apps extends PureComponent {
           </div>
           <div className={classes.content}>
             {appsList.map(app => (
-              <div className={classes.card}>
+              <div key={app.name} className={classes.card}>
                 <Card
                   onClickHandler={() => this.cardClickHandler(app.id)}
                   title={app.name}
