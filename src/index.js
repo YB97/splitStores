@@ -8,7 +8,7 @@ import "./global.scss"
 import stores from "./stores"
 
 class App extends Component {
-  render() {
+    render() {
     let routesComponents = routes.map(route => {
       return (
         <Route

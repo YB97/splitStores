@@ -12,6 +12,7 @@ import { URI_TO_NEW_APPS } from "../../constants";
 import { urlBuilder } from "../../routes";
 
 import classes from "./apps.module.scss";
+import Footer from "../../components/Footer";
 
 @inject("stores")
 @observer
@@ -57,6 +58,7 @@ class Apps extends PureComponent {
             ))}
           </div>
         </Container>
+        <Footer />
       </div>
     );
   }

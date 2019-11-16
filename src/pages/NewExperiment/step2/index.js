@@ -11,6 +11,7 @@ import StyledCheckbox from "../../../components/StyledCheckbox";
 import StyledSelect from "../../../components/StyledSelect";
 import DatePicker from "../../../components/DatePicker";
 import Button from "../../../components/Button";
+import Footer from "../../../components/Footer";
 import {
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_3
@@ -299,6 +300,7 @@ class NewExperimentStep2 extends PureComponent {
             </Grid>
           </Grid>
         </Container>
+        <Footer />
       </>
     );
   }

@@ -8,6 +8,7 @@ import Title from "../../../components/Title";
 import Stepper from "../../../components/Stepper";
 import Button from "../../../components/Button";
 import TestingIconCard from "../../../components/TestingIconCard";
+import Footer from "../../../components/Footer";
 import { URI_TO_NEW_EXPERIMENT_STEP_3 } from "../../../constants";
 
 import classes from "./step3.module.scss";
@@ -81,6 +82,7 @@ class NewExperimentStep3 extends PureComponent {
             </Grid>
           </Grid>
         </Container>
+        <Footer />
       </div>
     );
   }

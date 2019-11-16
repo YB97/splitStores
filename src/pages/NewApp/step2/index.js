@@ -8,9 +8,8 @@ import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import StyledSelect from "../../../components/StyledSelect";
 import CheckboxCards from "../../../components/CheckboxCards";
-
+import Footer from "../../../components/Footer";
 import optimizeImage from "../../../helpers/optimizeImage";
-
 import { URI_TO_NEW_APPS } from "../../../constants";
 
 import classes from "./step2.module.scss";
@@ -146,6 +145,7 @@ export default function() {
           <Button>ADD APPLICATION</Button>
         </div>
       </Container>
+      <Footer />
     </div>
   );
 }

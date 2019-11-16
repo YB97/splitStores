@@ -10,7 +10,8 @@ import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
 import StyledSelect from "../../components/StyledSelect";
-import { URI_TO_EXPERIMENT, URI_TO_NEW_EXPERIMENT } from "../../constants";
+import Footer from "../../components/Footer";
+import { URI_TO_NEW_EXPERIMENT } from "../../constants";
 import { urlBuilder } from "../../routes";
 
 import classes from "./experiments.module.scss";
@@ -47,17 +48,6 @@ class Experiments extends PureComponent {
     const { experiments } = this.props.stores.experiments;
     const { appsList, getAppById } = this.props.stores.apps;
     const { id } = this.props.match.params;
-
-    const dataMock = [
-      {
-        name: "Play",
-        icon: "../../static/images/apps/facebook.png"
-      },
-      {
-        name: "One",
-        icon: "../../static/images/apps/facebook.png"
-      }
-    ];
 
     return (
       <div className={classes.exp}>
@@ -107,6 +97,7 @@ class Experiments extends PureComponent {
               />
             ))}
         </Container>
+        <Footer />
       </div>
     );
   }

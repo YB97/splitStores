@@ -10,6 +10,7 @@ import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import StyledSelect from "../../components/StyledSelect";
 import CardRadioControl from "../../components/CardRadioControl";
+import Footer from "../../components/Footer";
 import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
 
 import classes from "./newexperiment.module.scss";
@@ -165,6 +166,7 @@ class NewExperiment extends PureComponent {
             </Grid>
           </Grid>
         </Container>
+        <Footer />
       </div>
     );
   }

@@ -11,6 +11,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Card from "../../components/Card";
 import CheckboxCards from "../../components/CheckboxCards";
+import Footer from "../../components/Footer";
 import { urlBuilder } from "../../routes";
 
 import classes from "./app.module.scss";
@@ -113,6 +114,7 @@ class App extends PureComponent {
           </main>
           <Button click={this.saveClickHandler}>SAVE</Button>
         </Container>
+        <Footer />
       </div>
     );
   }

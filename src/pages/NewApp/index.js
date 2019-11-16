@@ -1,13 +1,15 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import Container from "@material-ui/core/Container";
+import { Grid } from "@material-ui/core";
+
 import Header from "../../components/Header";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Card from "./components/Card";
+import Footer from "../../components/Footer";
 
 import classes from "./newapp.module.scss";
-import { Grid } from "@material-ui/core";
 
 export default function Apps() {
   const history = useHistory();
@@ -52,6 +54,7 @@ export default function Apps() {
           </div>
         </div>
       </Container>
+      <Footer />
     </div>
   );
 }
