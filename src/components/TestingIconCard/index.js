@@ -7,14 +7,20 @@ import classes from "./testingiconcard.module.scss";
 
 export default function TestingIconCard({
   variationName,
-  icon = null
+  icon = null,
+  onInputChange = () => {}
   // icon = "../../../static/images/apps/clash-royale.jpg"
 }) {
   const onClickHandler = () => {};
 
   return (
     <div className={classes.wrapper}>
-      <Input value={variationName} title="Variation name" titleCentered />
+      <Input
+        value={variationName}
+        onChange={onInputChange}
+        title="Variation name"
+        titleCentered
+      />
       <div className={classes.iconLabel}>Icon</div>
       <div className={classes.uploadWrapper}>
         <div className={classes.iconWrap}>

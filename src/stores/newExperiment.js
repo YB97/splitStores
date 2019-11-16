@@ -45,6 +45,19 @@ class NewExperimentStore {
   }
 
   @action.bound
+  setVariationName(name, id) {
+    this.variations[id].name = name;
+  }
+
+  @action.bound
+  addNewVariation() {
+    this.variations.push({
+      name: `Variation ${this.variations.length + 1}`,
+      uploadedIcon: ""
+    });
+  }
+
+  @action.bound
   setAppName(name) {
     this.appName = name;
   }

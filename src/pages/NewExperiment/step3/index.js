@@ -17,7 +17,13 @@ import classes from "./step3.module.scss";
 class NewExperimentStep3 extends PureComponent {
   render() {
     const steps = ["set up", "details", "variations"];
-    const { testPage, elementForTest } = this.props.stores.newExperiments;
+    const {
+      testPage,
+      elementForTest,
+      variations,
+      setVariationName,
+      addNewVariation
+    } = this.props.stores.newExperiments;
     const { history } = this.props;
 
     const onClickHandler = () => {
@@ -41,17 +47,20 @@ class NewExperimentStep3 extends PureComponent {
                   <Title title={`Testing ${elementForTest} on ${testPage}`} />
                 </div>
 
-                <div className={classes.cardWrapper}>
-                  <TestingIconCard variationName="Variant A" />
-                </div>
-                <div className={classes.cardWrapper}>
-                  <TestingIconCard variationName="Variant B" />
-                </div>
+                {variations.map((variation, id) => (
+                  <div className={classes.cardWrapper} key={id}>
+                    <TestingIconCard
+                      variationName={variation.name}
+                      icon={variation.uploadedIcon}
+                      onInputChange={e => setVariationName(e.target.value, id)}
+                    />
+                  </div>
+                ))}
 
                 <div className={classes.buttonsWrap}>
                   <div className={classes.fullwidthButton}>
                     <Button
-                      click={onClickHandler}
+                      click={addNewVariation}
                       variant="outlined"
                       color="#E3603B"
                       fullWidth
