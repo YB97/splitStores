@@ -5,6 +5,7 @@ import App from "../pages/App";
 import NewApp from "../pages/NewApp";
 import NewAppStep2 from "../pages/NewApp/step2";
 import Experiments from "../pages/Experiments";
+import Experiment from "../pages/Experiment";
 import NewExperiment from "../pages/NewExperiment";
 import NewExperimentStep2 from "../pages/NewExperiment/step2";
 import NewExperimentStep3 from "../pages/NewExperiment/step3";
@@ -15,6 +16,7 @@ import {
   URI_TO_NEW_APPS,
   URI_TO_NEW_APPS_STEP_2,
   URI_TO_EXPERIMENTS,
+  URI_TO_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_2,
   URI_TO_NEW_EXPERIMENT_STEP_3,
@@ -62,6 +64,12 @@ let routes = [
     name: "experiments",
     url: URI_TO_EXPERIMENTS,
     component: Experiments,
+    exact: true
+  },
+  {
+    name: "experiment",
+    url: URI_TO_EXPERIMENT,
+    component: Experiment,
     exact: true
   },
   {

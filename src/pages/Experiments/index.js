@@ -10,7 +10,7 @@ import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
 import StyledSelect from "../../components/StyledSelect";
-import { URI_TO_NEW_EXPERIMENT } from "../../constants";
+import { URI_TO_EXPERIMENT, URI_TO_NEW_EXPERIMENT } from "../../constants";
 import { urlBuilder } from "../../routes";
 
 import classes from "./experiments.module.scss";
@@ -27,6 +27,10 @@ class Experiments extends PureComponent {
 
   clickHandler = () => {
     this.props.history.push(URI_TO_NEW_EXPERIMENT);
+  };
+
+  onCardClickHandler = (appId, expId) => {
+    this.props.history.push(urlBuilder("experiment", { id: appId, expId }));
   };
 
   onAppSelect = name => {
@@ -87,9 +91,9 @@ class Experiments extends PureComponent {
             </div>
           )}
           {!!experiments.length &&
-            experiments.map((exp, idx) => (
+            experiments.map(exp => (
               <Card
-                key={`${exp.experiment_name} ${idx}`}
+                key={`${exp.experiment_name} ${exp.experiment_id}`}
                 type="experiments"
                 title={exp.experiment_name}
                 variationsCount={exp.variations_count}
@@ -97,7 +101,9 @@ class Experiments extends PureComponent {
                 clicksCount={exp.clicks_count}
                 publishDate={moment(exp.creation_date).format("DD/MM/YYYY")}
                 storeImgUrl="../../static/images/google-play.svg"
-                onClickHandler={() => console.log("click")}
+                onClickHandler={() =>
+                  this.onCardClickHandler(id, exp.experiment_id)
+                }
               />
             ))}
         </Container>
