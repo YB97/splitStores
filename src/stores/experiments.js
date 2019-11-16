@@ -6,6 +6,54 @@ class ExperimentsStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
+
+  @action.bound
+  getExperimentsByAppId(id) {
+    this.experiments = getExpByAppId(id.toString());
+  }
 }
+
+const getExpByAppId = id => {
+  switch (id) {
+    case "1":
+      return [
+        {
+          experiment_id: 1,
+          experiment_name: "Play For Game Exp1",
+          variations_count: 2,
+          visitors_count: 10,
+          clicks_count: 33,
+          creation_date: "2019-11-12T14:39:43+03:00"
+        },
+        {
+          experiment_id: 2,
+          experiment_name: "Play For Game Exp2",
+          variations_count: 4,
+          visitors_count: 8,
+          clicks_count: 28,
+          creation_date: "2019-11-14T14:39:43+03:00"
+        },
+        {
+          experiment_id: 3,
+          experiment_name: "Play For Game Exp3",
+          variations_count: 2,
+          visitors_count: 10,
+          clicks_count: 43,
+          creation_date: "2019-11-14T14:39:43+03:00"
+        }
+      ];
+    case "2":
+      return [
+        {
+          experiment_id: 2,
+          experiment_name: "Play For Game Exp2",
+          variations_count: 4,
+          visitors_count: 8,
+          clicks_count: 28,
+          creation_date: "2019-11-14T14:39:43+03:00"
+        }
+      ];
+  }
+};
 
 export default ExperimentsStore;

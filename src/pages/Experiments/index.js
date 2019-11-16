@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { inject, observer } from "mobx-react";
+import { toJS } from "mobx";
+import moment from "moment";
 
 import Header from "../../components/Header";
 import Title from "../../components/Title";
@@ -9,18 +11,38 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import StyledSelect from "../../components/StyledSelect";
 import { URI_TO_NEW_EXPERIMENT } from "../../constants";
+import { urlBuilder } from "../../routes";
 
 import classes from "./experiments.module.scss";
 
 @inject("stores")
 @observer
 class Experiments extends PureComponent {
+  componentDidMount() {
+    const { getExperimentsByAppId } = this.props.stores.experiments;
+    const { id } = this.props.match.params;
+
+    getExperimentsByAppId(id);
+  }
+
   clickHandler = () => {
     this.props.history.push(URI_TO_NEW_EXPERIMENT);
   };
 
+  onAppSelect = name => {
+    const { history } = this.props;
+    const { getAppByName } = this.props.stores.apps;
+    const { getExperimentsByAppId } = this.props.stores.experiments;
+    const app = getAppByName(name);
+
+    getExperimentsByAppId(app.id);
+    history.push(urlBuilder("experiments", { id: app.id }));
+  };
+
   render() {
     const { experiments } = this.props.stores.experiments;
+    const { appsList, getAppById } = this.props.stores.apps;
+    const { id } = this.props.match.params;
 
     const dataMock = [
       {
@@ -32,6 +54,7 @@ class Experiments extends PureComponent {
         icon: "../../static/images/apps/facebook.png"
       }
     ];
+
     return (
       <div className={classes.exp}>
         <div className="header">
@@ -40,9 +63,11 @@ class Experiments extends PureComponent {
         <Container>
           <div className={classes.select}>
             <StyledSelect
-              data={dataMock}
-              onClickHandler={val => console.log(val)}
+              data={appsList}
+              setAsDefault={toJS(getAppById(id)).name}
+              onClickHandler={this.onAppSelect}
               width="300px"
+              noBlankValue
             />
           </div>
           <div className={classes.title}>
@@ -53,21 +78,28 @@ class Experiments extends PureComponent {
               <Button click={this.clickHandler}>CREATE NEW EXPERIMENT</Button>
             )}
           </div>
-          {/* {!experiments.length && (
+          {!experiments.length && (
             <div className={classes["no-exp-wrapper"]}>
               <strong className={classes["no-exp-text"]}>
                 You don't have any experiments
               </strong>
               <Button click={this.clickHandler}>CREATE NEW EXPERIMENT</Button>
             </div>
-          )} */}
-          {!experiments.length && (
-            <Card
-              type="experiments"
-              storeImgUrl="../../static/images/google-play.svg"
-              onClickHandler={() => console.log("click")}
-            />
           )}
+          {!!experiments.length &&
+            experiments.map((exp, idx) => (
+              <Card
+                key={`${exp.experiment_name} ${idx}`}
+                type="experiments"
+                title={exp.experiment_name}
+                variationsCount={exp.variations_count}
+                visitorsCount={exp.visitors_count}
+                clicksCount={exp.clicks_count}
+                publishDate={moment(exp.creation_date).format("DD/MM/YYYY")}
+                storeImgUrl="../../static/images/google-play.svg"
+                onClickHandler={() => console.log("click")}
+              />
+            ))}
         </Container>
       </div>
     );

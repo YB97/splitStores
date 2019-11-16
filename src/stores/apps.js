@@ -8,7 +8,7 @@ class AppsStore {
 
   @action.bound
   getAppById(id) {
-    return this.appsList.find(a => parseInt(a.id) === parseInt(id));
+    return this.appsList.find(a => a.id === parseInt(id));
   }
 
   @action.bound
@@ -16,6 +16,11 @@ class AppsStore {
     const item = this.getAppById(id);
 
     item.name = name;
+  }
+
+  @action.bound
+  getAppByName(name) {
+    return this.appsList.find(a => a.name === name);
   }
 }
 

@@ -11,9 +11,9 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Card from "../../components/Card";
 import CheckboxCards from "../../components/CheckboxCards";
+import { urlBuilder } from "../../routes";
 
 import classes from "./app.module.scss";
-import { urlBuilder } from "../../routes";
 
 @inject("stores")
 @observer
@@ -66,12 +66,12 @@ class App extends PureComponent {
               appsImgUrl={appData.icon}
               publishDate={moment(appData.creation_date).format("DD/MM/YYYY")}
               experimentsCount={appData.experiments_count}
+              withExpHover
             />
           </div>
           <main className={classes.main}>
             <div className={classes.control}>
               <Input
-                defaultValue={appData.name}
                 helpText="This name will only be displayed on the dashboard"
                 title="App Name*"
                 onChange={e => this.setState({ name: e.target.value })}

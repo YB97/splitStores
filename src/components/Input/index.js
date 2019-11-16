@@ -43,8 +43,8 @@ function Input({
   required = false,
   disabled = false,
   multiline = false,
-  rows = "4",
-  defaultValue = ""
+  rows = "4"
+  // defaultValue
 }) {
   return (
     <>
@@ -71,7 +71,7 @@ function Input({
         disabled={disabled}
         multiline={multiline}
         rows={rows}
-        defaultValue={defaultValue}
+        // defaultValue={defaultValue}
       />
       {helpText && !error && (
         <span className={classes["help-text"]}>{helpText}</span>

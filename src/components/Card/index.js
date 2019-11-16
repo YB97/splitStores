@@ -13,7 +13,8 @@ export default function Card({
   appsImgUrl = "../../../static/images/apps/facebook.png",
   storeImgUrl = "../../../static/images/google-play-bw.svg",
   onClickHandler,
-  onExperimentsClick
+  withExpHover = false,
+  onExperimentsClick = () => {}
 }) {
   return (
     <>
@@ -35,7 +36,13 @@ export default function Card({
             </div>
             <div className={classes["info"]}>
               <div
-                className={classes["experiments"]}
+                className={
+                  withExpHover
+                    ? classes["experiments"] +
+                      " " +
+                      classes["experiments-hover"]
+                    : classes["experiments"]
+                }
                 onClick={onExperimentsClick}
               >
                 <span className={classes["experiments-count"]}>
