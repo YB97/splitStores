@@ -78,7 +78,7 @@ class Experiments extends PureComponent {
             <div className={classes["title-text"]}>
               <Title title="Experiments" />
             </div>
-            {!Boolean(experiments.length) && (
+            {Boolean(experiments.length) && (
               <Button click={this.clickHandler}>CREATE NEW EXPERIMENT</Button>
             )}
           </div>
