@@ -89,6 +89,12 @@ let routes = [
     url: URI_TO_NEW_EXPERIMENT_STEP_3,
     component: NewExperimentStep3,
     exact: true
+  },
+  {
+    name: "default",
+    url: "/",
+    component: LoginPage,
+    exact: true
   }
 ];
 
