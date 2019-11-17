@@ -92,7 +92,7 @@ let routes = [
   },
   {
     name: "default",
-    url: "/",
+    url: "**",
     component: LoginPage,
     exact: true
   }

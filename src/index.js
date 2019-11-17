@@ -1,14 +1,14 @@
-import React, { Component } from "react"
-import ReactDOM from "react-dom"
-import { Provider } from "mobx-react"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "mobx-react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import routes from "./routes"
-import "./global.scss"
-import stores from "./stores"
+import routes from "./routes";
+import "./global.scss";
+import stores from "./stores";
 
 class App extends Component {
-    render() {
+  render() {
     let routesComponents = routes.map(route => {
       return (
         <Route
@@ -17,9 +17,13 @@ class App extends Component {
           exact={route.exact}
           key={route.url}
         />
-      )
-    })
-    return <Router>{routesComponents}</Router>
+      );
+    });
+    return (
+      <Router>
+        <Switch>{routesComponents}</Switch>
+      </Router>
+    );
   }
 }
 
@@ -28,4 +32,4 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById("app")
-)
+);
