@@ -1,0 +1,59 @@
+.login-wrapper {
+  // font-family: "Exo", sans-serif; Это нужно?
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  min-height: 700px;
+}
+
+.logo {
+  margin-bottom: 27px;
+  font-weight: 300;
+}
+.button {
+  margin-top: 6px;
+  a {
+    color: #fff !important;
+  }
+}
+
+.login-form-wrapper {
+  min-width: 470px;
+  min-height: 330px;
+  padding: 30px 60px;
+  box-sizing: border-box;
+  @media (max-width: 500px) {
+    width: 100%;
+    padding: 25px 30px;
+  }
+  @media (max-width: 365px) {
+    width: 100%;
+    padding: 25px 30px;
+    min-width: 300px;
+  }
+}
+
+.H2 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.login-small-text {
+  margin-top: 20px;
+  font-size: 14px;
+}

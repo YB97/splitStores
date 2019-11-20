@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 
 class AppsStore {
-  @observable appsList = getApps();
+  @observable appsList = [];
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
@@ -21,6 +21,16 @@ class AppsStore {
   @action.bound
   getAppByName(name) {
     return this.appsList.find(a => a.name === name);
+  }
+
+  @action.bound
+  initialAppList() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.appsList = getApps();
+        resolve();
+      }, 3000);
+    });
   }
 }
 

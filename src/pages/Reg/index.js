@@ -13,7 +13,7 @@ import validation from "../../helpers/validation";
 
 import { URI_TO_APPS } from "../../constants";
 
-import styles from "./login.module.scss";
+import styles from "./reg.module.scss";
 
 const StyledButton = withStyles({
   root: {
@@ -40,7 +40,16 @@ class LoginPage extends React.Component {
   };
 
   render() {
-    const { email, password, setEmail, setPass } = this.props.stores.login;
+    const {
+      email,
+      password,
+      name,
+      company,
+      setEmail,
+      setPass,
+      setName,
+      setCompany
+    } = this.props.stores.login;
     const isBtnDisabled =
       (this.state.emailValidation && !this.state.emailValidation.isValid) ||
       !email.length ||
@@ -56,6 +65,24 @@ class LoginPage extends React.Component {
             <Paper className={styles["login-form-wrapper"]}>
               <h2 className={styles.H2}>Log in Split Stores</h2>
               <form onSubmit={this.submitHandler}>
+                <div className={styles["input-wrapper"]}>
+                  <Input
+                    label="Company"
+                    type="text"
+                    value={company}
+                    onChange={e => setCompany(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles["input-wrapper"]}>
+                  <Input
+                    label="Your name"
+                    type="text"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    required
+                  />
+                </div>
                 <div className={styles["input-wrapper"]}>
                   <Input
                     label="E-mail"
@@ -97,13 +124,13 @@ class LoginPage extends React.Component {
                     onClick={() => {}}
                     disabled={isBtnDisabled}
                   >
-                    sign in
+                    sign up!
                   </StyledButton>
                 </div>
               </form>
             </Paper>
             <span className={styles["login-small-text"]}>
-              Do not have an account? <u>Sign Up!</u>
+              Do you have an account? <u>Sign In!</u>
             </span>
           </div>
         </Container>

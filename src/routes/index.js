@@ -9,9 +9,11 @@ import Experiment from "../pages/Experiment";
 import NewExperiment from "../pages/NewExperiment";
 import NewExperimentStep2 from "../pages/NewExperiment/step2";
 import NewExperimentStep3 from "../pages/NewExperiment/step3";
+import RegPage from "../pages/Reg";
 import {
   URI_TO_APPS,
   URI_TO_LOGIN,
+  URI_TO_REG,
   URI_TO_WELCOME,
   URI_TO_NEW_APPS,
   URI_TO_NEW_APPS_STEP_2,
@@ -28,67 +30,85 @@ let routes = [
     name: "login",
     url: URI_TO_LOGIN,
     component: LoginPage,
-    exact: true
+    exact: true,
+    isAuthRequired: false
+  },
+  {
+    name: "reg",
+    url: URI_TO_REG,
+    component: RegPage,
+    exact: true,
+    isAuthRequired: false
   },
   {
     name: "welcome",
     url: URI_TO_WELCOME,
     component: Welcome,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "apps",
     url: URI_TO_APPS,
     component: Apps,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "app",
     url: URI_TO_APP,
     component: App,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "newApp",
     url: URI_TO_NEW_APPS,
     component: NewApp,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "newAppStep2",
     url: URI_TO_NEW_APPS_STEP_2,
     component: NewAppStep2,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "experiments",
     url: URI_TO_EXPERIMENTS,
     component: Experiments,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "experiment",
     url: URI_TO_EXPERIMENT,
     component: Experiment,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "newExperiment",
     url: URI_TO_NEW_EXPERIMENT,
     component: NewExperiment,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "newExperimentStep2",
     url: URI_TO_NEW_EXPERIMENT_STEP_2,
     component: NewExperimentStep2,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "newExperimentStep3",
     url: URI_TO_NEW_EXPERIMENT_STEP_3,
     component: NewExperimentStep3,
-    exact: true
+    exact: true,
+    isAuthRequired: true
   },
   {
     name: "default",

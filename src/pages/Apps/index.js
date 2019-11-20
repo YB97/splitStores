@@ -4,19 +4,25 @@ import { withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 
+import { URI_TO_NEW_APPS } from "../../constants";
+import { urlBuilder } from "../../routes";
+
 import Header from "../../components/Header";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
-import { URI_TO_NEW_APPS } from "../../constants";
-import { urlBuilder } from "../../routes";
+import Footer from "../../components/Footer";
+import Spinner from "../../components/Spinner";
 
 import classes from "./apps.module.scss";
-import Footer from "../../components/Footer";
 
 @inject("stores")
 @observer
 class Apps extends PureComponent {
+  componentDidMount() {
+    this.props.stores.apps.initialAppList();
+  }
+
   clickHandler = () => {
     this.props.history.push(URI_TO_NEW_APPS);
   };
@@ -30,6 +36,7 @@ class Apps extends PureComponent {
 
     return (
       <div className={classes.apps}>
+        <Spinner />
         <div className="header">
           <Header />
         </div>

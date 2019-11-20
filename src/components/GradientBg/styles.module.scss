@@ -1,6 +1,7 @@
 .bg {
   position: absolute;
   height: 100vh;
+  min-height: 700px;
   width: 100vw;
   z-index: -10;
   background: linear-gradient(-45deg, #ee7752, #e98568, #455dd4, #23d5ab);
