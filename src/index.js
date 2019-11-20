@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider, inject, observer } from "mobx-react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import ErrorBoundry from "./hocs/ErrorBoundry";
+
 import routes from "./routes";
 import "./global.scss";
 import stores from "./stores";
@@ -26,7 +28,9 @@ class App extends Component {
 
 ReactDOM.render(
   <Provider stores={stores}>
-    <App />
+    <ErrorBoundry>
+      <App />
+    </ErrorBoundry>
   </Provider>,
   document.getElementById("app")
 );
