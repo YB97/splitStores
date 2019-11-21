@@ -32,11 +32,10 @@ class Apps extends PureComponent {
   };
 
   render() {
-    const { appsList } = this.props.stores.apps;
+    const { appsList, processing } = this.props.stores.apps;
 
     return (
       <div className={classes.apps}>
-        <Spinner />
         <div className="header">
           <Header />
         </div>
@@ -51,18 +50,25 @@ class Apps extends PureComponent {
             <Button click={this.clickHandler}>Add App</Button>
           </div>
           <div className={classes.content}>
-            {appsList.map(app => (
-              <div key={app.name} className={classes.card}>
-                <Card
-                  onClickHandler={() => this.cardClickHandler(app.id)}
-                  title={app.name}
-                  appsImgUrl={app.icon}
-                  publishDate={moment(app.creation_date).format("DD/MM/YYYY")}
-                  experimentsCount={app.experiments_count}
-                  storeType={app.store}
-                />
-              </div>
-            ))}
+            {processing
+              ? (
+                <div className={classes.spinner}>
+                  <Spinner />
+                </div>
+                )
+              : appsList.map(app => (
+                <div key={app.name} className={classes.card}>
+                  <Card
+                    onClickHandler={() => this.cardClickHandler(app.id)}
+                    title={app.name}
+                    appsImgUrl={app.icon}
+                    publishDate={moment(app.creation_date).format("DD/MM/YYYY")}
+                    experimentsCount={app.experiments_count}
+                    storeType={app.store}
+                  />
+                </div>
+              ))
+            }
           </div>
         </Container>
         <Footer />
