@@ -83,7 +83,7 @@ export default function Card({
                 >
                   <img
                     className={classes["store-img"]}
-                    src={storeImgUrl}
+                    src={storeImgUrl || storeImg}
                     alt="store"
                   />
                   &nbsp; {publishDate}

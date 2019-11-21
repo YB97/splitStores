@@ -3,7 +3,6 @@ import { Container, Grid } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
-import { toJS } from "mobx";
 
 import Header from "../../components/Header";
 import Title from "../../components/Title";
@@ -16,12 +15,11 @@ import Footer from "../../components/Footer";
 import { urlBuilder } from "../../routes";
 
 import classes from "./app.module.scss";
-import { throws } from "assert";
 
 @inject("stores")
 @observer
 class App extends PureComponent {
-  st = this.props.stores.apps;
+  st = this.props.stores.app;
   timer = null;
 
   state = {
@@ -30,15 +28,23 @@ class App extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.stores.setLoading(true);
+    const { setLoading } = this.props.stores;
     const { getAppById } = this.st;
     const { id } = this.props.match.params;
-    if (id !== this.state.id) {
-      getAppById(id).then(data => {
-        this.setState({ name: toJS(data).name });
-        this.props.stores.setLoading(false);
-      });
-    }
+
+    setLoading(true);
+    getAppById(id);
+    this.setState({ name: this.st.app.name });
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    // if (id !== this.state.id) {
+    //   getAppById(id).then(data => {
+    //     this.setState({ name: toJS(data).name });
+    //     this.props.stores.setLoading(false);
+    //   });
+    // }
   }
 
   clickHandler = () => {
@@ -46,17 +52,16 @@ class App extends PureComponent {
   };
 
   saveClickHandler = () => {
-    const { setAppName } = this.st;
-    const { id } = this.props.match.params;
+    const { setAppName, save } = this.st;
 
-    setAppName(id, this.state.name);
+    setAppName(this.state.name);
+    save();
   };
 
   render() {
-    const { getAppById } = this.st;
+    const { app } = this.st;
     const { history } = this.props;
     const { id } = this.props.match.params;
-    const appData = getAppById(id);
 
     return (
       <div>
@@ -73,10 +78,10 @@ class App extends PureComponent {
                 onExperimentsClick={() =>
                   history.push(urlBuilder("experiments", { id }))
                 }
-                title={appData.name}
-                appsImgUrl={appData.icon}
-                publishDate={moment(appData.creation_date).format("DD/MM/YYYY")}
-                experimentsCount={appData.experiments_count}
+                title={app.name}
+                appsImgUrl={app.icon}
+                publishDate={moment(app.creation_date).format("DD/MM/YYYY")}
+                experimentsCount={app.experiments_count}
                 withExpHover
               />
             </div>
@@ -95,14 +100,14 @@ class App extends PureComponent {
                     <div className={classes.control}>
                       <Input
                         title="Link in Store*"
-                        value={appData.link_store}
+                        value={app.link_store}
                         disabled
                       />
                     </div>
                     <div className={classes.control}>
                       <Input
                         title="Store Category*"
-                        value={appData.store_category}
+                        value={app.store_category}
                         disabled
                       />
                     </div>
@@ -111,7 +116,7 @@ class App extends PureComponent {
                     <div className={classes["checkbox-cards"]}>
                       <CheckboxCards
                         store={
-                          appData.store === "Google Play"
+                          app.store === "Google Play"
                             ? "google-play"
                             : "app-store"
                         }

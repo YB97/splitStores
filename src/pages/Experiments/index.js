@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { inject, observer } from "mobx-react";
-import { toJS } from "mobx";
 import moment from "moment";
 
 import Header from "../../components/Header";
@@ -19,6 +18,11 @@ import classes from "./experiments.module.scss";
 @inject("stores")
 @observer
 class Experiments extends PureComponent {
+  componentWillMount() {
+    const { getAllApps } = this.props.stores.apps;
+
+    getAllApps();
+  }
   componentDidMount() {
     const { getExperimentsByAppId } = this.props.stores.experiments;
     const { id } = this.props.match.params;
@@ -36,9 +40,10 @@ class Experiments extends PureComponent {
 
   onAppSelect = name => {
     const { history } = this.props;
-    const { getAppByName } = this.props.stores.apps;
+    const { appsList } = this.props.stores.apps;
     const { getExperimentsByAppId } = this.props.stores.experiments;
-    const app = getAppByName(name);
+
+    const app = appsList.find(app => app.name === name);
 
     getExperimentsByAppId(app.id);
     history.push(urlBuilder("experiments", { id: app.id }));
@@ -46,8 +51,10 @@ class Experiments extends PureComponent {
 
   render() {
     const { experiments } = this.props.stores.experiments;
-    const { appsList, getAppById } = this.props.stores.apps;
+    const { appsList } = this.props.stores.apps;
     const { id } = this.props.match.params;
+
+    const activeApp = appsList.find(app => app.id.toString() === id.toString());
 
     return (
       <div className={classes.exp}>
@@ -58,7 +65,7 @@ class Experiments extends PureComponent {
           <div className={classes.select}>
             <StyledSelect
               data={appsList}
-              setAsDefault={toJS(getAppById(id)).name}
+              setAsDefault={activeApp && activeApp.name}
               onClickHandler={this.onAppSelect}
               width="300px"
               noBlankValue
@@ -90,7 +97,7 @@ class Experiments extends PureComponent {
                 visitorsCount={exp.visitors_count}
                 clicksCount={exp.clicks_count}
                 publishDate={moment(exp.creation_date).format("DD/MM/YYYY")}
-                storeImgUrl="../../static/images/google-play.svg"
+                storeType={activeApp.store}
                 onClickHandler={() =>
                   this.onCardClickHandler(id, exp.experiment_id)
                 }

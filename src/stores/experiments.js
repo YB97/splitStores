@@ -10,6 +10,15 @@ class ExperimentsStore {
   @action.bound
   getExperimentsByAppId(id) {
     this.experiments = getExpByAppId(id.toString());
+
+    // try {
+    //   const { data } = await axios.get(`/api/apps/${id}/experiments/`);
+    //   runInAction(() => {
+    //     this.experiments = data.experiments;
+    //   });
+    // } catch (e) {
+    //   console.error(e);
+    // }
   }
 }
 
@@ -46,7 +55,7 @@ const getExpByAppId = id => {
       return [
         {
           experiment_id: 2,
-          experiment_name: "Play For Game Exp2",
+          experiment_name: "Super Arcade Exp2",
           variations_count: 4,
           visitors_count: 8,
           clicks_count: 28,

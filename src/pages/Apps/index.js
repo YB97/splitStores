@@ -22,7 +22,10 @@ class Apps extends PureComponent {
   stores = this.props.stores;
 
   componentDidMount() {
+    const { getAllApps } = this.stores.apps;
     this.stores.setLoading(true);
+    getAllApps();
+
     this.stores.apps.initialAppList().then(() => {
       this.stores.setLoading(false);
     });

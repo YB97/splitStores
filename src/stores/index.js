@@ -2,6 +2,7 @@ import LoginStore from "./login";
 import ExperimentsStore from "./experiments";
 import NewExperimentsStore from "./newExperiment";
 import AppsStore from "./apps";
+import AppStore from "./app";
 import { observable, action } from "mobx";
 
 class RootStore {
@@ -10,6 +11,7 @@ class RootStore {
     this.experiments = new ExperimentsStore(this);
     this.newExperiments = new NewExperimentsStore(this);
     this.apps = new AppsStore(this);
+    this.app = new AppStore(this);
   }
   @observable loading = false;
 
