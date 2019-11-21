@@ -11,7 +11,7 @@ import Input from "../../components/Input";
 import Logo from "../../components/Logo";
 import validation from "../../helpers/validation";
 
-import { URI_TO_APPS } from "../../constants";
+import { URI_TO_APPS, URI_TO_LOGIN } from "../../constants";
 
 import styles from "./reg.module.scss";
 
@@ -37,6 +37,10 @@ class LoginPage extends React.Component {
     event.preventDefault();
     this.props.stores.login.setAuth();
     this.props.history.push(URI_TO_APPS);
+  };
+
+  onSignInClick = () => {
+    this.props.history.push(URI_TO_LOGIN);
   };
 
   render() {
@@ -130,9 +134,12 @@ class LoginPage extends React.Component {
               </form>
             </Paper>
             <span className={styles["login-small-text"]}>
-              Do you have an account? <u>Sign In!</u>
+              Do you have an account?{" "}
+              <a className={styles["link-text"]} onClick={this.onSignInClick}>
+                Sign In!
+              </a>
             </span>
-          </div>
+          </div> 
         </Container>
       </GradientBg>
     );

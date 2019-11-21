@@ -2,17 +2,17 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import Spinner from "../../components/Spinner";
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 
+import Spinner from "../../components/Spinner";
 import GradientBg from "../../components/GradientBg";
 import Input from "../../components/Input";
 import Logo from "../../components/Logo";
 import validation from "../../helpers/validation";
 
-import { URI_TO_APPS } from "../../constants";
+import { URI_TO_APPS, URI_TO_REG } from "../../constants";
 
 import styles from "./login.module.scss";
 
@@ -48,6 +48,10 @@ class LoginPage extends React.Component {
       .finally(() => {
         this.props.stores.setLoading(false);
       });
+  };
+
+  signUpClickHandler = () => {
+    this.props.history.push(URI_TO_REG);
   };
 
   render() {
@@ -114,7 +118,13 @@ class LoginPage extends React.Component {
               </form>
             </Paper>
             <span className={styles["login-small-text"]}>
-              Do not have an account? <u>Sign Up!</u>
+              Do not have an account?&nbsp;
+              <a
+                className={styles["link-text"]}
+                onClick={this.signUpClickHandler}
+              >
+                Sign Up!
+              </a>
             </span>
           </div>
         </Container>

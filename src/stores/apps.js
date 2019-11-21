@@ -1,5 +1,4 @@
 import { observable, action } from "mobx";
-import { runInThisContext } from "vm";
 
 class AppsStore {
   @observable appsList = [
