@@ -19,8 +19,13 @@ import classes from "./apps.module.scss";
 @inject("stores")
 @observer
 class Apps extends PureComponent {
+  stores = this.props.stores;
+
   componentDidMount() {
-    this.props.stores.apps.initialAppList();
+    this.stores.setLoading(true);
+    this.stores.apps.initialAppList().then(() => {
+      this.stores.setLoading(false);
+    });
   }
 
   clickHandler = () => {
@@ -36,35 +41,36 @@ class Apps extends PureComponent {
 
     return (
       <div className={classes.apps}>
-        <Spinner />
         <div className="header">
           <Header />
         </div>
-        <Container>
-          <div className={classes.title}>
-            <div className={classes["title-text"]}>
-              <Title
-                title="Apps"
-                subtitle="This is the application control room. Here you can create and manage your apps."
-              />
-            </div>
-            <Button click={this.clickHandler}>Add App</Button>
-          </div>
-          <div className={classes.content}>
-            {appsList.map(app => (
-              <div key={app.name} className={classes.card}>
-                <Card
-                  onClickHandler={() => this.cardClickHandler(app.id)}
-                  title={app.name}
-                  appsImgUrl={app.icon}
-                  publishDate={moment(app.creation_date).format("DD/MM/YYYY")}
-                  experimentsCount={app.experiments_count}
-                  storeType={app.store}
+        <Spinner>
+          <Container>
+            <div className={classes.title}>
+              <div className={classes["title-text"]}>
+                <Title
+                  title="Apps"
+                  subtitle="This is the application control room. Here you can create and manage your apps."
                 />
               </div>
-            ))}
-          </div>
-        </Container>
+              <Button click={this.clickHandler}>Add App</Button>
+            </div>
+            <div className={classes.content}>
+              {appsList.map(app => (
+                <div key={app.name} className={classes.card}>
+                  <Card
+                    onClickHandler={() => this.cardClickHandler(app.id)}
+                    title={app.name}
+                    appsImgUrl={app.icon}
+                    publishDate={moment(app.creation_date).format("DD/MM/YYYY")}
+                    experimentsCount={app.experiments_count}
+                    storeType={app.store}
+                  />
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Spinner>
         <Footer />
       </div>
     );

@@ -75,3 +75,11 @@
     translate(38.5px, 38.5px);
   transform: translate(-38.5px, -38.5px) scale(0.385) translate(38.5px, 38.5px);
 }
+
+.spinner {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

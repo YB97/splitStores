@@ -1,43 +1,8 @@
 import { observable, action } from "mobx";
+import { runInThisContext } from "vm";
 
 class AppsStore {
-  @observable appsList = [];
-  constructor(rootStore) {
-    this.rootStore = rootStore;
-  }
-
-  @action.bound
-  getAppById(id) {
-    return this.appsList.find(a => a.id === parseInt(id));
-  }
-
-  @action.bound
-  setAppName(id, name) {
-    const item = this.getAppById(id);
-
-    item.name = name;
-  }
-
-  @action.bound
-  getAppByName(name) {
-    return this.appsList.find(a => a.name === name);
-  }
-
-  @action.bound
-  initialAppList() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        this.appsList = getApps();
-        resolve();
-      }, 3000);
-    });
-  }
-}
-
-export default AppsStore;
-
-const getApps = () => {
-  return [
+  @observable appsList = [
     {
       id: 1,
       name: "Play For Game",
@@ -59,4 +24,42 @@ const getApps = () => {
       experiments_count: 4
     }
   ];
-};
+  constructor(rootStore) {
+    this.rootStore = rootStore;
+  }
+
+  @action.bound
+  getAppById(id) {
+    console.log('getAppById');
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const app = this.appsList.find(a => a.id === parseInt(id));
+        resolve(app);
+      }, 700);
+    });
+  }
+
+  @action.bound
+  setAppName(id, name) {
+    this.getAppById(id).then(app => {
+      console.log(app);
+      app.name = name;
+    });
+  }
+
+  @action.bound
+  getAppByName(name) {
+    return this.appsList.find(a => a.name === name);
+  }
+
+  @action.bound
+  initialAppList() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    });
+  }
+}
+
+export default AppsStore;

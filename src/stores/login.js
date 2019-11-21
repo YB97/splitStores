@@ -23,7 +23,12 @@ class LoginStore {
 
   @action.bound
   setAuth() {
-    this.isAuth = true;
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.isAuth = true;
+        resolve();
+      }, 1000);
+    });
   }
 
   @action.bound

@@ -2,6 +2,7 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import Spinner from "../../components/Spinner";
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import { observer, inject } from "mobx-react";
@@ -34,9 +35,19 @@ class LoginPage extends React.Component {
   };
 
   submitHandler = event => {
+    this.props.stores.setLoading(true);
     event.preventDefault();
-    this.props.stores.login.setAuth();
-    this.props.history.push(URI_TO_APPS);
+    this.props.stores.login
+      .setAuth()
+      .then(() => {
+        this.props.history.push(URI_TO_APPS);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        this.props.stores.setLoading(false);
+      });
   };
 
   render() {
@@ -97,7 +108,7 @@ class LoginPage extends React.Component {
                     onClick={() => {}}
                     disabled={isBtnDisabled}
                   >
-                    sign in
+                    <Spinner text>sign in</Spinner>
                   </StyledButton>
                 </div>
               </form>
