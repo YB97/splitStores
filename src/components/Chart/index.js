@@ -14,17 +14,17 @@ class Chart extends Component {
     });
 
     return (
-      <>
+      <div className={classes["chart-wrapper"]}>
         {labelText && (
           <div className={classes.label}>
             {labelText}: <span className={classes.count}>{count}</span>
           </div>
         )}
         <AreaChart
-          width={380}
+          width={280}
           height={250}
           data={formattedData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
           style={{ fontSize: "14px" }}
         >
           <XAxis dataKey={xAxisName} />
@@ -37,7 +37,7 @@ class Chart extends Component {
             fill="#E3603B"
           />
         </AreaChart>
-      </>
+      </div>
     );
   }
 }

@@ -9,20 +9,41 @@ import classes from "./experiment.module.scss";
 class Experiment extends PureComponent {
   render() {
     return (
-      <>
+      <div className={classes.exp}>
         <div className="header">
           <Header />
         </div>
-        Exp Page
-        <Chart
-          xAxisName="date"
-          yAxisName="visitors"
-          data={chartDataMock}
-          labelText="Label"
-          count={4}
-        />
+        <div className={classes["charts-wrapper"]}>
+          <div className={classes["chart-wrapper-comp"]}>
+            <Chart
+              xAxisName="date"
+              yAxisName="visitors"
+              data={chartDataMock}
+              labelText="Label"
+              count={4}
+            />
+          </div>
+          <div className={classes["chart-wrapper-comp"]}>
+            <Chart
+              xAxisName="date"
+              yAxisName="visitors"
+              data={chartDataMock}
+              labelText="Label"
+              count={4}
+            />
+          </div>
+          <div className={classes["chart-wrapper-comp"]}>
+            <Chart
+              xAxisName="date"
+              yAxisName="visitors"
+              data={chartDataMock}
+              labelText="Label"
+              count={4}
+            />
+          </div>
+        </div>
         <Footer />
-      </>
+      </div>
     );
   }
 }
