@@ -2,6 +2,7 @@ import { observable, action } from "mobx";
 
 class AppsStore {
   @observable appsList = [];
+  @observable processing = false;
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
@@ -26,7 +27,9 @@ class AppsStore {
   @action.bound
   initialAppList() {
     return new Promise(resolve => {
+      this.processing = true;
       setTimeout(() => {
+        this.processing = false;
         this.appsList = getApps();
         resolve();
       }, 3000);
