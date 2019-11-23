@@ -16,7 +16,8 @@ export default function Card({
   onClickHandler,
   withExpHover = false,
   onExperimentsClick = () => {},
-  storeType = "Google Play"
+  storeType = "Google Play",
+  data = []
 }) {
   const storeImg =
     storeType === "Google Play"
@@ -110,6 +111,44 @@ export default function Card({
                 <br />
                 clicks
               </span>
+            </div>
+          </>
+        )}
+        {type === "variations" && (
+          <>
+            <div className={classes["main-content"]}>
+              <div className={classes["card-image"]}>
+                <div className={classes["img-wrapper"]}>
+                  <img className={classes.img} src={appsImgUrl} alt="logoapp" />
+                </div>
+              </div>
+              <div className={classes["title-wrapper"]}>
+                <strong className={classes["title"]}>{title}</strong>
+                <small
+                  className={`${classes["publish"]} ${classes["exp-publish"]}`}
+                >
+                  <img
+                    className={classes["store-img"]}
+                    src={storeImgUrl || storeImg}
+                    alt="store"
+                  />
+                  &nbsp; {publishDate}
+                </small>
+              </div>
+            </div>
+            <div className={`${classes["info"]} ${classes["exp-info"]}`}>
+              {data.map(item => (
+                <span
+                  key={`${item.rowName}-${item.value}`}
+                  className={classes["exp-stat"]}
+                >
+                  <Tooltip title={item.rowName} placement="top">
+                    <strong>{item.value}</strong>
+                  </Tooltip>
+                  <br />
+                  {item.rowName}
+                </span>
+              ))}
             </div>
           </>
         )}

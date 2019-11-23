@@ -11,6 +11,7 @@ class ExperimentStore {
   getExperimentById(appId, id) {
     this.experiment = getExpById(appId.toString(), id.toString());
 
+    console.log("get");
     // try {
     //   const { data } = await axios.get(`/api/apps/${appId}/experiments/${id}`);
     //   runInAction(() => {
@@ -37,7 +38,36 @@ const getExpById = (appId, id) => {
             clicks_count: 33,
             creation_date: "2019-11-12T14:39:43+03:00",
             app_name: "Play For Game",
-            traffic_link: "https://google.com"
+            traffic_link: "https://google.com",
+            variations: [
+              {
+                variation_id: "2",
+                name: "Play for game Var 1",
+                icon: "",
+                eng_rate: "90%",
+                clicks_count: 4,
+                visitors_count: 15,
+                install_rate: "4%"
+              },
+              {
+                variation_id: "5",
+                name: "Play for game Var 2",
+                icon: "",
+                eng_rate: "100%",
+                clicks_count: 19,
+                visitors_count: 3,
+                install_rate: "76%"
+              },
+              {
+                variation_id: "3",
+                name: "Play for game Var 3",
+                icon: "",
+                eng_rate: "30%",
+                clicks_count: 9,
+                visitors_count: 13,
+                install_rate: "6%"
+              }
+            ]
           };
         case "2":
           return {
@@ -48,7 +78,18 @@ const getExpById = (appId, id) => {
             clicks_count: 28,
             creation_date: "2019-11-14T14:39:43+03:00",
             app_name: "Play For Game",
-            traffic_link: "https://google.com"
+            traffic_link: "https://google.com",
+            variations: [
+              {
+                variation_id: "2",
+                name: "Play for game Exp 2 Var 1",
+                icon: "",
+                eng_rate: "30%",
+                clicks_count: 4,
+                visitors_count: 15,
+                install_rate: "4%"
+              }
+            ]
           };
         case "3":
           return {
@@ -59,7 +100,27 @@ const getExpById = (appId, id) => {
             clicks_count: 43,
             creation_date: "2019-11-14T14:39:43+03:00",
             app_name: "Play For Game",
-            traffic_link: "https://google.com"
+            traffic_link: "https://google.com",
+            variations: [
+              {
+                variation_id: "6",
+                name: "Play for game Var 1",
+                icon: "",
+                eng_rate: "60%",
+                clicks_count: 4,
+                visitors_count: 5,
+                install_rate: "40%"
+              },
+              {
+                variation_id: "8",
+                name: "Play for game Var 2",
+                icon: "",
+                eng_rate: "30%",
+                clicks_count: 4,
+                visitors_count: 15,
+                install_rate: "4%"
+              }
+            ]
           };
       }
       break;
@@ -74,7 +135,18 @@ const getExpById = (appId, id) => {
             clicks_count: 28,
             creation_date: "2019-11-14T14:39:43+03:00",
             app_name: "Super Arcade",
-            traffic_link: "https://google.com"
+            traffic_link: "https://google.com",
+            variations: [
+              {
+                variation_id: "2",
+                name: "Super Arcade Exp2 Var 1",
+                icon: "",
+                eng_rate: "60%",
+                clicks_count: 4,
+                visitors_count: 5,
+                install_rate: "40%"
+              }
+            ]
           };
       }
   }

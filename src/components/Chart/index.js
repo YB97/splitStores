@@ -29,7 +29,7 @@ class Chart extends Component {
         {labelText && (
           <div className={classes.label} onClick={this.handleIconClick}>
             <div>
-              {labelText}: <span className={classes.count}>{count}</span>
+              {labelText} <span className={classes.count}>{count}</span>
             </div>
             <div className={iconClasses}>
               <svg

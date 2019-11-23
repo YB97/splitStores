@@ -59,6 +59,9 @@ const StyledTabs = withStyles({
     "& .PrivateTabScrollButton-root-322": {
       backgroundColor: "#395DE0",
       color: "#fff"
+    },
+    "& .MuiButtonBase-root.PrivateTabScrollButton-root-324.MuiTabs-scrollButtons.MuiTabs-scrollButtonsDesktop": {
+      color: "#fff"
     }
   },
   indicator: {

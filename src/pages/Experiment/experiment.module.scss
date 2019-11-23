@@ -11,6 +11,8 @@
 
 .title {
   padding-top: 45px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .subtitle {
@@ -41,4 +43,8 @@
 .charts-wrapper {
   display: flex;
   align-items: center;
+}
+
+.var-list-title {
+  margin-top: 50px;
 }
