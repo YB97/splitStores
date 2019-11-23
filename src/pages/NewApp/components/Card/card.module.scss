@@ -26,3 +26,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.reset {
+  cursor: pointer;
+  margin-left: 10px;
+  &:hover {
+    color: #244bdd;
+  }
+}

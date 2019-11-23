@@ -1,36 +1,82 @@
-import React, { useState } from "react"
-import { useHistory } from "react-router-dom"
-import Input from "../../../../components/Input"
-import Button from "../../../../components/Button"
-import classes from "./card.module.scss"
-import { URI_TO_NEW_APPS_STEP_2 } from "../../../../constants"
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Input from "../../../../components/Input";
+import Button from "../../../../components/Button";
+import Spinner from "../../../../components/Spinner";
+import classes from "./card.module.scss";
+import { URI_TO_NEW_APPS_STEP_2 } from "../../../../constants";
+import withStore from "../../../../hocs/withStore";
 
-export default function({
+function Card({
   withBtn = false,
   title = "Yes, here’s my app’s URL",
-  urlImg = "../../../../../static/images/newapp/check.svg"
+  urlImg = "../../../../../static/images/newapp/check.svg",
+  stores
 }) {
-  const [value, setValue] = useState("")
-  const history = useHistory()
+  const [value, setValue] = useState("");
+  const [canCreate, setCanCreate] = useState(false);
+  const history = useHistory();
+
+  const emulation = () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        setCanCreate(true);
+        resolve();
+      }, 400);
+    });
+  };
 
   const changeHandler = e => {
-    setValue(e.target.value)
-  }
+    stores.setLoading(true);
+    const value = e.target.value;
+    try {
+      new URL(value);
+      setValue(value);
+      emulation().then(() => {
+        stores.setLoading(false);
+      });
+    } catch (e) {
+      setValue("");
+      console.error("error", e);
+      stores.setLoading(false);
+      return;
+    }
+  };
+
   const clickHandler = e => {
-    history.push(URI_TO_NEW_APPS_STEP_2)
-  }
+    history.push(URI_TO_NEW_APPS_STEP_2);
+  };
+
+  const onReset = () => {
+    setValue("");
+    setCanCreate(false);
+  };
 
   let renderActions = (
-    <Button click={clickHandler}>ADD APPLICATION MANUALLY</Button>
-  )
+    <Button click={clickHandler} disabled={stores.loading}>
+      ADD APPLICATION MANUALLY
+    </Button>
+  );
   if (!withBtn) {
     renderActions = (
-      <Input
-        onChange={changeHandler}
-        value={value}
-        placeholder={"Paste the link to  your app here"}
-      />
-    )
+      <Spinner>
+        <Input
+          onChange={changeHandler}
+          value={value}
+          placeholder={"Paste the link to  your app here"}
+        />
+      </Spinner>
+    );
+  }
+  if (canCreate) {
+    renderActions = (
+      <>
+        <Button click={clickHandler}>ADD APP</Button>
+        <span className={classes.reset} onClick={onReset}>
+          Reset
+        </span>
+      </>
+    );
   }
   return (
     <>
@@ -38,9 +84,13 @@ export default function({
         <div className={classes["img-wrapper"]}>
           <img className={classes.img} src={urlImg} alt="" />
         </div>
-        <h3 className={classes.title}>{title}</h3>
+        <h3 className={classes.title}>
+          {canCreate ? "We are upload your app. Do you want to add?" : title}
+        </h3>
         <div className={classes.action}>{renderActions}</div>
       </div>
     </>
-  )
+  );
 }
+
+export default withStore(Card);

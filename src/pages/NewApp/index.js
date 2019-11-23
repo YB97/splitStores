@@ -1,23 +1,15 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { Grid } from "@material-ui/core";
 
 import Header from "../../components/Header";
 import Title from "../../components/Title";
-import Button from "../../components/Button";
 import Card from "./components/Card";
 import Footer from "../../components/Footer";
 
 import classes from "./newapp.module.scss";
 
 export default function Apps() {
-  const history = useHistory();
-
-  const clickHandler = () => {
-    console.log("TODO: history.push");
-  };
-
   return (
     <div className={classes.newapp}>
       <div className="header">
@@ -28,7 +20,6 @@ export default function Apps() {
           <div className={classes["title-text"]}>
             <Title title="Add new app" />
           </div>
-          <Button click={clickHandler}>next</Button>
         </div>
         <div className={classes.content}>
           <div className={classes["content-title-wrap"]}>
@@ -41,7 +32,7 @@ export default function Apps() {
               container
               direction="row"
               justify="center"
-              alignItems="center"
+              alignItems="flex-start"
               spacing={3}
             >
               <Grid item xs={12} sm={6} lg={5}>
