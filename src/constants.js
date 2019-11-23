@@ -8,6 +8,8 @@ export const URI_TO_NEW_APPS = "/newapp";
 export const URI_TO_NEW_APPS_STEP_2 = "/newapp/step2";
 export const URI_TO_EXPERIMENTS = "/apps/:id/experiments";
 export const URI_TO_EXPERIMENT = "/apps/:id/experiments/:expId";
+export const URI_TO_VARIATION =
+  "/apps/:id/experiments/:expId/variations/:varId";
 export const URI_TO_NEW_EXPERIMENT = "/newexperiment";
 export const URI_TO_NEW_EXPERIMENT_STEP_2 = "/newexperiment/step2";
 export const URI_TO_NEW_EXPERIMENT_STEP_3 = "/newexperiment/step3";

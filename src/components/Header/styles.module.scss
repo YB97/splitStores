@@ -17,4 +17,7 @@
   text-decoration: none;
   color: #333333 !important;
   font-size: 18px;
+  @media screen and (max-width: 576px) {
+    font-size: 12px;
+  }
 }

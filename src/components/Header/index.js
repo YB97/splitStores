@@ -52,12 +52,6 @@ export default function MenuAppBar({ color = "white" }) {
       <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
         Applications
       </Link>
-      <Link
-        to={URI_TO_EXPERIMENTS.replace(":id", "1")}
-        className={`${classes.link} ${color}`}
-      >
-        Experiments
-      </Link>
     </>
   );
 

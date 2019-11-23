@@ -1,0 +1,17 @@
+.tag-list {
+  margin: 0;
+  padding: 0;
+  margin-left: 12px;
+  display: inline-flex;
+  list-style-type: none;
+}
+
+.tag-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.tag {
+  display: inline-block;
+  color: #e3603b;
+}

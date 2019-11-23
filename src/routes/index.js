@@ -1,4 +1,5 @@
 import LoginPage from "../pages/Login";
+import RegPage from "../pages/Reg";
 import Welcome from "../pages/Welcome";
 import Apps from "../pages/Apps";
 import App from "../pages/App";
@@ -9,8 +10,8 @@ import Experiment from "../pages/Experiment";
 import NewExperiment from "../pages/NewExperiment";
 import NewExperimentStep2 from "../pages/NewExperiment/step2";
 import NewExperimentStep3 from "../pages/NewExperiment/step3";
-import RegPage from "../pages/Reg";
 import NotFound from "../pages/NotFound";
+import Variation from "../pages/Variation";
 import {
   URI_TO_APPS,
   URI_TO_LOGIN,
@@ -23,7 +24,8 @@ import {
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_2,
   URI_TO_NEW_EXPERIMENT_STEP_3,
-  URI_TO_APP
+  URI_TO_APP,
+  URI_TO_VARIATION
 } from "../constants";
 
 let routes = [
@@ -108,6 +110,13 @@ let routes = [
     name: "newExperimentStep3",
     url: URI_TO_NEW_EXPERIMENT_STEP_3,
     component: NewExperimentStep3,
+    exact: true,
+    isAuthRequired: true
+  },
+  {
+    name: "variation",
+    url: URI_TO_VARIATION,
+    component: Variation,
     exact: true,
     isAuthRequired: true
   },
