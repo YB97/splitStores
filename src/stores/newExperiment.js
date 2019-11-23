@@ -53,10 +53,12 @@ class NewExperimentStore {
 
   @action.bound
   addNewVariation() {
+    const lastVariation = this.variations[this.variations.length - 1];
+    const id = lastVariation ? (lastVariation.id + 1) : 1;
     this.variations.push({
-      id: this.variations[this.variations.length - 1].id + 1,
-      name: `Variation ${this.variations[this.variations.length - 1].id + 1}`,
-      uploadedIcon: ""
+      id,
+      name: `Variation ${id}`,
+      uploadedIcon: {}
     });
   }
 

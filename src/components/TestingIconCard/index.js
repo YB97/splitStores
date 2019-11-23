@@ -31,14 +31,14 @@ const TestingIconCard = ({
       <div className={classes.uploadWrapper}>
         <div className={classes.iconWrap}>
           {icon.value ? (
-            <img src={icon.value} alt="" />
+            <img src={icon.value} className={classes.image} alt="" />
           ) : (
-            <>
+            <div className={classes.imageWait}>
               <span className={classes["file-content"]}>+</span>
               <div className={classes["icon-text"]}>
                 {icon.name || "Add icon"}
               </div>
-            </>
+            </div>
           )}
         </div>
         <div className={classes.buttonWrap}>
