@@ -12,7 +12,8 @@ export default function({
   variant = null,
   size = "small",
   fullWidth = false,
-  children
+  children,
+  disabled = false
 }) {
   const StyledButton = withStyles({
     root: {
@@ -37,6 +38,7 @@ export default function({
       onClick={click}
       variant={variant}
       size={size}
+      disabled={disabled}
       fullWidth={fullWidth}
     >
       {children}

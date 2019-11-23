@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { Grid, Container } from "@material-ui/core";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -9,20 +10,52 @@ import classes from "./experiment.module.scss";
 class Experiment extends PureComponent {
   render() {
     return (
-      <>
+      <div className={classes.exp}>
         <div className="header">
           <Header />
         </div>
-        Exp Page
-        <Chart
-          xAxisName="date"
-          yAxisName="visitors"
-          data={chartDataMock}
-          labelText="Label"
-          count={4}
-        />
+        <Container>
+          <div className={classes["charts-wrapper"]}>
+            <Grid container spacing={3} justify="center">
+              <Grid item xs={12} md={4} lg={4}>
+                <div className={classes["chart-wrapper-comp"]}>
+                  <Chart
+                    xAxisName="date"
+                    yAxisName="visitors"
+                    data={chartDataMock}
+                    labelText="Label"
+                    count={4}
+                    withDropdown
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} md={4} lg={4}>
+                <div className={classes["chart-wrapper-comp"]}>
+                  <Chart
+                    xAxisName="date"
+                    yAxisName="visitors"
+                    data={chartDataMock}
+                    labelText="Label"
+                    count={4}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} md={4} lg={4}>
+                <div className={classes["chart-wrapper-comp"]}>
+                  <Chart
+                    xAxisName="date"
+                    yAxisName="visitors"
+                    data={chartDataMock}
+                    labelText="Label"
+                    count={4}
+                  />
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        </Container>
         <Footer />
-      </>
+      </div>
     );
   }
 }
