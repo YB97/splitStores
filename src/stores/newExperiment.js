@@ -33,12 +33,12 @@ class NewExperimentStore {
     {
       id: 1,
       name: "Variation 1",
-      uploadedIcon: ""
+      uploadedIcon: {}
     },
     {
       id: 2,
       name: "Variation 2",
-      uploadedIcon: ""
+      uploadedIcon: {}
     }
   ];
 
