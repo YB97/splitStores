@@ -59,7 +59,7 @@ class NewExperimentStep3 extends PureComponent {
                       variationName={variation.name}
                       onInputChange={e => setVariationName(e.target.value, id)}
                       icon={variation.uploadedIcon}
-                      handleIcon={setIcon(variation)}
+                      setIcon={setIcon(variation)}
                       onDelete={() => deleteVariation(variation.id)}
                       id={id}
                     />

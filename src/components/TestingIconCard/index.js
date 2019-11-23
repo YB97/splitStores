@@ -9,14 +9,14 @@ import classes from "./testingiconcard.module.scss";
 const TestingIconCard = ({
   variationName,
   icon = null,
-  handleIcon,
+  setIcon,
   id,
   onInputChange = () => {},
   onDelete = () => {},
   changeHandlerWrapper
 }) => {
   const fileInputRef = React.createRef();
-  const handleIconWrapped = changeHandlerWrapper(handleIcon, fileInputRef);
+  const handleIconWrapped = changeHandlerWrapper(setIcon, fileInputRef);
 
   const onClickHandler = () => {};
   return (
