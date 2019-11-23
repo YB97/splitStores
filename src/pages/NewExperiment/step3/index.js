@@ -32,6 +32,10 @@ class NewExperimentStep3 extends PureComponent {
       history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
     };
 
+    const setIcon = (variation) => (file) => {
+      variation.uploadedIcon = file;
+    };
+
     return (
       <div className={classes.newexperiment}>
         <div className={classes.header}>
@@ -53,9 +57,11 @@ class NewExperimentStep3 extends PureComponent {
                   <div className={classes.cardWrapper} key={id}>
                     <TestingIconCard
                       variationName={variation.name}
-                      icon={variation.uploadedIcon}
                       onInputChange={e => setVariationName(e.target.value, id)}
+                      icon={variation.uploadedIcon}
+                      setIcon={setIcon(variation)}
                       onDelete={() => deleteVariation(variation.id)}
+                      id={id}
                     />
                   </div>
                 ))}

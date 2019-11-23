@@ -2,18 +2,23 @@ import React from "react";
 
 import Input from "../Input";
 import Button from "../Button";
+import FileInput from '../../hocs/FileInput';
 
 import classes from "./testingiconcard.module.scss";
 
-export default function TestingIconCard({
+const TestingIconCard = ({
   variationName,
   icon = null,
+  setIcon,
+  id,
   onInputChange = () => {},
-  onDelete = () => {}
-  // icon = "../../../static/images/apps/clash-royale.jpg"
-}) {
-  const onClickHandler = () => {};
+  onDelete = () => {},
+  changeHandlerWrapper
+}) => {
+  const fileInputRef = React.createRef();
+  const handleIconWrapped = changeHandlerWrapper(setIcon, fileInputRef);
 
+  const onClickHandler = () => {};
   return (
     <div className={classes.wrapper}>
       <Input
@@ -25,16 +30,34 @@ export default function TestingIconCard({
       <div className={classes.iconLabel}>Icon</div>
       <div className={classes.uploadWrapper}>
         <div className={classes.iconWrap}>
-          {icon ? (
-            <img src={icon} alt="" className={classes.image} />
+          {icon.value ? (
+            <img src={icon.value} alt="" />
           ) : (
-            <div className={classes.image}></div>
+            <>
+              <span className={classes["file-content"]}>+</span>
+              <div className={classes["icon-text"]}>
+                {icon.name || "Add icon"}
+              </div>
+            </>
           )}
         </div>
         <div className={classes.buttonWrap}>
-          <Button click={onClickHandler} bg="#E3603B" size="small">
-            Upload new file
+          <Button bg="#E3603B" size="small">
+            <label
+              htmlFor={'file' + (id!==undefined ? `_${id}` : '')}
+              className={classes.buttonLabel}
+            >
+             Upload new file
+            </label>
           </Button>
+          <input
+            ref={fileInputRef}
+            accept=".jpg, .jpeg, .png"
+            onChange={handleIconWrapped}
+            className={classes.file}
+            id={'file' + (id!==undefined ? `_${id}` : '')}
+            type="file"
+          />
           <div className={classes.buttonHelpText}>
             We recommend using .png 250x250px
           </div>
@@ -45,4 +68,7 @@ export default function TestingIconCard({
       </span>
     </div>
   );
-}
+};
+
+
+export default FileInput(TestingIconCard);

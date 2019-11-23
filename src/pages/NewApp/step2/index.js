@@ -9,7 +9,7 @@ import Input from "../../../components/Input";
 import StyledSelect from "../../../components/StyledSelect";
 import CheckboxCards from "../../../components/CheckboxCards";
 import Footer from "../../../components/Footer";
-import optimizeImage from "../../../helpers/optimizeImage";
+import FileInput from "../../../components/FileInput";
 import { URI_TO_NEW_APPS } from "../../../constants";
 
 import classes from "./step2.module.scss";
@@ -26,39 +26,17 @@ export default function() {
   const [store, setStore] = useState("app-store");
   const history = useHistory();
 
-  const fileInput = React.createRef();
-
   const onClickHandler = () => {
     history.push(URI_TO_NEW_APPS);
   };
 
-  const handleFileAsDataUri = file => {
-    return new Promise(resolve => {
-      const reader = new FileReader();
-      reader.onload = (function(file) {
-        return function(e) {
-          const binaryData = e.target.result;
-          const base64String = window.btoa(binaryData);
-          const value = `data:${file.type};base64,${base64String}`;
-          resolve(value);
-        };
-      })(file);
-      reader.readAsBinaryString(file);
-    });
+  const setImage = (file) => {
+    setStep2({ ...step2, file});
   };
 
   const selectHandler = e => {
     const value = e.target.value;
     setStore(value);
-  };
-  const changeHandler = e => {
-    const file = fileInput.current.files[0];
-    optimizeImage(file, 0.9, 200, 200).then(blob => {
-      handleFileAsDataUri(blob).then(value => {
-        const newFile = { name: file.name, value };
-        setStep2({ ...step2, file: newFile });
-      });
-    });
   };
 
   return (
@@ -107,36 +85,10 @@ export default function() {
             </Grid>
             <Grid item lg={5} xs={12}>
               <div className={classes["icon-wrapper"]}>
-                <div className="icon">
-                  <div className="input-wrapper">
-                    {/* {TODO: create the File component} */}
-                    <label
-                      htmlFor="file"
-                      className={`${classes["file-label"]} ${
-                        step2.file.name ? classes["file-add"] : ""
-                      }`}
-                    >
-                      {step2.file.value ? (
-                        <img src={step2.file.value} alt="" />
-                      ) : (
-                        <>
-                          <span className={classes["file-content"]}>+</span>
-                          <div className={classes["icon-text"]}>
-                            {step2.file.name || "Add icon"}
-                          </div>
-                        </>
-                      )}
-                    </label>
-                    <input
-                      ref={fileInput}
-                      accept=".jpg, .jpeg, .png"
-                      onChange={changeHandler}
-                      className={classes.file}
-                      id="file"
-                      type="file"
-                    />
-                  </div>
-                </div>
+                <FileInput
+                  setImage={setImage}
+                  image={step2.file}
+                />
               </div>
             </Grid>
           </Grid>

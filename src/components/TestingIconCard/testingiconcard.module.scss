@@ -44,6 +44,10 @@
   background-color: #f1f1f1;
 }
 
+.buttonLabel {
+  cursor: pointer;
+}
+
 .buttonWrap {
   margin-left: 30px;
 }
@@ -57,6 +61,11 @@
   &:before {
     clear: both;
   }
+}
+
+.file {
+  visibility: hidden;
+  display: none;
 }
 
 .delete {
