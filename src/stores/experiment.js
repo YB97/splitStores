@@ -36,7 +36,8 @@ const getExpById = (appId, id) => {
             visitors_count: 10,
             clicks_count: 33,
             creation_date: "2019-11-12T14:39:43+03:00",
-            app_name: "Play For Game"
+            app_name: "Play For Game",
+            traffic_link: "https://google.com"
           };
         case "2":
           return {
@@ -46,7 +47,8 @@ const getExpById = (appId, id) => {
             visitors_count: 8,
             clicks_count: 28,
             creation_date: "2019-11-14T14:39:43+03:00",
-            app_name: "Play For Game"
+            app_name: "Play For Game",
+            traffic_link: "https://google.com"
           };
         case "3":
           return {
@@ -56,7 +58,8 @@ const getExpById = (appId, id) => {
             visitors_count: 10,
             clicks_count: 43,
             creation_date: "2019-11-14T14:39:43+03:00",
-            app_name: "Play For Game"
+            app_name: "Play For Game",
+            traffic_link: "https://google.com"
           };
       }
       break;
@@ -70,7 +73,8 @@ const getExpById = (appId, id) => {
             visitors_count: 8,
             clicks_count: 28,
             creation_date: "2019-11-14T14:39:43+03:00",
-            app_name: "Super Arcade"
+            app_name: "Super Arcade",
+            traffic_link: "https://google.com"
           };
       }
   }

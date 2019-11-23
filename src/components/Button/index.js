@@ -67,8 +67,8 @@ export default function({
           aria-label="full-width button group"
         >
           {btns.map(btn => (
-            <StyledButton>
-              <span className={styles['btn-content']}>
+            <StyledButton key={`${btn.name}`}>
+              <span className={styles["btn-content"]}>
                 {btn.name}
                 <span className={styles["icon-wrapper"]}>
                   {btn.icon && <img src={btn.icon} className={styles.icon} />}

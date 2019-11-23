@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import Chart from "../../components/Chart";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
+import NavBar from "../../components/NavBar";
 
 import classes from "./experiment.module.scss";
 
@@ -58,7 +59,8 @@ class Experiment extends PureComponent {
             </div>
           </Container>
         </div>
-        <Container>
+        <NavBar items={items} />
+        {/* <Container>
           <div className={classes["charts-wrapper"]}>
             <Grid container spacing={3} justify="center">
               <Grid item xs={12} md={4} lg={4}>
@@ -97,7 +99,7 @@ class Experiment extends PureComponent {
               </Grid>
             </Grid>
           </div>
-        </Container>
+        </Container> */}
         <Footer />
       </div>
     );
@@ -117,4 +119,59 @@ const chartDataMock = [
   { date: "17/10/2019", visitors: 8 },
   { date: "18/10/2019", visitors: 35 },
   { date: "19/10/2019", visitors: 5 }
+];
+
+const item1 = (
+  <>
+    <div className={classes["charts-wrapper"]}>
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12} md={4} lg={4}>
+          <div className={classes["chart-wrapper-comp"]}>
+            <Chart
+              xAxisName="date"
+              yAxisName="visitors"
+              data={chartDataMock}
+              labelText="Label"
+              count={4}
+              withDropdown
+            />
+          </div>
+        </Grid>
+        <Grid item xs={12} md={4} lg={4}>
+          <div className={classes["chart-wrapper-comp"]}>
+            <Chart
+              xAxisName="date"
+              yAxisName="visitors"
+              data={chartDataMock}
+              labelText="Label"
+              count={4}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={12} md={4} lg={4}>
+          <div className={classes["chart-wrapper-comp"]}>
+            <Chart
+              xAxisName="date"
+              yAxisName="visitors"
+              data={chartDataMock}
+              labelText="Label"
+              count={4}
+            />
+          </div>
+        </Grid>
+      </Grid>
+    </div>
+  </>
+);
+
+const item2 = <div>Under development</div>;
+
+const items = [
+  { data: item1, label: "Overview" },
+  { data: item2, label: "Behavior" },
+  { data: item2, label: "Install Button" },
+  { data: item2, label: "Screenshots" },
+  { data: item2, label: "Read More" },
+  { data: item2, label: "Scroll Depth" },
+  { data: item2, label: "Audience" }
 ];
