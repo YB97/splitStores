@@ -15,6 +15,7 @@ import Footer from "../../components/Footer";
 import Spinner from "../../components/Spinner";
 
 import classes from "./apps.module.scss";
+import { height } from "@material-ui/system";
 
 @inject("stores")
 @observer
@@ -47,7 +48,7 @@ class Apps extends PureComponent {
         <div className="header">
           <Header />
         </div>
-        <Spinner>
+        <Spinner page>
           <Container>
             <div className={classes.title}>
               <div className={classes["title-text"]}>
