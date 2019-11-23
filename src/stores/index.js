@@ -1,4 +1,5 @@
 import LoginStore from "./login";
+import ExperimentStore from "./experiment";
 import ExperimentsStore from "./experiments";
 import NewExperimentsStore from "./newExperiment";
 import AppsStore from "./apps";
@@ -8,6 +9,7 @@ import { observable, action } from "mobx";
 class RootStore {
   constructor() {
     this.login = new LoginStore(this);
+    this.experiment = new ExperimentStore(this);
     this.experiments = new ExperimentsStore(this);
     this.newExperiments = new NewExperimentsStore(this);
     this.apps = new AppsStore(this);

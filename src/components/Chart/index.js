@@ -62,7 +62,7 @@ class Chart extends Component {
             style={{ fontSize: "14px" }}
           >
             <XAxis dataKey={xAxisName} />
-            <YAxis dataKey={yAxisName} />
+            {/* <YAxis dataKey={yAxisName} /> */}
             <Tooltip />
             <Area
               type="monotone"

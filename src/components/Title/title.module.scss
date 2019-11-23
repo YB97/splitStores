@@ -10,12 +10,19 @@
 .title {
   margin: 0;
   font-size: 24px;
-  font-weight: normal;
   margin-right: 17px;
   color: #333333;
   @media (max-width: 576px) {
     font-size: 24px;
   }
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.normal {
+  font-weight: normal;
 }
 
 .subtitle {

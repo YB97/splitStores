@@ -3,6 +3,33 @@
   min-height: 100vh;
 }
 
+.content-header {
+  width: 100%;
+  min-height: 200px;
+  background-color: #eaecf4;
+}
+
+.title {
+  padding-top: 45px;
+}
+
+.subtitle {
+  margin-top: 20px;
+}
+
+.subtitle-app {
+  font-weight: bold;
+  color: #8b8b8b;
+}
+
+.subtitle-date {
+  margin-left: 25px;
+}
+
+.btn-wrapper {
+  margin-top: 15px;
+}
+
 .charts-wrapper {
   margin-top: 40px;
   display: flex;
