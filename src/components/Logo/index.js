@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import classes from "./styles.module.scss"
 
 export default function({ color = "blue", link = "#", font = "normal" }) {
-  let inverseColor = "blue"
+  let inverseColor = "blue";
   if (color === "blue") {
     inverseColor = "white"
   }

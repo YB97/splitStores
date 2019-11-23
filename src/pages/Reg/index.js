@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
             </div>
             <Paper className={styles["login-form-wrapper"]}>
               <h2 className={styles.H2}>Log in Split Stores</h2>
-              <form onSubmit={this.submitHandler}>
+              <form onSubmit={this.submitHandler.bind(this)}>
                 <div className={styles["input-wrapper"]}>
                   <Input
                     label="Company"
@@ -135,7 +135,7 @@ class LoginPage extends React.Component {
             </Paper>
             <span className={styles["login-small-text"]}>
               Do you have an account?{" "}
-              <a className={styles["link-text"]} onClick={this.onSignInClick}>
+              <a className={styles["link-text"]} onClick={this.onSignInClick.bind(this)}>
                 Sign In!
               </a>
             </span>

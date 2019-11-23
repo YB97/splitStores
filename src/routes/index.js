@@ -10,6 +10,7 @@ import NewExperiment from "../pages/NewExperiment";
 import NewExperimentStep2 from "../pages/NewExperiment/step2";
 import NewExperimentStep3 from "../pages/NewExperiment/step3";
 import RegPage from "../pages/Reg";
+import NotFound from "../pages/NotFound";
 import {
   URI_TO_APPS,
   URI_TO_LOGIN,
@@ -111,9 +112,16 @@ let routes = [
     isAuthRequired: true
   },
   {
+    name: "login",
+    url: "/",
+    component: LoginPage,
+    exact: true,
+    isAuthRequired: false
+  },
+  {
     name: "default",
     url: "**",
-    component: LoginPage,
+    component: NotFound,
     exact: true
   }
 ];
