@@ -7,11 +7,10 @@
   margin-top: 40px;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 }
 
-.chart-wrapper-comp {
-  margin-right: 20px;
-  &:last-child {
-    margin-right: 0;
-  }
+.charts-wrapper {
+  display: flex;
+  align-items: center;
 }
