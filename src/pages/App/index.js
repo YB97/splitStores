@@ -66,7 +66,7 @@ class App extends PureComponent {
     return (
       <div>
         <Header />
-        <Spinner>
+        <Spinner page>
           <Container>
             <div className={classes.title}>
               <Title title="App details" />

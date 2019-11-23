@@ -1,4 +1,5 @@
 import React from "react";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import classes from "./card.module.scss";
 
@@ -96,12 +97,16 @@ export default function Card({
                 <br /> variations
               </span>
               <span className={classes["exp-stat"]}>
-                <strong>{visitorsCount}</strong>
+                <Tooltip title="Visitors" placement="top">
+                  <strong>{visitorsCount}</strong>
+                </Tooltip>
                 <br />
                 visitors
               </span>
               <span className={classes["exp-stat"]}>
-                <strong>{clicksCount}</strong>
+                <Tooltip title="Clicks" placement="top">
+                  <strong>{clicksCount}</strong>
+                </Tooltip>
                 <br />
                 clicks
               </span>

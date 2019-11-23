@@ -8,7 +8,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
 
-import { URI_TO_APPS, URI_TO_WELCOME } from "../../constants";
+import {
+  URI_TO_APPS,
+  URI_TO_WELCOME,
+  URI_TO_EXPERIMENTS
+} from "../../constants";
 import Logo from "~c/Logo";
 import classes from "./styles.module.scss";
 
@@ -43,10 +47,18 @@ export default function MenuAppBar({ color = "white" }) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const navList = canShowNavList(auth) && (
-    <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
-      Applications
-    </Link>
+  const navList = auth && (
+    <>
+      <Link to={URI_TO_APPS} className={`${classes.link} ${color}`}>
+        Applications
+      </Link>
+      <Link
+        to={URI_TO_EXPERIMENTS.replace(":id", "1")}
+        className={`${classes.link} ${color}`}
+      >
+        Experiments
+      </Link>
+    </>
   );
 
   const handleMenu = event => {
