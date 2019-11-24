@@ -13,6 +13,15 @@
   padding-top: 45px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.title-text {
+  width: 90%;
+}
+.title-control {
+  width: 90%;
+  text-align: right;
 }
 
 .subtitle {

@@ -169,10 +169,14 @@ class Experiment extends PureComponent {
           <div className={classes["content-header"]}>
             <Container>
               <div className={classes.title}>
-                <Title title={experiment.experiment_name} bold />
-                <Button click={this.createClickHandler}>
-                  CREATE NEW EXPERIMENT
-                </Button>
+                <div className={classes["title-text"]}>
+                  <Title title={experiment.experiment_name} bold />
+                </div>
+                <div className={classes["title-control"]}>
+                  <Button click={this.createClickHandler}>
+                    NEW EXPERIMENT
+                  </Button>
+                </div>
               </div>
               <div className={classes.subtitle}>
                 <span className={classes["subtitle-app"]}>App Name: </span>
