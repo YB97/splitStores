@@ -30,8 +30,9 @@
   @media (max-width: 500px) {
     width: 100%;
     padding: 25px 30px;
+    min-width: 300px;
   }
-  @media (max-width: 365px) {
+  @media screen and (max-width: 375px) {
     width: 100%;
     padding: 25px 30px;
     min-width: 300px;
