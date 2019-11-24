@@ -1,0 +1,34 @@
+.mainWrapper {
+  background: linear-gradient(47.51deg, #E3603B 3.48%, #F03263 100%);
+  height: 100vh;
+  width: 100%;
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+
+.bgFigureWrapper {
+  background-position: center;
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-left: 16px;
+  padding-right: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg width='1713' height='1410' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1093 591c48.6 0 88-39.399 88-88s-39.4-88-88-88-88 39.399-88 88 39.4 88 88 88zm0 11c54.68 0 99-44.324 99-99s-44.32-99-99-99-99 44.324-99 99 44.32 99 99 99zM293.5 561C441.236 561 561 441.236 561 293.5S441.236 26 293.5 26 26 145.764 26 293.5 145.764 561 293.5 561zm0 26C455.596 587 587 455.596 587 293.5S455.596 0 293.5 0 0 131.404 0 293.5 131.404 587 293.5 587z' fill='%23fff'/%3E%3Cpath d='M372 934c0 24.301-19.699 44-44 44s-44-19.699-44-44 19.699-44 44-44 44 19.699 44 44zM994 1165.5c0 12.98-10.521 23.5-23.5 23.5s-23.5-10.52-23.5-23.5 10.521-23.5 23.5-23.5 23.5 10.52 23.5 23.5zM878 428c0 17.121-13.879 31-31 31-17.121 0-31-13.879-31-31 0-17.121 13.879-31 31-31 17.121 0 31 13.879 31 31z' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M567 867l-392 345-1.982-2.25 392-345.002L567 867zM1402 602l-392 345-1.98-2.252 392-345L1402 602z' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M284.5 1399c103.553 0 187.5-83.95 187.5-187.5S388.053 1024 284.5 1024 97 1107.95 97 1211.5 180.947 1399 284.5 1399zm0 11c109.629 0 198.5-88.87 198.5-198.5S394.129 1013 284.5 1013 86 1101.87 86 1211.5 174.871 1410 284.5 1410zM1484 1163c120.4 0 218-97.6 218-218 0-120.398-97.6-218-218-218s-218 97.602-218 218c0 120.4 97.6 218 218 218zm0 11c126.47 0 229-102.53 229-229 0-126.473-102.53-229-229-229s-229 102.527-229 229c0 126.47 102.53 229 229 229z' fill='%23fff'/%3E%3C/svg%3E");
+}
