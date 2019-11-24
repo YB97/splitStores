@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, computed, action } from "mobx";
 
 class VariationStore {
   @observable data = {};
@@ -9,7 +9,13 @@ class VariationStore {
 
   @action.bound
   getVariationById(appId, expId, varId) {
-    this.data = getVariationById(appId, expId, varId);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.data = getVariationById(appId, expId, varId);
+        console.log(this.data);
+        resolve();
+      }, 300);
+    });
     // try {
     //   const { data } = await axios.get(`/api/apps/${appId}/experiments/${expId}/variations/${varId}`);
     //   runInAction(() => {
@@ -18,6 +24,29 @@ class VariationStore {
     // } catch (e) {
     //   console.error(e);
     // }
+  }
+
+  @computed get avgRating() {
+    if (!this.data.reviews) {
+      return null;
+    }
+    const avgRating =
+      this.data.reviews.reduce((total, statValue, index) => {
+        total += statValue * (index + 1);
+        return total;
+      }, 0) / this.reviewsCount;
+    return avgRating;
+  }
+
+  @computed get reviewsCount() {
+    if (!this.data.reviews) {
+      return null;
+    }
+    console.log("reviews");
+    return this.data.reviews.reduce((total, statValue) => {
+      total += statValue;
+      return total;
+    });
   }
 }
 
@@ -64,7 +93,7 @@ const getVariationById = (appId, expId, varId) => {
                 icon: "../../../static/images/apps/facebook.png",
                 tags: ["Social", "Blog", "Game"],
                 screenshots: ["../../../../../static/images/variations/1.jpg"],
-                reviews: [10, 20, 40, 30, 100],
+                reviews: [10, 20, 40, 30, 200],
                 developer: "My app developer",
                 downloads_count: 40,
                 rating: 4.0,
@@ -92,7 +121,7 @@ const getVariationById = (appId, expId, varId) => {
                 icon: "../../../static/images/apps/facebook.png",
                 tags: ["Social", "Blog", "Game"],
                 screenshots: ["../../../../../static/images/variations/1.jpg"],
-                reviews: [10, 20, 40, 30, 100],
+                reviews: [10, 20, 43, 30, 100],
                 developer: "My app developer",
                 downloads_count: 54,
                 rating: 4.1,
@@ -123,7 +152,7 @@ const getVariationById = (appId, expId, varId) => {
                 icon: "../../../static/images/apps/facebook.png",
                 tags: ["Blog", "Game"],
                 screenshots: ["../../../../../static/images/variations/1.jpg"],
-                reviews: [10, 20, 40, 30, 100],
+                reviews: [10, 21, 40, 30, 100],
                 developer: "My app developer",
                 downloads_count: 33,
                 rating: 2.6,
@@ -154,7 +183,7 @@ const getVariationById = (appId, expId, varId) => {
                 icon: "../../../static/images/apps/facebook.png",
                 tags: ["Blog", "Game"],
                 screenshots: ["../../../../../static/images/variations/1.jpg"],
-                reviews: [10, 20, 40, 30, 100],
+                reviews: [10, 20, 40, 3, 100],
                 developer: "My app developer",
                 downloads_count: 80,
                 rating: 5.0,
@@ -212,7 +241,7 @@ const getVariationById = (appId, expId, varId) => {
                 name: "Super Arcade Exp2 Var 1",
                 icon: "../../../static/images/apps/facebook.png",
                 screenshots: ["../../../../../static/images/variations/1.jpg"],
-                reviews: [10, 20, 40, 30, 100],
+                reviews: [10, 20, 43, 30, 100],
                 developer: "My app developer",
                 downloads_count: 415,
                 rating: 4.6,

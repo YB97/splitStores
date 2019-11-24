@@ -12,20 +12,28 @@ import Info from "./components/Info";
 import Overview from "./components/Overview";
 import Ratings from "./components/Ratings";
 
+import { urlBuilder } from "../../routes";
+
+import { URI_TO_EXPERIMENTS } from "../../constants";
+
 import classes from "./variation.module.scss";
 
 class Variation extends PureComponent {
   stores = this.props.stores;
 
   componentDidMount() {
+    this.stores.setLoading(true);
     const { getVariationById, data } = this.stores.variations;
     const { id, expId, varId } = this.props.match.params;
 
-    getVariationById(id, expId, varId);
+    getVariationById(id, expId, varId).then(() => {
+      this.stores.setLoading(false);
+    });
   }
 
   backBtnHandler = () => {
-    console.log("back");
+    const { id, expId } = this.props.match.params;
+    this.props.history.push(urlBuilder("experiment", { id, expId }));
   };
 
   render() {
@@ -36,7 +44,7 @@ class Variation extends PureComponent {
         <div className="header">
           <Header />
         </div>
-        <Spinner>
+        <Spinner page>
           <Container>
             <div className={classes.control}>
               <Button
@@ -54,7 +62,7 @@ class Variation extends PureComponent {
               <Info
                 title={data.name}
                 downloadsCount={data.downloads_count}
-                rating={data.rating}
+                rating={this.stores.variations.avgRating || 0}
                 variationImgUrl={data && data.icon}
                 ageRating={data.age}
               />
@@ -67,7 +75,11 @@ class Variation extends PureComponent {
               />
             </div>
             <div className={classes.ratings}>
-              <Ratings reviews={data.reviews || [0]} />
+              <Ratings
+                reviews={data.reviews || [0]}
+                rating={this.stores.variations.avgRating || 0}
+                reviewsCount={this.stores.variations.reviewsCount || 0}
+              />
             </div>
             <div className={classes.developer}>
               <div className={classes["developer-title"]}>

@@ -25,10 +25,13 @@ class Experiments extends PureComponent {
     getAllApps();
   }
   componentDidMount() {
+    this.props.stores.setLoading(true);
     const { getExperimentsByAppId } = this.props.stores.experiments;
     const { id } = this.props.match.params;
 
-    getExperimentsByAppId(id);
+    getExperimentsByAppId(id).then(() => {
+      this.props.stores.setLoading(false);
+    });
   }
 
   clickHandler = () => {

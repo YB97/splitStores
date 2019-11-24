@@ -30,7 +30,7 @@ export default function({
               size="small"
               readOnly
             />
-            <span className={classes["rating-text"]}>{rating}</span>
+            <span className={classes["rating-text"]}>{rating.toFixed(1)}</span>
           </div>
           <div className={classes.downloads}>
             <span className={classes["downloads-text"]}>

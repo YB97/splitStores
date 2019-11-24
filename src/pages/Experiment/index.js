@@ -10,6 +10,7 @@ import Title from "../../components/Title";
 import Button from "../../components/Button";
 import NavBar from "../../components/NavBar";
 import Card from "../../components/Card";
+import Spinner from "../../components/Spinner";
 import { URI_TO_NEW_EXPERIMENT } from "../../constants";
 import { urlBuilder } from "../../routes";
 
@@ -21,10 +22,13 @@ class Experiment extends PureComponent {
   st = this.props.stores.experiment;
 
   componentDidMount() {
+    this.props.stores.setLoading(true);
     const { getExperimentById } = this.st;
     const { id, expId } = this.props.match.params;
 
-    getExperimentById(id, expId);
+    getExperimentById(id, expId).then(() => {
+      this.props.stores.setLoading(false);
+    });
   }
 
   createClickHandler = () => {
@@ -161,28 +165,30 @@ class Experiment extends PureComponent {
         <div className="header">
           <Header />
         </div>
-        <div className={classes["content-header"]}>
-          <Container>
-            <div className={classes.title}>
-              <Title title={experiment.experiment_name} bold />
-              <Button click={this.createClickHandler}>
-                CREATE NEW EXPERIMENT
-              </Button>
-            </div>
-            <div className={classes.subtitle}>
-              <span className={classes["subtitle-app"]}>App Name: </span>
-              {experiment.app_name}
-              <span className={classes["subtitle-date"]}>
-                {moment(experiment.creation_date).format("MMM Do YYYY")}
-              </span>
-            </div>
-            <div className={classes["btn-wrapper"]}>
-              <Button bg="#aeaeae" isGroupButton btns={buttons} />
-            </div>
-          </Container>
-        </div>
-        <NavBar items={items} />
-        <Footer />
+        <Spinner page>
+          <div className={classes["content-header"]}>
+            <Container>
+              <div className={classes.title}>
+                <Title title={experiment.experiment_name} bold />
+                <Button click={this.createClickHandler}>
+                  CREATE NEW EXPERIMENT
+                </Button>
+              </div>
+              <div className={classes.subtitle}>
+                <span className={classes["subtitle-app"]}>App Name: </span>
+                {experiment.app_name}
+                <span className={classes["subtitle-date"]}>
+                  {moment(experiment.creation_date).format("MMM Do YYYY")}
+                </span>
+              </div>
+              <div className={classes["btn-wrapper"]}>
+                <Button bg="#aeaeae" isGroupButton btns={buttons} />
+              </div>
+            </Container>
+          </div>
+          <NavBar items={items} />
+          <Footer />
+        </Spinner>
       </div>
     );
   }

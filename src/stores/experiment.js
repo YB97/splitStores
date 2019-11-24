@@ -9,9 +9,13 @@ class ExperimentStore {
 
   @action.bound
   getExperimentById(appId, id) {
-    this.experiment = getExpById(appId.toString(), id.toString());
-
-    console.log("get");
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.experiment = getExpById(appId.toString(), id.toString());
+        console.log("get experementById");
+        resolve();
+      }, 300);
+    });
     // try {
     //   const { data } = await axios.get(`/api/apps/${appId}/experiments/${id}`);
     //   runInAction(() => {
