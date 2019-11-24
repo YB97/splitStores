@@ -45,7 +45,7 @@ function WidgetBtn({ stores }) {
     setOpen(false);
   };
 
-  if (!stores.login.isAuth) {
+  if (!stores.login.isAuth || stores.loading) {
     return;
   }
 
