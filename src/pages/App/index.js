@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Card from "../../components/Card";
 import Spinner from "../../components/Spinner";
-import CheckboxCards from "../../components/CheckboxCards";
+import CardRadioControl from "../../components/CardRadioControl";
 import Footer from "../../components/Footer";
 import { urlBuilder } from "../../routes";
 
@@ -24,7 +24,8 @@ class App extends PureComponent {
 
   state = {
     name: "",
-    id: null
+    id: null,
+    store: ""
   };
 
   componentDidMount() {
@@ -35,9 +36,10 @@ class App extends PureComponent {
     setLoading(true);
     getAppById(id);
     this.setState({ name: this.st.app.name });
+
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 700);
 
     // if (id !== this.state.id) {
     //   getAppById(id).then(data => {
@@ -46,6 +48,10 @@ class App extends PureComponent {
     //   });
     // }
   }
+
+  setStore = (value) => {
+    this.setState({store: value});
+  };
 
   clickHandler = () => {
     this.props.history.push("/newexperiment");
@@ -62,6 +68,7 @@ class App extends PureComponent {
     const { app } = this.st;
     const { history } = this.props;
     const { id } = this.props.match.params;
+
 
     return (
       <div>
@@ -114,13 +121,27 @@ class App extends PureComponent {
                   </Grid>
                   <Grid item xs={12} lg={6}>
                     <div className={classes["checkbox-cards"]}>
-                      <CheckboxCards
-                        store={
-                          app.store === "Google Play"
-                            ? "google-play"
-                            : "app-store"
+                      <CardRadioControl
+                        name="storeSelect"
+                        title={
+                          <span className={classes["store-control-title"]}>Store*</span>
                         }
-                        disabled
+                        values={[
+                          {
+                            value: "appstore",
+                            id: "appstore",
+                            img: "../../../static/images/devices/android-phone.svg",
+                            text: "AppStore"
+                          },
+                          {
+                            value: "googleplay",
+                            id: "googleplay",
+                            img: "../../../static/images/devices/android-tablet.svg",
+                            text: "Google Play"
+                          }
+                        ]}
+                        currentValue={this.state.store}
+                        handleChange={e => this.setStore(e.target.value)}
                       />
                     </div>
                   </Grid>
