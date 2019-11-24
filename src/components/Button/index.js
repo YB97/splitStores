@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import { ButtonGroup } from "@material-ui/core";
-import { withStyles, darken } from "@material-ui/core/styles";
+import { ButtonGroup, Popover, Box, Typography } from "@material-ui/core";
+import { withStyles, darken, makeStyles } from "@material-ui/core/styles";
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 
 import styles from "./button.module.scss";
+
+const useStyles = makeStyles(theme => ({
+  typography: {
+    padding: theme.spacing(2)
+  }
+}));
 
 export default function({
   bg = "#244BDD",
@@ -16,8 +23,27 @@ export default function({
   children,
   disabled = false,
   isGroupButton = false,
-  btns = []
+  btns = [],
+  withPopover = false,
+  popoverContent = "",
+  ...props
 }) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = event => {
+    event.stopPropagation();
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   const StyledButton = withStyles({
     root: {
       backgroundColor: !variant && bg,
@@ -49,7 +75,7 @@ export default function({
 
   return (
     <>
-      {!isGroupButton ? (
+      {!isGroupButton && !withPopover && (
         <StyledButton
           href={href}
           className={styles.button}
@@ -61,13 +87,14 @@ export default function({
         >
           {children}
         </StyledButton>
-      ) : (
+      )}
+      {isGroupButton && (
         <StyledButtonGroup
           variant="contained"
           aria-label="full-width button group"
         >
           {btns.map(btn => (
-            <StyledButton key={`${btn.name}`}>
+            <StyledButton key={`${btn.name}`} onClick={btn.onClick}>
               <span className={styles["btn-content"]}>
                 {btn.name}
                 <span className={styles["icon-wrapper"]}>
@@ -77,6 +104,35 @@ export default function({
             </StyledButton>
           ))}
         </StyledButtonGroup>
+      )}
+      {withPopover && (
+        <div>
+          <Button
+            aria-describedby={id}
+            variant="contained"
+            onClick={handleClick}
+          >
+            {children}
+          </Button>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center"
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center"
+            }}
+          >
+            <Typography className={classes.typography}>
+              {popoverContent}
+            </Typography>
+          </Popover>
+        </div>
       )}
     </>
   );

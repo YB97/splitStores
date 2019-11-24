@@ -9,10 +9,11 @@ import Chart from "../../components/Chart";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 import NavBar from "../../components/NavBar";
+import Card from "../../components/Card";
 import { URI_TO_NEW_EXPERIMENT } from "../../constants";
+import { urlBuilder } from "../../routes";
 
 import classes from "./experiment.module.scss";
-import Card from "../../components/Card";
 
 @inject("stores")
 @observer
@@ -22,7 +23,7 @@ class Experiment extends PureComponent {
   componentDidMount() {
     const { getExperimentById } = this.st;
     const { id, expId } = this.props.match.params;
-    console.log("get comp");
+
     getExperimentById(id, expId);
   }
 
@@ -30,8 +31,10 @@ class Experiment extends PureComponent {
     this.props.history.push(URI_TO_NEW_EXPERIMENT);
   };
 
-  onCardClickHandler = id => {
-    console.log("clikc", id);
+  onCardClickHandler = varId => {
+    const { id, expId } = this.props.match.params;
+
+    this.props.history.push(urlBuilder("variation", { id, expId, varId }));
   };
 
   render() {
@@ -39,15 +42,18 @@ class Experiment extends PureComponent {
     const buttons = [
       {
         name: "Start driving traffic",
-        icon: "../../static/images/experiment/power.svg"
+        icon: "../../static/images/experiment/power.svg",
+        onClick: () => {
+          window.open("https://google.com", "_blank");
+        }
       },
       {
         name: "Download emails",
-        icon: "../../static/images/experiment/download.svg"
+        icon: "../../static/images/experiment/download.svg",
+        onClick: () => console.log("click btn Download")
       }
     ];
 
-    console.log("exp", experiment);
     const item1 = (
       <>
         <div className={classes["charts-wrapper"]}>
@@ -93,11 +99,6 @@ class Experiment extends PureComponent {
             <Title title="Your Variations List" />
           </div>
           <div className={classes["var-cards"]}>
-            {console.log(
-              "experiment.variations",
-              experiment,
-              experiment.variations
-            )}
             {experiment.variations &&
               experiment.variations.map(variation => (
                 <Card
@@ -122,7 +123,7 @@ class Experiment extends PureComponent {
                       value: variation.eng_rate
                     }
                   ]}
-                  onClickHandler={() =>
+                  onClickHandler={e =>
                     this.onCardClickHandler(variation.variation_id)
                   }
                 />

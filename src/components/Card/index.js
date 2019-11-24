@@ -1,6 +1,8 @@
 import React from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 
+import Button from "../Button";
+
 import classes from "./card.module.scss";
 
 export default function Card({
@@ -23,6 +25,18 @@ export default function Card({
     storeType === "Google Play"
       ? "../../../static/images/google-play.svg"
       : "../../../static/images/apple.svg";
+  const smallScreen = window.innerWidth < 769;
+  const popContent = data.map(item => (
+    <span key={`${item.value}: ${item.rowName}`}>
+      <b>{item.value}</b>&nbsp;{item.rowName}
+      <br />
+    </span>
+  ));
+  const btnClickHandler = e => {
+    console.log("btnClickHandler", e);
+    e.stopPropagation();
+  };
+
   return (
     <>
       <div className={classes.card} onClick={onClickHandler}>
@@ -136,20 +150,35 @@ export default function Card({
                 </small>
               </div>
             </div>
-            <div className={`${classes["info"]} ${classes["exp-info"]}`}>
-              {data.map(item => (
-                <span
-                  key={`${item.rowName}-${item.value}`}
-                  className={classes["exp-stat"]}
+
+            {!smallScreen ? (
+              <div className={`${classes["info"]} ${classes["exp-info"]}`}>
+                {data.map(item => (
+                  <span
+                    key={`${item.rowName}-${item.value}`}
+                    className={classes["var-stat"]}
+                  >
+                    <span>
+                      <Tooltip title={item.rowName} placement="top">
+                        <strong>{item.value}</strong>
+                      </Tooltip>
+                      &nbsp;
+                    </span>
+                    <span>{item.rowName}</span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className={classes.popover}>
+                <Button
+                  withPopover
+                  popoverContent={popContent}
+                  click={btnClickHandler}
                 >
-                  <Tooltip title={item.rowName} placement="top">
-                    <strong>{item.value}</strong>
-                  </Tooltip>
-                  <br />
-                  {item.rowName}
-                </span>
-              ))}
-            </div>
+                  Statistics
+                </Button>
+              </div>
+            )}
           </>
         )}
       </div>

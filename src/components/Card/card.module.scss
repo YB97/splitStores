@@ -135,3 +135,18 @@
     }
   }
 }
+
+.var-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 15px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.var-stat-link {
+  text-decoration: underline;
+  color: #e3603b;
+}
