@@ -2,7 +2,10 @@ import { observable, action, runInAction } from "mobx";
 // import axios from "axios";
 
 class AppStore {
-  @observable app = {};
+  @observable app = {
+    name: "",
+    store: ""
+  };
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -36,6 +39,11 @@ class AppStore {
   @action.bound
   setAppName(name) {
     this.app.name = name;
+  }
+
+  @action.bound
+  setAppStore(store) {
+    this.app.store = store;
   }
 
   @action.bound

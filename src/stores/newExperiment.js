@@ -52,8 +52,14 @@ class NewExperimentStore {
   }
 
   @action.bound
+  setVariationIcon(icon, id) {
+    this.variations[id].uploadedIcon = icon;
+  }
+
+  @action.bound
   addNewVariation() {
     const lastVariation = this.variations[this.variations.length - 1];
+    //if user deletes all variations, set default id to 1
     const id = lastVariation ? (lastVariation.id + 1) : 1;
     this.variations.push({
       id,

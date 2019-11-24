@@ -18,7 +18,6 @@ const TestingIconCard = ({
   const fileInputRef = React.createRef();
   const handleIconWrapped = changeHandlerWrapper(setIcon, fileInputRef);
 
-  const onClickHandler = () => {};
   return (
     <div className={classes.wrapper}>
       <Input
@@ -29,7 +28,7 @@ const TestingIconCard = ({
       />
       <div className={classes.iconLabel}>Icon</div>
       <div className={classes.uploadWrapper}>
-        <div className={classes.iconWrap}>
+        <div className={classes.imageWrap}>
           {icon.value ? (
             <img src={icon.value} className={classes.image} alt="" />
           ) : (

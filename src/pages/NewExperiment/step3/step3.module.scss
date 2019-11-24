@@ -61,11 +61,19 @@
 
 }
 
-.butonGroupWrap  {
+.buttonGroupWrap  {
   margin-top: 55px;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   max-width: 483px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
+}
+.buttonGroupWrap_bottom  {
+    margin-top: 30px;
 }
