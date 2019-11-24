@@ -23,6 +23,7 @@ class Chart extends Component {
     const iconClasses = isVisible
       ? `${classes.icon} ${classes["icon-active"]}`
       : classes.icon;
+    const smallScreen = window.innerWidth <= 370;
 
     return (
       <div className={classes["chart-wrapper"]}>
@@ -55,7 +56,7 @@ class Chart extends Component {
           }
         >
           <AreaChart
-            width={280}
+            width={!smallScreen ? 280 : 230}
             height={250}
             data={formattedData}
             margin={{ top: 0, right: 0, left: 0, bottom: 0 }}

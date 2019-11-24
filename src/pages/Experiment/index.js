@@ -50,7 +50,9 @@ class Experiment extends PureComponent {
       {
         name: "Download emails",
         icon: "../../static/images/experiment/download.svg",
-        onClick: () => console.log("click btn Download")
+        onClick: () => {
+          window.open("https://google.com", "_blank");
+        }
       }
     ];
 
@@ -133,6 +135,17 @@ class Experiment extends PureComponent {
       </>
     );
 
+    const item2 = (
+      <div className={classes["develop-wrapper"]}>
+        <div className={classes["develop-icon"]}>
+          <img src="../../static/images/experiment/settings.svg" />
+        </div>
+        <div className={classes["develop-text"]}>
+          <b>Under development</b>
+        </div>
+      </div>
+    );
+
     const items = [
       { data: item1, label: "Overview" },
       { data: item2, label: "Behavior" },
@@ -189,5 +202,3 @@ const chartDataMock = [
   { date: "18/10/2019", visitors: 35 },
   { date: "19/10/2019", visitors: 5 }
 ];
-
-const item2 = <div>Under development</div>;

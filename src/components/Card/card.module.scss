@@ -20,6 +20,7 @@
 
   @media (max-width: 576px) {
     padding: 30px 10px;
+    flex-direction: column;
   }
 }
 .main-content {
@@ -33,6 +34,9 @@
   align-items: center;
   height: 38px;
   width: 38px;
+  @media (max-width: 576px) {
+    margin-right: 5px;
+  }
 }
 .img-wrapper {
   position: absolute;
@@ -59,6 +63,9 @@
   font-weight: bold;
   font-size: 18px;
   transition: color 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   @media (max-width: 576px) {
     font-size: 16px;
     width: 105px;
@@ -80,6 +87,16 @@
 .exp-stat {
   text-align: right;
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 576px) {
+    flex-direction: row;
+  }
+}
+.exp-stat-text {
+  @media (max-width: 576px) {
+    margin-left: 5px;
+  }
 }
 .experiments {
   font-size: 18px;
@@ -149,4 +166,10 @@
 .var-stat-link {
   text-decoration: underline;
   color: #e3603b;
+}
+
+.popover {
+  @media (max-width: 576px) {
+    margin-top: 10px;
+  }
 }

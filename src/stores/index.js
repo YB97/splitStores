@@ -4,6 +4,7 @@ import ExperimentsStore from "./experiments";
 import NewExperimentsStore from "./newExperiment";
 import AppsStore from "./apps";
 import AppStore from "./app";
+import VariationStore from "./variation";
 import { observable, action } from "mobx";
 
 class RootStore {
@@ -14,6 +15,7 @@ class RootStore {
     this.newExperiments = new NewExperimentsStore(this);
     this.apps = new AppsStore(this);
     this.app = new AppStore(this);
+    this.variations = new VariationStore(this);
   }
   @observable loading = false;
 

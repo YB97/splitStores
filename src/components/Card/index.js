@@ -108,22 +108,29 @@ export default function Card({
             </div>
             <div className={`${classes["info"]} ${classes["exp-info"]}`}>
               <span className={classes["exp-stat"]}>
-                <strong>{variationsCount}</strong>
-                <br /> variations
+                <span>
+                  <strong>{variationsCount}</strong>
+                </span>
+                {/* <br />  */}
+                <span className={classes['exp-stat-text']}>variations</span>
               </span>
               <span className={classes["exp-stat"]}>
                 <Tooltip title="Visitors" placement="top">
-                  <strong>{visitorsCount}</strong>
+                  <span>
+                    <strong>{visitorsCount}</strong>
+                  </span>
                 </Tooltip>
-                <br />
-                visitors
+                {/* <br /> */}
+                <span className={classes["exp-stat-text"]}>visitors</span>
               </span>
               <span className={classes["exp-stat"]}>
                 <Tooltip title="Clicks" placement="top">
-                  <strong>{clicksCount}</strong>
+                  <span>
+                    <strong>{clicksCount}</strong>
+                  </span>
                 </Tooltip>
-                <br />
-                clicks
+                {/* <br /> */}
+                <span className={classes["exp-stat-text"]}>clicks</span>
               </span>
             </div>
           </>

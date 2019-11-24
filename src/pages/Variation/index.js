@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-import witrhStores from "../../hocs/withStore";
+import withStores from "../../hocs/withStore";
 import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
@@ -17,14 +17,20 @@ import classes from "./variation.module.scss";
 class Variation extends PureComponent {
   stores = this.props.stores;
 
-  state = {
-    tags: ["Social", "Blog", "Game", "Some"],
-    screenshots: ["../../../../../static/images/variations/1.jpg"],
-    reviews: [10, 20, 40, 30, 100],
-    developer: "My app developer"
+  componentDidMount() {
+    const { getVariationById, data } = this.stores.variations;
+    const { id, expId, varId } = this.props.match.params;
+
+    getVariationById(id, expId, varId);
+  }
+
+  backBtnHandler = () => {
+    console.log("back");
   };
 
   render() {
+    const { data } = this.stores.variations;
+
     return (
       <div className={classes.variation}>
         <div className="header">
@@ -33,21 +39,35 @@ class Variation extends PureComponent {
         <Spinner>
           <Container>
             <div className={classes.control}>
-              <Button variant="outlined" color="#244bdd">
+              <Button
+                variant="outlined"
+                color="#244bdd"
+                click={this.backBtnHandler}
+              >
                 Back
               </Button>
             </div>
             <div className={classes.tags}>
-              <Tags tags={this.state.tags} />
+              <Tags tags={data.tags || []} />
             </div>
             <div className={classes.info}>
-              <Info variationImgUrl="../../../static/images/apps/facebook.png" />
+              <Info
+                title={data.name}
+                downloadsCount={data.downloads_count}
+                rating={data.rating}
+                variationImgUrl={data && data.icon}
+                ageRating={data.age}
+              />
             </div>
             <div className={classes.overview}>
-              <Overview screenshots={this.state.screenshots} />
+              <Overview
+                screenshots={data.screenshots}
+                descriptionPreview={data.description_preview}
+                descriptionText={data.description_text}
+              />
             </div>
             <div className={classes.ratings}>
-              <Ratings reviews={this.state.reviews} />
+              <Ratings reviews={data.reviews || [0]} />
             </div>
             <div className={classes.developer}>
               <div className={classes["developer-title"]}>
@@ -55,9 +75,7 @@ class Variation extends PureComponent {
                   Developer
                 </span>
               </div>
-              <h4 className={classes["developer-name"]}>
-                {this.state.developer}
-              </h4>
+              <h4 className={classes["developer-name"]}>{data.developer}</h4>
             </div>
             <Footer />
           </Container>
@@ -67,4 +85,4 @@ class Variation extends PureComponent {
   }
 }
 
-export default withRouter(witrhStores(Variation));
+export default withRouter(withStores(Variation));
