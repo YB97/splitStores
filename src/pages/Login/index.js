@@ -60,7 +60,6 @@ class LoginPage extends React.Component {
       (this.state.emailValidation && !this.state.emailValidation.isValid) ||
       !email.length ||
       !password.length;
-
     return (
       <GradientBg>
         <Container>
