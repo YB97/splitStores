@@ -119,6 +119,10 @@ export default function PersistentDrawerLeft({ color = "white" }) {
 
   return (
     <div className={classes.root}>
+      {open ? (
+        <div className={cls.overlay} onClick={handleDrawerClose}></div>
+      ) : null}
+
       <CssBaseline />
       <AppBar position="static" className={`bg-${color}`}>
         <Toolbar>
