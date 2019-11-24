@@ -39,7 +39,11 @@ export default function Apps() {
                 <Card />
               </Grid>
               <Grid item xs={12} sm={6} lg={5}>
-                <Card withBtn={true} />
+                <Card
+                  withBtn={true}
+                  title="Not yet"
+                  urlImg={"../../../static/images/newapp/add-circle.svg"}
+                />
               </Grid>
             </Grid>
           </div>

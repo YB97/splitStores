@@ -34,3 +34,17 @@
     color: #244bdd;
   }
 }
+
+.control {
+  margin-left: 15px;
+  height: 54px;
+  button {
+    height: 100%;
+  }
+}
+
+.form {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
