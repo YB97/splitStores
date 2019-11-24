@@ -28,7 +28,7 @@ class AppsStore {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve();
-      }, 3000);
+      }, 1000);
     });
   }
 }

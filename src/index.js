@@ -4,6 +4,7 @@ import { Provider, inject, observer } from "mobx-react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ErrorBoundry from "./hocs/ErrorBoundry";
+import SpeedDial from "./components/SpeedDial";
 
 import routes from "./routes";
 import "./global.scss";
@@ -21,6 +22,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>{routesComponents}</Switch>
+        <SpeedDial />
       </Router>
     );
   }

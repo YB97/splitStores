@@ -1,0 +1,45 @@
+.overview {
+  padding-bottom: 50px;
+  border-bottom: 1px solid #d0d0d0;
+}
+.wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.img-block {
+  position: relative;
+  width: 200px;
+  height: 360px;
+  display: inline-flex;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+.img-wrapper {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.img {
+  width: 100%;
+}
+
+.overview-title {
+  margin: 20px 0 32px 0;
+}
+
+.title {
+  font-size: 18px;
+}
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+.description-preview {
+  font-size: 20px;
+}

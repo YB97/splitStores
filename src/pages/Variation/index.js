@@ -9,6 +9,8 @@ import Spinner from "../../components/Spinner";
 
 import Tags from "./components/Tags";
 import Info from "./components/Info";
+import Overview from "./components/Overview";
+import Ratings from "./components/Ratings";
 
 import classes from "./variation.module.scss";
 
@@ -16,7 +18,10 @@ class Variation extends PureComponent {
   stores = this.props.stores;
 
   state = {
-    tags: ["Social", "Blog", "Game", "Some"]
+    tags: ["Social", "Blog", "Game", "Some"],
+    screenshots: ["../../../../../static/images/variations/1.jpg"],
+    reviews: [10, 20, 40, 30, 100],
+    developer: "My app developer"
   };
 
   render() {
@@ -37,6 +42,22 @@ class Variation extends PureComponent {
             </div>
             <div className={classes.info}>
               <Info variationImgUrl="../../../static/images/apps/facebook.png" />
+            </div>
+            <div className={classes.overview}>
+              <Overview screenshots={this.state.screenshots} />
+            </div>
+            <div className={classes.ratings}>
+              <Ratings reviews={this.state.reviews} />
+            </div>
+            <div className={classes.developer}>
+              <div className={classes["developer-title"]}>
+                <span className={classes["developer-title-text"]}>
+                  Developer
+                </span>
+              </div>
+              <h4 className={classes["developer-name"]}>
+                {this.state.developer}
+              </h4>
             </div>
             <Footer />
           </Container>
