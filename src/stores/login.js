@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 
 class LoginStore {
-  @observable isAuth = true;
+  @observable isAuth = getAuthFromLocalStorage();
   @observable email = "";
   @observable password = "";
   @observable name = "";
@@ -25,7 +25,23 @@ class LoginStore {
   setAuth() {
     return new Promise(resolve => {
       setTimeout(() => {
+        localStorage.setItem("isAuth", "1");
         this.isAuth = true;
+        resolve();
+      }, 1000);
+    });
+  }
+
+  @action.bound
+  logout() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.setEmail("");
+        this.setPass("");
+        this.setCompany("");
+        this.setName("");
+        localStorage.setItem("isAuth", "0");
+        this.isAuth = false;
         resolve();
       }, 1000);
     });
@@ -40,6 +56,10 @@ class LoginStore {
   setCompany(value) {
     this.company = value;
   }
+}
+
+function getAuthFromLocalStorage() {
+  return Boolean(JSON.parse(localStorage.getItem("isAuth")));
 }
 
 export default LoginStore;

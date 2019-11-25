@@ -56,3 +56,14 @@
   z-index: 100;
   background: rgba(0, 0, 0, 0.5);
 }
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-top: 2px;
+  color: #333;
+  font-size: 16px;
+}

@@ -15,6 +15,7 @@ import stores from "./stores";
 class App extends Component {
   render() {
     const { isAuth } = this.props.stores.login;
+    console.log(isAuth);
     const authFreeRoutes = routes.filter(route => !route.isAuthRequired);
     const routesComponents = isAuth
       ? routes.map(getRoutes)

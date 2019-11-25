@@ -9,13 +9,18 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 
 import Logo from "~c/Logo";
+import withStore from "../../hocs/withStore";
+import { useHistory } from "react-router-dom";
 import {
   URI_TO_APPS,
   URI_TO_WELCOME,
@@ -81,11 +86,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PersistentDrawerLeft({ color = "white" }) {
+function Header({ color = "white", stores }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
+  const openUserMenu = Boolean(anchorEl);
 
   const navList = [
     { text: "Applications", href: URI_TO_APPS },
@@ -98,6 +106,23 @@ export default function PersistentDrawerLeft({ color = "white" }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const onLogout = () => {
+    stores.setLoading(true);
+    handleClose();
+    stores.login.logout().then(() => {
+      history.push("/");
+      stores.setLoading(false);
+    });
   };
 
   const canShowNavList = auth => {
@@ -141,6 +166,37 @@ export default function PersistentDrawerLeft({ color = "white" }) {
             <Logo color={color} href={canShowNavList(auth) && URI_TO_APPS} />
           </div>
           <div className={cls.nav}>{renderNavList}</div>
+          {auth && (
+            <div className={cls.user}>
+              <span className={cls["user-name"]}>John Preston</span>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="primary"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                open={openUserMenu}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -177,3 +233,5 @@ export default function PersistentDrawerLeft({ color = "white" }) {
     </div>
   );
 }
+
+export default withStore(Header);
