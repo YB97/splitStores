@@ -4,7 +4,7 @@ import Input from "../../../../components/Input";
 import Button from "../../../../components/Button";
 import Spinner from "../../../../components/Spinner";
 import classes from "./card.module.scss";
-import { URI_TO_NEW_APPS_STEP_2 } from "../../../../constants";
+import { URI_TO_APPS, URI_TO_NEW_APPS_STEP_2 } from "../../../../constants";
 import withStore from "../../../../hocs/withStore";
 
 function Card({
@@ -58,6 +58,10 @@ function Card({
   };
 
   const clickHandler = e => {
+    history.push(URI_TO_APPS);
+  };
+
+  const onCreateNewApp = e => {
     history.push(URI_TO_NEW_APPS_STEP_2);
   };
 
@@ -69,7 +73,7 @@ function Card({
   };
 
   let renderActions = (
-    <Button click={clickHandler} disabled={stores.loading}>
+    <Button click={onCreateNewApp} disabled={stores.loading}>
       ADD APPLICATION MANUALLY
     </Button>
   );
@@ -78,6 +82,7 @@ function Card({
       <Spinner>
         <form className={classes.form} onSubmit={onSend}>
           <Input
+            type="url"
             onChange={changeHandler}
             value={value}
             placeholder={"Paste the link to your app here"}
