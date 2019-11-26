@@ -20,13 +20,18 @@ import classes from "./newexperiment.module.scss";
 class NewExperiment extends PureComponent {
   st = this.props.stores.newExperiments;
 
+  componentDidMount() {
+    const { getAllApps, appsList } = this.props.stores.apps;
+
+    getAllApps();
+  }
+
   onClickHandler = () => {
     this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
   };
 
   render() {
     const {
-      appName,
       setAppName,
       device,
       setDevice,
@@ -39,12 +44,14 @@ class NewExperiment extends PureComponent {
       actionOnInstall,
       setActionOnInstall
     } = this.st;
+    const { appsList } = this.props.stores.apps;
     const steps = ["set up", "details", "variations"];
-    const selectAppDataMock = [
-      { name: "Play", icon: "../../static/images/apps/facebook.png" },
-      { name: "Game1", icon: "../../static/images/apps/clash-royale.jpg" },
-      { name: "Game3" }
-    ];
+    const appsOptions =
+      appsList &&
+      appsList.map(item => ({
+        name: item.name,
+        icon: item.icon
+      }));
     const selectPageData = [{ name: "Landing Pages" }];
     const selectElementData = [
       { name: "Icon" },
@@ -70,10 +77,11 @@ class NewExperiment extends PureComponent {
                   width="100%"
                   title="Select the app"
                   titleCenter
-                  data={selectAppDataMock}
-                  setAsDefault={appName}
+                  data={appsOptions}
+                  setAsDefault={this.props.stores.app.app.name}
                   onClickHandler={val => setAppName(val)}
                   noBlankValue
+                  required
                 />
                 <CardRadioControl
                   name="deviceSelect"
