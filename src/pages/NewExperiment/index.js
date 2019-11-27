@@ -11,7 +11,6 @@ import Button from "../../components/Button";
 import StyledSelect from "../../components/StyledSelect";
 import CardRadioControl from "../../components/CardRadioControl";
 import Footer from "../../components/Footer";
-import Dropzone from "../../components/Dropzone";
 import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
 
 import classes from "./newexperiment.module.scss";
@@ -307,9 +306,6 @@ class NewExperiment extends PureComponent {
                       error={errors.customLink}
                     />
                   )}
-                </div>
-                <div className="dropzone">
-                  <Dropzone />
                 </div>
                 <div className={classes.buttonWrap}>
                   <Button click={this.onClickHandler}>Next</Button>

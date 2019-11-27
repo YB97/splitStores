@@ -12,6 +12,7 @@ import StyledSelect from "../../../components/StyledSelect";
 import DatePicker from "../../../components/DatePicker";
 import Button from "../../../components/Button";
 import Footer from "../../../components/Footer";
+import Dropzone from "../../../components/Dropzone";
 import {
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_3
@@ -287,6 +288,9 @@ class NewExperimentStep2 extends PureComponent {
                       onChange={e => setFiveStarsCount(e.target.value)}
                     />
                   </div>
+                </div>
+                <div className={classes.dropzone}>
+                  <Dropzone />
                 </div>
                 <div className={classes.buttonWrap}>
                   <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
