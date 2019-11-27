@@ -39,7 +39,7 @@
 
 .btn-wrapper {
   margin-top: 15px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .charts-wrapper {
@@ -76,4 +76,31 @@
 .develop-text {
   font-size: 24px;
   margin-left: 20px;
+}
+
+.link {
+  display: flex;
+  padding-bottom: 40px;
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.link-title {
+  margin: 0 8px 0 0;
+}
+.link-text-copy {
+  color: #e3603b;
+  width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  &:hover {
+    color: lighten(#e3603b, 5%);
+  }
+  @media screen and (max-width: 576px) {
+    margin-top: 5px;
+  }
 }

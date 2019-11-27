@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import { observer, inject } from "mobx-react";
-import { Grid, Container } from "@material-ui/core";
+import { Grid, Container, Tooltip } from "@material-ui/core";
 import moment from "moment";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -20,6 +21,13 @@ import classes from "./experiment.module.scss";
 @observer
 class Experiment extends PureComponent {
   st = this.props.stores.experiment;
+
+  state = {
+    value: "some value",
+    copied: false
+  };
+
+  timer = null;
 
   componentDidMount() {
     this.props.stores.setLoading(true);
@@ -41,6 +49,16 @@ class Experiment extends PureComponent {
     this.props.history.push(urlBuilder("variation", { id, expId, varId }));
   };
 
+  onCopy = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    this.setState({ copied: true });
+    this.timer = setTimeout(() => {
+      this.setState({ copied: false });
+    }, 2000);
+  };
+
   render() {
     const { experiment } = this.props.stores.experiment;
     const buttons = [
@@ -48,7 +66,7 @@ class Experiment extends PureComponent {
         name: "Start driving traffic",
         icon: "../../static/images/experiment/power.svg",
         onClick: () => {
-          window.open("https://google.com", "_blank");
+          console.log("started");
         }
       },
       {
@@ -187,6 +205,19 @@ class Experiment extends PureComponent {
               </div>
               <div className={classes["btn-wrapper"]}>
                 <Button bg="#aeaeae" isGroupButton btns={buttons} />
+              </div>
+              <div className={classes.link}>
+                <h4 className={classes["link-title"]}>Link for testing:</h4>
+                <CopyToClipboard
+                  text={experiment.traffic_link}
+                  onCopy={this.onCopy}
+                >
+                  <Tooltip title="Click to copy" placement="top">
+                    <div className={classes["link-text-copy"]}>
+                      {this.state.copied ? "Copied" : experiment.traffic_link}
+                    </div>
+                  </Tooltip>
+                </CopyToClipboard>
               </div>
             </Container>
           </div>
