@@ -23,7 +23,6 @@ class Experiment extends PureComponent {
   st = this.props.stores.experiment;
 
   state = {
-    value: "some value",
     copied: false
   };
 
@@ -60,20 +59,20 @@ class Experiment extends PureComponent {
   };
 
   render() {
-    const { experiment } = this.props.stores.experiment;
+    const { experiment, setIsStarted } = this.props.stores.experiment;
     const buttons = [
       {
-        name: "Start driving traffic",
+        name: `${experiment.isStarted ? "Stop" : "Start"} driving traffic`,
         icon: "../../static/images/experiment/power.svg",
         onClick: () => {
-          console.log("started");
+          setIsStarted(!experiment.isStarted);
         }
       },
       {
         name: "Download emails",
         icon: "../../static/images/experiment/download.svg",
         onClick: () => {
-          window.open("https://google.com", "_blank");
+          console.log("DownLoad");
         }
       }
     ];
@@ -178,6 +177,19 @@ class Experiment extends PureComponent {
       { data: item2, label: "Audience" }
     ];
 
+    const linkForTesting = experiment.isStarted ? (
+      <div className={classes.link}>
+        <h4 className={classes["link-title"]}>Link for testing:</h4>
+        <CopyToClipboard text={experiment.traffic_link} onCopy={this.onCopy}>
+          <Tooltip title="Click to copy" placement="top">
+            <div className={classes["link-text-copy"]}>
+              {this.state.copied ? "Copied" : experiment.traffic_link}
+            </div>
+          </Tooltip>
+        </CopyToClipboard>
+      </div>
+    ) : null;
+
     return (
       <div className={classes.exp}>
         <div className="header">
@@ -206,19 +218,7 @@ class Experiment extends PureComponent {
               <div className={classes["btn-wrapper"]}>
                 <Button bg="#aeaeae" isGroupButton btns={buttons} />
               </div>
-              <div className={classes.link}>
-                <h4 className={classes["link-title"]}>Link for testing:</h4>
-                <CopyToClipboard
-                  text={experiment.traffic_link}
-                  onCopy={this.onCopy}
-                >
-                  <Tooltip title="Click to copy" placement="top">
-                    <div className={classes["link-text-copy"]}>
-                      {this.state.copied ? "Copied" : experiment.traffic_link}
-                    </div>
-                  </Tooltip>
-                </CopyToClipboard>
-              </div>
+              {linkForTesting}
             </Container>
           </div>
           <NavBar items={items} />

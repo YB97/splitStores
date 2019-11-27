@@ -25,6 +25,15 @@ class ExperimentStore {
     //   console.error(e);
     // }
   }
+
+  @action.bound
+  setIsStarted(value) {
+    if (!this.experiment.experiment_id) {
+      return;
+    }
+    this.experiment.isStarted = value;
+    console.log(this.experiment.isStarted);
+  }
 }
 
 export default ExperimentStore;
@@ -36,6 +45,7 @@ const getExpById = (appId, id) => {
         case "1":
           return {
             experiment_id: 1,
+            isStarted: true,
             experiment_name: "Play For Game Exp1",
             variations_count: 2,
             visitors_count: 10,
@@ -76,6 +86,7 @@ const getExpById = (appId, id) => {
         case "2":
           return {
             experiment_id: 2,
+            isStarted: true,
             experiment_name: "Play For Game Exp2",
             variations_count: 4,
             visitors_count: 8,
@@ -98,6 +109,7 @@ const getExpById = (appId, id) => {
         case "3":
           return {
             experiment_id: 3,
+            isStarted: true,
             experiment_name: "Play For Game Exp3",
             variations_count: 2,
             visitors_count: 10,
