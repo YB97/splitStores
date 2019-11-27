@@ -60,7 +60,6 @@ function StyledSelect({
     }
   }))(InputBase);
 
-  console.log("error", error);
   return (
     <>
       {title && (

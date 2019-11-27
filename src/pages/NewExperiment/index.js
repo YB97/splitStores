@@ -26,20 +26,24 @@ class NewExperiment extends PureComponent {
       testPage: null,
       testElem: null,
       expName: null,
+      deviceSelect: null,
+      installAction: null,
       customLink: null
     }
   };
+
   componentDidMount() {
     const { getAllApps } = this.props.stores.apps;
+    const { app } = this.props.stores.app;
+    const { appStore } = this.st;
 
     getAllApps();
-    if (this.props.stores.app.app) {
-      this.st.setAppStore(this.props.stores.app.app.store);
+    if (app) {
+      this.st.setAppStore(app.store || appStore);
     }
   }
 
   onClickHandler = () => {
-    const { errors } = this.state;
     const {
       appName,
       testPage,
@@ -50,29 +54,30 @@ class NewExperiment extends PureComponent {
       customLink
     } = this.st;
 
-    this.setState({
-      errors: {
-        appSelect: !Boolean(appName),
-        testPage: !Boolean(testPage),
-        testElem: !Boolean(elementForTest),
-        expName: !Boolean(experimentName),
-        deviceSelect: !Boolean(device),
-        installAction: !Boolean(actionOnInstall),
-        customLink: actionOnInstall === "custom_link" && !Boolean(customLink)
+    this.setState(
+      {
+        errors: {
+          appSelect: !Boolean(appName),
+          testPage: !Boolean(testPage),
+          testElem: !Boolean(elementForTest),
+          expName: !Boolean(experimentName),
+          deviceSelect: !Boolean(device),
+          installAction: !Boolean(actionOnInstall),
+          customLink:
+            actionOnInstall === "custom_link" ? !Boolean(customLink) : false
+        }
+      },
+      () => {
+        if (Object.values(this.state.errors).every(error => error === false)) {
+          this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
+        }
       }
-    });
-
-    if (
-      Object.values(errors).every(error => {
-        return error === false;
-      })
-    ) {
-      this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
-    }
+    );
   };
 
   render() {
     const {
+      appName,
       setAppName,
       appStore,
       setAppStore,
@@ -125,11 +130,11 @@ class NewExperiment extends PureComponent {
                   title="Select the app"
                   titleCenter
                   data={appsOptions}
-                  setAsDefault={this.props.stores.app.app.name}
+                  setAsDefault={this.props.stores.app.app.name || appName}
                   onClickHandler={val => {
                     setAppName(val);
                     const appSt = appsList.find(item => item.name === val);
-                    // console.log("aoo St", appSt);
+
                     setAppStore(appSt.store);
                     this.setState({
                       errors: { ...this.state.errors, appSelect: false }
@@ -262,8 +267,17 @@ class NewExperiment extends PureComponent {
                   handleChange={e => {
                     setActionOnInstall(e.target.value);
 
+                    // if (e.target.value === "user_email") {
+                    // }
                     this.setState({
-                      errors: { ...this.state.errors, installAction: false }
+                      errors: {
+                        ...this.state.errors,
+                        installAction: false,
+                        customLink:
+                          e.target.value !== "user_email"
+                            ? this.state.errors.customLink
+                            : false
+                      }
                     });
                   }}
                 />
@@ -279,7 +293,9 @@ class NewExperiment extends PureComponent {
                         this.setState({
                           errors: {
                             ...this.state.errors,
-                            customLink: !Boolean(e.target.value)
+                            customLink:
+                              actionOnInstall === "custom_link" &&
+                              !Boolean(e.target.value)
                           }
                         });
                       }}
