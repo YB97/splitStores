@@ -2,9 +2,11 @@ import { observable, action, toJS } from "mobx";
 
 class NewExperimentStore {
   @observable appName;
+  @observable appStore;
   @observable device;
   @observable testPage;
   @observable elementForTest;
+  @observable customLink;
   @observable experimentName;
   @observable actionOnInstall;
   @observable developerName;
@@ -47,6 +49,11 @@ class NewExperimentStore {
   }
 
   @action.bound
+  setAppStore(store) {
+    this.appStore = store;
+  }
+
+  @action.bound
   setVariationName(name, id) {
     this.variations[id].name = name;
   }
@@ -54,12 +61,17 @@ class NewExperimentStore {
   @action.bound
   addNewVariation() {
     const lastVariation = this.variations[this.variations.length - 1];
-    const id = lastVariation ? (lastVariation.id + 1) : 1;
+    const id = lastVariation ? lastVariation.id + 1 : 1;
     this.variations.push({
       id,
       name: `Variation ${id}`,
       uploadedIcon: {}
     });
+  }
+
+  @action.bound
+  setCustomLink(link) {
+    this.customLink = link;
   }
 
   @action.bound

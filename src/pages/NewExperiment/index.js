@@ -20,19 +20,62 @@ import classes from "./newexperiment.module.scss";
 class NewExperiment extends PureComponent {
   st = this.props.stores.newExperiments;
 
+  state = {
+    errors: {
+      appSelect: null,
+      testPage: null,
+      testElem: null,
+      expName: null,
+      customLink: null
+    }
+  };
   componentDidMount() {
-    const { getAllApps, appsList } = this.props.stores.apps;
+    const { getAllApps } = this.props.stores.apps;
 
     getAllApps();
+    if (this.props.stores.app.app) {
+      this.st.setAppStore(this.props.stores.app.app.store);
+    }
   }
 
   onClickHandler = () => {
-    this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
+    const { errors } = this.state;
+    const {
+      appName,
+      testPage,
+      elementForTest,
+      experimentName,
+      device,
+      actionOnInstall,
+      customLink
+    } = this.st;
+
+    this.setState({
+      errors: {
+        appSelect: !Boolean(appName),
+        testPage: !Boolean(testPage),
+        testElem: !Boolean(elementForTest),
+        expName: !Boolean(experimentName),
+        deviceSelect: !Boolean(device),
+        installAction: !Boolean(actionOnInstall),
+        customLink: actionOnInstall === "custom_link" && !Boolean(customLink)
+      }
+    });
+
+    if (
+      Object.values(errors).every(error => {
+        return error === false;
+      })
+    ) {
+      this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
+    }
   };
 
   render() {
     const {
       setAppName,
+      appStore,
+      setAppStore,
       device,
       setDevice,
       testPage,
@@ -42,15 +85,19 @@ class NewExperiment extends PureComponent {
       experimentName,
       setExperimentName,
       actionOnInstall,
-      setActionOnInstall
+      setActionOnInstall,
+      customLink,
+      setCustomLink
     } = this.st;
+    const { errors } = this.state;
     const { appsList } = this.props.stores.apps;
     const steps = ["set up", "details", "variations"];
     const appsOptions =
       appsList &&
       appsList.map(item => ({
         name: item.name,
-        icon: item.icon
+        icon: item.icon,
+        store: item.store
       }));
     const selectPageData = [{ name: "Landing Pages" }];
     const selectElementData = [
@@ -79,9 +126,17 @@ class NewExperiment extends PureComponent {
                   titleCenter
                   data={appsOptions}
                   setAsDefault={this.props.stores.app.app.name}
-                  onClickHandler={val => setAppName(val)}
+                  onClickHandler={val => {
+                    setAppName(val);
+                    const appSt = appsList.find(item => item.name === val);
+                    // console.log("aoo St", appSt);
+                    setAppStore(appSt.store);
+                    this.setState({
+                      errors: { ...this.state.errors, appSelect: false }
+                    });
+                  }}
+                  error={errors.appSelect}
                   noBlankValue
-                  required
                 />
                 <CardRadioControl
                   name="deviceSelect"
@@ -90,23 +145,40 @@ class NewExperiment extends PureComponent {
                       Define platform device
                     </div>
                   }
+                  error={errors.deviceSelect}
                   values={[
                     {
                       value: "phone",
                       id: "phone",
-                      img: "../../../static/images/devices/android-phone.svg",
-                      text: "Android phone"
+                      img: `../../../static/images/devices/${
+                        appStore === "Google Play" ? "android" : "apple"
+                      }-phone.svg`,
+                      text:
+                        appStore === "Google Play"
+                          ? "Android Phone"
+                          : "Apple Phone"
                     },
                     {
                       value: "tablet",
                       id: "tablet",
-                      img: "../../../static/images/devices/android-tablet.svg",
-                      text: "Android tablet"
+                      img: `../../../static/images/devices/${
+                        appStore === "Google Play" ? "android" : "apple"
+                      }-tablet.svg`,
+                      text:
+                        appStore === "Google Play"
+                          ? "Android Tablet"
+                          : "Apple Tablet"
                     }
                   ]}
                   currentValue={device}
                   className={classes.formControl}
-                  handleChange={e => setDevice(e.target.value)}
+                  handleChange={e => {
+                    setDevice(e.target.value);
+
+                    this.setState({
+                      errors: { ...this.state.errors, deviceSelect: false }
+                    });
+                  }}
                 />
                 <div className={classes["select-wrapper"]}>
                   <StyledSelect
@@ -115,8 +187,15 @@ class NewExperiment extends PureComponent {
                     titleCenter
                     data={selectPageData}
                     setAsDefault={testPage}
-                    onClickHandler={val => setTestPage(val)}
+                    onClickHandler={val => {
+                      setTestPage(val);
+
+                      this.setState({
+                        errors: { ...this.state.errors, testPage: false }
+                      });
+                    }}
                     noBlankValue
+                    error={errors.testPage}
                   />
                 </div>
                 <div className={classes["select-wrapper"]}>
@@ -126,8 +205,15 @@ class NewExperiment extends PureComponent {
                     titleCenter
                     data={selectElementData}
                     setAsDefault={elementForTest}
-                    onClickHandler={val => setElementForTest(val)}
+                    onClickHandler={val => {
+                      setElementForTest(val);
+
+                      this.setState({
+                        errors: { ...this.state.errors, testElem: false }
+                      });
+                    }}
                     noBlankValue
+                    error={errors.testElem}
                   />
                 </div>
                 <div className={classes.formControl}>
@@ -135,9 +221,16 @@ class NewExperiment extends PureComponent {
                     title="Set the name to your experiment"
                     titleCentered
                     value={experimentName}
-                    onChange={e => setExperimentName(e.target.value)}
+                    onChange={e => {
+                      setExperimentName(e.target.value);
+
+                      this.setState({
+                        errors: { ...this.state.errors, expName: false }
+                      });
+                    }}
                     placeholder="Name..."
                     helpText="This name will only be displayed on the dashboard"
+                    error={errors.expName}
                   />
                 </div>
                 <CardRadioControl
@@ -165,8 +258,35 @@ class NewExperiment extends PureComponent {
                   ]}
                   currentValue={actionOnInstall}
                   className={classes.formControl}
-                  handleChange={e => setActionOnInstall(e.target.value)}
+                  error={errors.installAction}
+                  handleChange={e => {
+                    setActionOnInstall(e.target.value);
+
+                    this.setState({
+                      errors: { ...this.state.errors, installAction: false }
+                    });
+                  }}
                 />
+                <div className={classes["link-input"]}>
+                  {actionOnInstall === "custom_link" && (
+                    <Input
+                      placeholder="https://example.com"
+                      value={customLink}
+                      type="url"
+                      onChange={e => {
+                        setCustomLink(e.target.value);
+
+                        this.setState({
+                          errors: {
+                            ...this.state.errors,
+                            customLink: !Boolean(e.target.value)
+                          }
+                        });
+                      }}
+                      error={errors.customLink}
+                    />
+                  )}
+                </div>
                 <div className={classes.buttonWrap}>
                   <Button click={this.onClickHandler}>Next</Button>
                 </div>

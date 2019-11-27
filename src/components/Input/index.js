@@ -29,6 +29,7 @@ const StyledInput = withStyles({
 })(TextField);
 
 function Input({
+  pattern = null,
   label = "",
   title = "",
   titleCentered = false,
@@ -43,7 +44,7 @@ function Input({
   required = false,
   disabled = false,
   multiline = false,
-  rows = "4"
+  rows = "4",
   // defaultValue
 }) {
   return (

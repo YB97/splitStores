@@ -8,32 +8,6 @@ import InputBase from "@material-ui/core/InputBase";
 
 import classes from "./select.module.scss";
 
-const CustomInput = withStyles(theme => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3)
-    },
-    "& .MuiSelect-root.MuiInputBase-input": {
-      alignItems: "center",
-      justifyContent: "flex-start",
-      display: "flex"
-    }
-  },
-  input: {
-    height: "40px",
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: theme.palette.background.paper,
-    border: "1px solid #ced4da",
-    fontSize: 16,
-    padding: "10px 26px 10px 12px",
-    "&:focus": {
-      borderRadius: 4,
-      borderColor: "#244BDD"
-    }
-  }
-}))(InputBase);
-
 const useStyles = makeStyles(theme => ({
   margin: {
     margin: 0
@@ -49,7 +23,8 @@ function StyledSelect({
   onClickHandler = val => {},
   setAsDefault = "",
   noBlankValue = false,
-  titleCenter = false
+  titleCenter = false,
+  error = null
 }) {
   // @ts-ignore
   const styles = useStyles();
@@ -59,6 +34,33 @@ function StyledSelect({
     onClickHandler(event.target.value);
   };
 
+  const CustomInput = withStyles(theme => ({
+    root: {
+      "label + &": {
+        marginTop: theme.spacing(3)
+      },
+      "& .MuiSelect-root.MuiInputBase-input": {
+        alignItems: "center",
+        justifyContent: "flex-start",
+        display: "flex"
+      }
+    },
+    input: {
+      height: "40px",
+      borderRadius: 4,
+      position: "relative",
+      backgroundColor: theme.palette.background.paper,
+      border: `1px solid ${error ? "#FF0000" : "#ced4da"}`,
+      fontSize: 16,
+      padding: "10px 26px 10px 12px",
+      "&:focus": {
+        borderRadius: 4,
+        borderColor: "#244BDD"
+      }
+    }
+  }))(InputBase);
+
+  console.log("error", error);
   return (
     <>
       {title && (
@@ -74,12 +76,13 @@ function StyledSelect({
           <InputLabel id="demo-customized-select-label">{label}</InputLabel>
         )}
         <Select
-          labelId="demo-customized-select-label"
-          id="demo-customized-select"
+          labelId={"demo-customized-select-label"}
+          id={!error ? "demo-customized-select" : "demo-simple-select-error"}
           value={field}
           onChange={handleChange}
           input={<CustomInput />}
           disabled={disabled}
+          error={error}
         >
           {!noBlankValue && (
             <MenuItem value="">
