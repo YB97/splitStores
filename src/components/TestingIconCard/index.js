@@ -5,6 +5,7 @@ import Button from "../Button";
 import FileInput from "../../hocs/FileInput";
 
 import classes from "./testingiconcard.module.scss";
+import Dropzone from "../Dropzone";
 
 const TestingIconCard = ({
   variationName,
@@ -73,7 +74,11 @@ const TestingIconCard = ({
           </div>
         </>
       )}
-      {elementForTest === "Screenshots" && <>Drag and drop</>}
+      {elementForTest === "Screenshots" && (
+        <div className={classes.dropzone}>
+          <Dropzone />
+        </div>
+      )}
       {elementForTest === "Description" && (
         <div className={classes["desc-wrapper"]}>
           <div className={classes["item-title"]}>Description</div>

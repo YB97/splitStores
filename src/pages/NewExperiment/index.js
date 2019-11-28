@@ -52,7 +52,8 @@ class NewExperiment extends PureComponent {
       experimentName,
       device,
       actionOnInstall,
-      customLink
+      customLink,
+      setIsValid
     } = this.st;
     console.log("appName", appName);
 
@@ -71,6 +72,7 @@ class NewExperiment extends PureComponent {
       },
       () => {
         if (Object.values(this.state.errors).every(error => error === false)) {
+          setIsValid(true);
           this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_2);
         }
       }

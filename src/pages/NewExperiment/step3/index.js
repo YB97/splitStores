@@ -9,13 +9,25 @@ import Stepper from "../../../components/Stepper";
 import Button from "../../../components/Button";
 import TestingIconCard from "../../../components/TestingIconCard";
 import Footer from "../../../components/Footer";
-import { URI_TO_NEW_EXPERIMENT_STEP_3 } from "../../../constants";
+import {
+  URI_TO_NEW_EXPERIMENT,
+  URI_TO_NEW_EXPERIMENT_STEP_3
+} from "../../../constants";
 
 import classes from "./step3.module.scss";
 
 @inject("stores")
 @observer
 class NewExperimentStep3 extends PureComponent {
+  componentDidMount() {
+    const { isValid } = this.props.stores.newExperiments;
+    const { history } = this.props;
+
+    if (!isValid) {
+      history.push(URI_TO_NEW_EXPERIMENT);
+    }
+  }
+
   render() {
     const steps = ["set up", "details", "variations"];
     const {

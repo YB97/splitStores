@@ -1,6 +1,7 @@
 import { observable, action, toJS } from "mobx";
 
 class NewExperimentStore {
+  @observable isValid = false;
   @observable appName;
   @observable appStore;
   @observable device;
@@ -53,6 +54,11 @@ class NewExperimentStore {
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+  }
+
+  @action.bound
+  setIsValid(val) {
+    this.isValid = val;
   }
 
   @action.bound

@@ -23,6 +23,15 @@ import classes from "./step2.module.scss";
 @inject("stores")
 @observer
 class NewExperimentStep2 extends PureComponent {
+  componentDidMount() {
+    const { isValid } = this.props.stores.newExperiments;
+    const { history } = this.props;
+
+    if (!isValid) {
+      history.push(URI_TO_NEW_EXPERIMENT);
+    }
+  }
+
   render() {
     const {
       testPage,
@@ -237,7 +246,7 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["label"]}>Average user rating</div>
                   <Input
                     value={userRating}
-                    type='number'
+                    type="number"
                     placeholder="4.5"
                     onChange={e => setUserRating(e.target.value)}
                   />
@@ -289,9 +298,11 @@ class NewExperimentStep2 extends PureComponent {
                     />
                   </div>
                 </div>
-                <div className={classes.dropzone}>
-                  <Dropzone />
-                </div>
+                {elementForTest !== "Screenshots" && (
+                  <div className={classes.dropzone}>
+                    <Dropzone />
+                  </div>
+                )}
                 <div className={classes.buttonWrap}>
                   <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
                     Back
