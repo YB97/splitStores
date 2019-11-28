@@ -39,8 +39,13 @@ class AppStore {
   }
 
   @action.bound
+  setApp(app) {
+    this.app = app;
+  }
+
+  @action.bound
   save() {
-    console.log('saved!');
+    console.log("saved!");
     // try {
     //   await axios.patch(`/api/apps/${this.app.id}`, {
     //     app: {

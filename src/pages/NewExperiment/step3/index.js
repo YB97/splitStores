@@ -24,7 +24,9 @@ class NewExperimentStep3 extends PureComponent {
       variations,
       setVariationName,
       addNewVariation,
-      deleteVariation
+      deleteVariation,
+      setDescriptionVariant,
+      setAppNameVariant
     } = this.props.stores.newExperiments;
     const { history } = this.props;
 
@@ -32,7 +34,7 @@ class NewExperimentStep3 extends PureComponent {
       history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
     };
 
-    const setIcon = (variation) => (file) => {
+    const setIcon = variation => file => {
       variation.uploadedIcon = file;
     };
 
@@ -60,8 +62,20 @@ class NewExperimentStep3 extends PureComponent {
                       onInputChange={e => setVariationName(e.target.value, id)}
                       icon={variation.uploadedIcon}
                       setIcon={setIcon(variation)}
+                      screenshots={variation.uploadedScreenshots}
+                      description={variation.description}
+                      appName={variation.appName}
                       onDelete={() => deleteVariation(variation.id)}
+                      onChange={e => {
+                        if (elementForTest === "Description") {
+                          setDescriptionVariant(e.target.value, id);
+                        }
+                        if (elementForTest === "App Name") {
+                          setAppNameVariant(e.target.value, id);
+                        }
+                      }}
                       id={id}
+                      elementForTest={elementForTest}
                     />
                   </div>
                 ))}

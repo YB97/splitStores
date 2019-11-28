@@ -23,6 +23,7 @@ class NewExperimentStore {
   @observable appSize;
   @observable appVersion;
   @observable userRating;
+  @observable reviewsCount;
   @observable downloadsCount = 0;
   @observable androidRewiewsCount = 0;
   @observable iosRewiewsCount = 0;
@@ -35,12 +36,18 @@ class NewExperimentStore {
     {
       id: 1,
       name: "Variation 1",
-      uploadedIcon: {}
+      uploadedIcon: {},
+      uploadedScreenshots: {},
+      appName: "",
+      description: ""
     },
     {
       id: 2,
       name: "Variation 2",
-      uploadedIcon: {}
+      uploadedIcon: {},
+      uploadedScreenshots: {},
+      appName: "",
+      description: ""
     }
   ];
 
@@ -56,6 +63,16 @@ class NewExperimentStore {
   @action.bound
   setVariationName(name, id) {
     this.variations[id].name = name;
+  }
+
+  @action.bound
+  setDescriptionVariant(desc, id) {
+    this.variations[id].description = desc;
+  }
+
+  @action.bound
+  setAppNameVariant(name, id) {
+    this.variations[id].appName = name;
   }
 
   @action.bound
@@ -98,6 +115,13 @@ class NewExperimentStore {
   @action.bound
   setElementForTest(value) {
     this.elementForTest = value;
+  }
+
+  @action.bound
+  setReviewsCount(value) {
+    if (value >= 0) {
+      this.reviewsCount = value;
+    }
   }
 
   @action.bound
@@ -177,12 +201,16 @@ class NewExperimentStore {
 
   @action.bound
   setUserRating(value) {
-    this.userRating = value;
+    if (value >= 0) {
+      this.userRating = value;
+    }
   }
 
   @action.bound
   setDownloadsCount(num) {
-    this.downloadsCount = num;
+    if (num >= 0) {
+      this.downloadsCount = num;
+    }
   }
 
   @action.bound

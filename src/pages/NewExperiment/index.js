@@ -35,10 +35,11 @@ class NewExperiment extends PureComponent {
   componentDidMount() {
     const { getAllApps } = this.props.stores.apps;
     const { app } = this.props.stores.app;
-    const { appStore } = this.st;
+    const { appStore, appName } = this.st;
 
     getAllApps();
     if (app) {
+      this.st.setAppName(app.name || appName)
       this.st.setAppStore(app.store || appStore);
     }
   }
@@ -53,6 +54,7 @@ class NewExperiment extends PureComponent {
       actionOnInstall,
       customLink
     } = this.st;
+    console.log("appName", appName);
 
     this.setState(
       {
@@ -111,6 +113,8 @@ class NewExperiment extends PureComponent {
       { name: "Description" },
       { name: "App Name" }
     ];
+
+
 
     return (
       <div className={classes.newexperiment}>

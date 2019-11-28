@@ -26,8 +26,10 @@ class NewExperimentStep2 extends PureComponent {
     const {
       testPage,
       elementForTest,
-      appName,
-      setAppName,
+      // appName,
+      // setAppName,
+      reviewsCount,
+      setReviewsCount,
       developerName,
       setDeveloperName,
       appIsFree,
@@ -97,14 +99,6 @@ class NewExperimentStep2 extends PureComponent {
                 </div>
                 <div className={classes["input-wrapper"]}>
                   <Input
-                    label="App name"
-                    value={appName}
-                    onChange={e => setAppName(e.target.value)}
-                    helpText="Specify the app name that you want users to see on the experiment page"
-                  />
-                </div>
-                <div className={classes["input-wrapper"]}>
-                  <Input
                     label="Developer name"
                     value={developerName}
                     onChange={e => setDeveloperName(e.target.value)}
@@ -147,15 +141,17 @@ class NewExperimentStep2 extends PureComponent {
                   checked={offersInApp}
                   onChange={() => setOffersInApp(!offersInApp)}
                 />
-                <div>
-                  <div className={classes["label"]}>App Description</div>
-                  <Input
-                    value={appDesc}
-                    placeholder="Type your app description"
-                    multiline
-                    onChange={e => setAppDesc(e.target.value)}
-                  />
-                </div>
+                {elementForTest !== "Description" && (
+                  <div>
+                    <div className={classes["label"]}>App Description</div>
+                    <Input
+                      value={appDesc}
+                      placeholder="Type your app description"
+                      multiline
+                      onChange={e => setAppDesc(e.target.value)}
+                    />
+                  </div>
+                )}
                 <div>
                   <div className={classes["label"]}>Short app description</div>
                   <Input
@@ -166,6 +162,7 @@ class NewExperimentStep2 extends PureComponent {
                     onChange={e => setShortAppDesc(e.target.value)}
                   />
                 </div>
+
                 <div className={classes["app-ver-wrapper"]}>
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>App category</div>
@@ -221,15 +218,17 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       value={downloadsCount}
                       placeholder="12"
+                      type="number"
                       onChange={e => setDownloadsCount(e.target.value)}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>Rewiews Count</div>
                     <Input
-                      value={appVersion}
-                      placeholder="1.2.4"
-                      onChange={e => setDownloadsCount(e.target.value)}
+                      value={reviewsCount}
+                      placeholder="100"
+                      type="number"
+                      onChange={e => setReviewsCount(e.target.value)}
                     />
                   </div>
                 </div>
@@ -237,6 +236,7 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["label"]}>Average user rating</div>
                   <Input
                     value={userRating}
+                    type='number'
                     placeholder="4.5"
                     onChange={e => setUserRating(e.target.value)}
                   />

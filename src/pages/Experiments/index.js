@@ -26,9 +26,15 @@ class Experiments extends PureComponent {
   }
   componentDidMount() {
     this.props.stores.setLoading(true);
+
     const { getExperimentsByAppId } = this.props.stores.experiments;
     const { id } = this.props.match.params;
+    const { appsList } = this.props.stores.apps;
+    const { setApp } = this.props.stores.app;
 
+    const app = appsList.find(ap => ap.id.toString() === id);
+
+    setApp(app);
     getExperimentsByAppId(id).then(() => {
       this.props.stores.setLoading(false);
     });
@@ -45,10 +51,12 @@ class Experiments extends PureComponent {
   onAppSelect = name => {
     const { history } = this.props;
     const { appsList } = this.props.stores.apps;
+    const { setApp } = this.props.stores.app;
     const { getExperimentsByAppId } = this.props.stores.experiments;
 
     const app = appsList.find(app => app.name === name);
-
+    
+    setApp(app);
     getExperimentsByAppId(app.id);
     history.push(urlBuilder("experiments", { id: app.id }));
   };
