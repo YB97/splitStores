@@ -55,7 +55,6 @@ class NewExperiment extends PureComponent {
       customLink,
       setIsValid
     } = this.st;
-    console.log("appName", appName);
 
     this.setState(
       {
@@ -115,8 +114,6 @@ class NewExperiment extends PureComponent {
       { name: "Description" },
       { name: "App Name" }
     ];
-
-
 
     return (
       <div className={classes.newexperiment}>

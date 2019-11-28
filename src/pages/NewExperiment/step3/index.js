@@ -9,16 +9,22 @@ import Stepper from "../../../components/Stepper";
 import Button from "../../../components/Button";
 import TestingIconCard from "../../../components/TestingIconCard";
 import Footer from "../../../components/Footer";
+import SimpleModal from "../../../components/Modal";
 import {
+  URI_TO_EXPERIMENTS,
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_3
 } from "../../../constants";
+import { urlBuilder } from "../../../routes";
 
 import classes from "./step3.module.scss";
 
 @inject("stores")
 @observer
 class NewExperimentStep3 extends PureComponent {
+  state = {
+    modalOpen: false
+  };
   componentDidMount() {
     const { isValid } = this.props.stores.newExperiments;
     const { history } = this.props;
@@ -27,6 +33,24 @@ class NewExperimentStep3 extends PureComponent {
       history.push(URI_TO_NEW_EXPERIMENT);
     }
   }
+
+  handleModalClose = () => {
+    this.setState({ modalOpen: false });
+    this.backToExp();
+  };
+
+  handleModalOpen = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  backToExp = () => {
+    const { history } = this.props;
+    const { appName } = this.props.stores.newExperiments;
+    const { appsList } = this.props.stores.apps;
+
+    const activeApp = appsList.find(app => app.name.toString() === appName);
+    history.push(urlBuilder("experiments", { id: activeApp.id }));
+  };
 
   render() {
     const steps = ["set up", "details", "variations"];
@@ -43,7 +67,8 @@ class NewExperimentStep3 extends PureComponent {
     const { history } = this.props;
 
     const onClickHandler = () => {
-      history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
+      this.handleModalOpen();
+      // history.push(URI_TO_EXPERIMENTS);
     };
 
     const setIcon = variation => file => {
@@ -107,7 +132,7 @@ class NewExperimentStep3 extends PureComponent {
                     <Button click={onClickHandler} size="small">
                       Publish experiment
                     </Button>
-                    <Button click={onClickHandler} bg="#B0B0B0" size="small">
+                    <Button click={() => {}} bg="#B0B0B0" size="small">
                       Save and publish later
                     </Button>
                   </div>
@@ -115,6 +140,15 @@ class NewExperimentStep3 extends PureComponent {
               </div>
             </Grid>
           </Grid>
+          <SimpleModal
+            open={this.state.modalOpen}
+            handleClose={this.handleModalClose}
+            handleOpen={this.handleModalOpen}
+            title="Success!"
+            content="Your experiment is published successfully"
+          >
+            <Button click={this.backToExp}>back to experiments</Button>
+          </SimpleModal>
         </Container>
         <Footer />
       </div>
