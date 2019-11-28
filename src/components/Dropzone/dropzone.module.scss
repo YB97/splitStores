@@ -1,0 +1,31 @@
+.dropzone {
+  cursor: pointer;
+  background: white;
+  border: 1px dashed #b6b6b6;
+  border-radius: 4px;
+  transition: border 0.2s ease;
+  outline: none;
+  &:hover {
+    border: 1px solid #244bdd;
+  }
+  &:focus,
+  &:active {
+    border: 1px solid #333;
+  }
+}
+
+.text {
+  position: relative;
+  font-size: 20px;
+  padding: 80px 15px;
+  text-align: center;
+}
+
+.error {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, -10px);
+  color: red;
+  font-size: 12px;
+}
