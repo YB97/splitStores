@@ -1,10 +1,13 @@
 .dropzone {
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  background: white;
+  background: #dedede;
   border: 1px dashed #b6b6b6;
   border-radius: 4px;
   transition: border 0.2s ease;
   outline: none;
+  min-height: 200px;
   &:hover {
     border: 1px solid #244bdd;
   }
@@ -17,8 +20,9 @@
 .text {
   position: relative;
   font-size: 20px;
-  padding: 80px 15px;
+  padding: 20px 15px;
   text-align: center;
+  width: 100%;
 }
 
 .error {
@@ -28,4 +32,29 @@
   transform: translate(-50%, -10px);
   color: red;
   font-size: 12px;
+}
+
+.previews {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0 40px;
+  @media screen and (max-width: 832px) {
+    justify-content: space-between;
+  }
+}
+
+.preview {
+  display: inline-block;
+  margin-bottom: 20px;
+  &:nth-child(3n) {
+    margin-right: 0px;
+  }
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  @media screen and (max-width: 832px) {
+    margin-right: 0;
+  }
 }
