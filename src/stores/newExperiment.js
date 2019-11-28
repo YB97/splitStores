@@ -1,4 +1,4 @@
-import { observable, action, toJS } from "mobx";
+import { observable, action } from "mobx";
 
 class NewExperimentStore {
   @observable isValid = false;
@@ -33,6 +33,7 @@ class NewExperimentStore {
   @observable threeStarsCount = 0;
   @observable fourStarsCount = 0;
   @observable fiveStarsCount = 0;
+  @observable screenshots = [];
   @observable variations = [
     {
       id: 1,
@@ -261,6 +262,13 @@ class NewExperimentStore {
   setFiveStarsCount(num) {
     if (num >= 0) {
       this.fiveStarsCount = num;
+    }
+  }
+
+  @action.bound
+  setScreenshots(screenshots) {
+    if (screenshots.length > 0) {
+      this.screenshots = screenshots;
     }
   }
 }

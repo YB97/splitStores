@@ -77,7 +77,9 @@ class NewExperimentStep2 extends PureComponent {
       fourStarsCount,
       setFourStarsCount,
       fiveStarsCount,
-      setFiveStarsCount
+      setFiveStarsCount,
+      screenshots,
+      setScreenshots
     } = this.props.stores.newExperiments;
 
     const steps = ["set up", "details", "variations"];
@@ -300,7 +302,10 @@ class NewExperimentStep2 extends PureComponent {
                 </div>
                 {elementForTest !== "Screenshots" && (
                   <div className={classes.dropzone}>
-                    <Dropzone />
+                    <Dropzone
+                      screenshots={screenshots}
+                      onUpload={setScreenshots}
+                    />
                   </div>
                 )}
                 <div className={classes.buttonWrap}>
