@@ -119,16 +119,16 @@ class NewExperimentStep2 extends PureComponent {
         {
           errors: {
             developerName: !Boolean(developerName),
-            appDesc: !Boolean(appDesc),
+            appDesc: elementForTest !== 'Description' && !Boolean(appDesc) || false,
             shortAppDesc: !Boolean(shortAppDesc),
             appCategory: !Boolean(appCategory),
             appRestrictions: !Boolean(appRestrictions),
             releaseNotes: !Boolean(releaseNotes),
             appSize: !Boolean(appSize),
             appVersion: !Boolean(appVersion),
-            downloadsCount: downloadsCount < 0,
-            reviewsCount: reviewsCount < 0,
-            userRating: userRating < 0 || userRating > 5,
+            downloadsCount: !Boolean(downloadsCount && downloadsCount.length),
+            reviewsCount: !Boolean(reviewsCount && reviewsCount.length),
+            userRating: !Boolean(userRating && userRating >= 0),
             oneStarsCount: oneStarsCount < 0,
             twoStarsCount: twoStarsCount < 0,
             threeStarsCount: threeStarsCount < 0,
@@ -138,6 +138,7 @@ class NewExperimentStep2 extends PureComponent {
           }
         },
         () => {
+          console.log("erro", this.state.errors);
           if (
             Object.values(this.state.errors).every(error => error === false)
           ) {
