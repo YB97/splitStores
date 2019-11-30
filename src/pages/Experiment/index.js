@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { observer, inject } from "mobx-react";
 import { Grid, Container, Tooltip } from "@material-ui/core";
 import moment from "moment";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";

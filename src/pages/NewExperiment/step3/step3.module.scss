@@ -58,14 +58,28 @@
 }
 
 .fullwidthButton {
-
 }
 
-.butonGroupWrap  {
+.butonGroupWrap {
   margin-top: 55px;
   display: flex;
   justify-content: space-evenly;
   max-width: 483px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.link-diving {
+  display: flex;
+  flex-direction: row;
+}
+.link-diving-title {
+  font-size: 12px;
+  font-weight: normal;
+}
+.link-diving-text {
+  font-size: 12px;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
 }

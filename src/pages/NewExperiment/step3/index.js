@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Tooltip } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 import Header from "../../../components/Header";
 import Title from "../../../components/Title";
@@ -23,8 +24,10 @@ import classes from "./step3.module.scss";
 @observer
 class NewExperimentStep3 extends PureComponent {
   state = {
-    modalOpen: false
+    modalOpen: false,
+    copied: false
   };
+
   componentDidMount() {
     const { isValid } = this.props.stores.newExperiments;
     const { history } = this.props;
@@ -50,6 +53,16 @@ class NewExperimentStep3 extends PureComponent {
 
     const activeApp = appsList.find(app => app.name.toString() === appName);
     history.push(urlBuilder("experiments", { id: activeApp.id }));
+  };
+
+  onCopy = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    this.setState({ copied: true });
+    this.timer = setTimeout(() => {
+      this.setState({ copied: false });
+    }, 2000);
   };
 
   render() {
@@ -147,6 +160,18 @@ class NewExperimentStep3 extends PureComponent {
             title="Success!"
             content="Your experiment is published successfully"
           >
+            <div className={classes["link-diving"]}>
+              <h5 className={classes["link-diving-title"]}>
+                Link for you diving test:
+              </h5>
+              <CopyToClipboard text={"https://google.com"} onCopy={this.onCopy}>
+                <Tooltip title="Click to copy" placement="top">
+                  <div className={classes["link-diving-text"]}>
+                    {this.state.copied ? "Copied" : "https://google.com"}
+                  </div>
+                </Tooltip>
+              </CopyToClipboard>
+            </div>
             <Button click={this.backToExp}>back to experiments</Button>
           </SimpleModal>
         </Container>
