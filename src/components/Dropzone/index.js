@@ -7,7 +7,7 @@ import classes from "./dropzone.module.scss";
 const MAX_SIZE_FILE = 8e6;
 const MAX_NUMBER_FILES = 6;
 
-function Dropzone({ screenshots = [], onUpload = () => {} }) {
+function Dropzone({ screenshots = [], onUpload = data => {} }) {
   const [files, setFiles] = useState([]);
   const [errorText, setError] = useState(null);
 
@@ -31,15 +31,22 @@ function Dropzone({ screenshots = [], onUpload = () => {} }) {
       setError("Max number files is six");
     }
     setFiles(acceptedFiles);
-    Promise.all(acceptedFiles.map(uploadFile)).then(data => {
-      setError(false);
-      onUpload(data);
-    });
+    Promise.all(acceptedFiles.map(uploadFile))
+      .then(data => {
+        setError(false);
+        onUpload(data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className={classes.dropzone} {...getRootProps()}>
+    <div
+      className={`${classes.dropzone} ${errorText ? "dropzone_error" : null}`}
+      {...getRootProps()}
+    >
       <input
         {...getInputProps()}
         size={MAX_SIZE_FILE * MAX_NUMBER_FILES}
@@ -50,7 +57,9 @@ function Dropzone({ screenshots = [], onUpload = () => {} }) {
       ) : (
         <>
           <div className={classes.text}>
-            {screenshots.length > 0 && window.innerWidth >= 768 ? (
+            {screenshots.length > 0 &&
+            window.innerWidth >= 768 &&
+            !errorText ? (
               <div className={classes.previews}>{renderPreviews()}</div>
             ) : null}
             {errorText ? (

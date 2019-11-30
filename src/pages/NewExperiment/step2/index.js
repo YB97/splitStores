@@ -49,7 +49,7 @@ class NewExperimentStep2 extends PureComponent {
     const { history } = this.props;
 
     if (!isValid) {
-      history.push(URI_TO_NEW_EXPERIMENT);
+      // history.push(URI_TO_NEW_EXPERIMENT);
     }
   }
 
