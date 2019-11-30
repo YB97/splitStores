@@ -23,6 +23,27 @@ import classes from "./step2.module.scss";
 @inject("stores")
 @observer
 class NewExperimentStep2 extends PureComponent {
+  state = {
+    errors: {
+      developerName: null,
+      price: false,
+      appDesc: null,
+      shortAppDesc: null,
+      appCategory: null,
+      appRestrictions: null,
+      releaseNotes: null,
+      appSize: null,
+      appVersion: null,
+      downloadsCount: null,
+      reviewsCount: null,
+      userRating: null,
+      oneStarsCount: null,
+      twoStarsCount: null,
+      threeStarsCount: null,
+      fourStarsCount: null,
+      fiveStarsCount: null
+    }
+  };
   componentDidMount() {
     const { isValid } = this.props.stores.newExperiments;
     const { history } = this.props;
@@ -30,6 +51,15 @@ class NewExperimentStep2 extends PureComponent {
     if (!isValid) {
       history.push(URI_TO_NEW_EXPERIMENT);
     }
+  }
+
+  setError(field, value) {
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        [field]: value
+      }
+    });
   }
 
   render() {
@@ -81,12 +111,42 @@ class NewExperimentStep2 extends PureComponent {
       screenshots,
       setScreenshots
     } = this.props.stores.newExperiments;
-
+    const { errors } = this.state;
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
     const onClickHandler = () => {
-      this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
+      this.setState(
+        {
+          errors: {
+            developerName: !Boolean(developerName),
+            appDesc: !Boolean(appDesc),
+            shortAppDesc: !Boolean(shortAppDesc),
+            appCategory: !Boolean(appCategory),
+            appRestrictions: !Boolean(appRestrictions),
+            releaseNotes: !Boolean(releaseNotes),
+            appSize: !Boolean(appSize),
+            appVersion: !Boolean(appVersion),
+            downloadsCount: downloadsCount < 0,
+            reviewsCount: reviewsCount < 0,
+            userRating: userRating < 0 || userRating > 5,
+            oneStarsCount: oneStarsCount < 0,
+            twoStarsCount: twoStarsCount < 0,
+            threeStarsCount: threeStarsCount < 0,
+            fourStarsCount: fourStarsCount < 0,
+            fiveStarsCount: fiveStarsCount < 0,
+            price: !appIsFree && price === 0
+          }
+        },
+        () => {
+          if (
+            Object.values(this.state.errors).every(error => error === false)
+          ) {
+            this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
+          }
+        }
+      );
     };
+
     const onBackClickHandler = () => {
       this.props.history.push(URI_TO_NEW_EXPERIMENT);
     };
@@ -113,7 +173,11 @@ class NewExperimentStep2 extends PureComponent {
                   <Input
                     label="Developer name"
                     value={developerName}
-                    onChange={e => setDeveloperName(e.target.value)}
+                    onChange={e => {
+                      setDeveloperName(e.target.value);
+                      this.setError("developerName", !Boolean(developerName));
+                    }}
+                    error={errors.developerName}
                   />
                 </div>
                 <div className={classes["label"]}>Price</div>
@@ -123,7 +187,12 @@ class NewExperimentStep2 extends PureComponent {
                       width="120px"
                       label="App is free"
                       checked={appIsFree}
-                      onChange={() => setAppIsFree(!appIsFree)}
+                      onChange={() => {
+                        setAppIsFree(!appIsFree);
+                        if (!appIsFree) {
+                          this.setError("price", true);
+                        }
+                      }}
                     />
                   </div>
                   <div className={classes["price-currency-wrapper"]}>
@@ -131,8 +200,14 @@ class NewExperimentStep2 extends PureComponent {
                       <Input
                         value={price}
                         type="number"
-                        onChange={e => setPrice(e.target.value)}
+                        onChange={e => {
+                          if (e.target.value > 0) {
+                            setPrice(e.target.value);
+                            this.setError("price", price <= 0);
+                          }
+                        }}
                         disabled={appIsFree}
+                        error={errors.price}
                       />
                     </div>
                     <div className={classes["price-select-wrapper"]}>
@@ -160,7 +235,11 @@ class NewExperimentStep2 extends PureComponent {
                       value={appDesc}
                       placeholder="Type your app description"
                       multiline
-                      onChange={e => setAppDesc(e.target.value)}
+                      onChange={e => {
+                        setAppDesc(e.target.value);
+                        this.setError("appDesc", !Boolean(e.target.value));
+                      }}
+                      error={errors.appDesc}
                     />
                   </div>
                 )}
@@ -171,7 +250,11 @@ class NewExperimentStep2 extends PureComponent {
                     rows="3"
                     placeholder="Type your short app description"
                     multiline
-                    onChange={e => setShortAppDesc(e.target.value)}
+                    onChange={e => {
+                      setShortAppDesc(e.target.value);
+                      this.setError("shortAppDesc", !Boolean(e.target.value));
+                    }}
+                    error={errors.shortAppDesc}
                   />
                 </div>
 
@@ -181,7 +264,11 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       value={appCategory}
                       placeholder="Games"
-                      onChange={e => setAppCategory(e.target.value)}
+                      onChange={e => {
+                        setAppCategory(e.target.value);
+                        this.setError("appCategory", !Boolean(e.target.value));
+                      }}
+                      error={errors.appCategory}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -189,7 +276,14 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       value={appRestrictions}
                       placeholder="3+"
-                      onChange={e => setAppRestrictions(e.target.value)}
+                      onChange={e => {
+                        setAppRestrictions(e.target.value);
+                        this.setError(
+                          "appRestrictions",
+                          !Boolean(e.target.value)
+                        );
+                      }}
+                      error={errors.appRestrictions}
                     />
                   </div>
                 </div>
@@ -203,7 +297,11 @@ class NewExperimentStep2 extends PureComponent {
                     value={releaseNotes}
                     placeholder="Type your app description"
                     multiline
-                    onChange={e => setReleaseNotes(e.target.value)}
+                    onChange={e => {
+                      setReleaseNotes(e.target.value);
+                      this.setError("releaseNotes", !Boolean(e.target.value));
+                    }}
+                    error={errors.releaseNotes}
                   />
                 </div>
                 <div className={classes["app-ver-wrapper"]}>
@@ -212,7 +310,11 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       value={appSize}
                       placeholder="3MB"
-                      onChange={e => setAppSize(e.target.value)}
+                      onChange={e => {
+                        setAppSize(e.target.value);
+                        this.setError("appSize", !Boolean(e.target.value));
+                      }}
+                      error={errors.appSize}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -220,7 +322,12 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       value={appVersion}
                       placeholder="1.2.4"
-                      onChange={e => setAppVersion(e.target.value)}
+                      onChange={e => {
+                        const newVal = e.target.value.replace(/[^0-9.]/g, "");
+                        setAppVersion(newVal);
+                        this.setError("appVersion", !Boolean(newVal));
+                      }}
+                      error={errors.appVersion}
                     />
                   </div>
                 </div>
@@ -231,7 +338,14 @@ class NewExperimentStep2 extends PureComponent {
                       value={downloadsCount}
                       placeholder="12"
                       type="number"
-                      onChange={e => setDownloadsCount(e.target.value)}
+                      onChange={e => {
+                        setDownloadsCount(e.target.value);
+                        this.setError(
+                          "downloadsCount",
+                          !Boolean(e.target.value)
+                        );
+                      }}
+                      error={errors.downloadsCount}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -240,7 +354,11 @@ class NewExperimentStep2 extends PureComponent {
                       value={reviewsCount}
                       placeholder="100"
                       type="number"
-                      onChange={e => setReviewsCount(e.target.value)}
+                      onChange={e => {
+                        setReviewsCount(e.target.value);
+                        this.setError("reviewsCount", !Boolean(e.target.value));
+                      }}
+                      error={errors.reviewsCount}
                     />
                   </div>
                 </div>
@@ -250,7 +368,14 @@ class NewExperimentStep2 extends PureComponent {
                     value={userRating}
                     type="number"
                     placeholder="4.5"
-                    onChange={e => setUserRating(e.target.value)}
+                    onChange={e => {
+                      setUserRating(e.target.value);
+                      this.setError(
+                        "userRating",
+                        e.target.value < 0 || e.target.value > 5
+                      );
+                    }}
+                    error={errors.userRating}
                   />
                 </div>
                 <div className={classes["app-ver-wrapper"]}>
@@ -260,7 +385,10 @@ class NewExperimentStep2 extends PureComponent {
                       type="number"
                       value={oneStarsCount}
                       placeholder="12"
-                      onChange={e => setOneStarsCount(e.target.value)}
+                      onChange={e => {
+                        setOneStarsCount(e.target.value);
+                      }}
+                      error={errors.oneStarsCount}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -269,7 +397,10 @@ class NewExperimentStep2 extends PureComponent {
                       type="number"
                       value={twoStarsCount}
                       placeholder="1.2.4"
-                      onChange={e => setTwoStarsCount(e.target.value)}
+                      onChange={e => {
+                        setTwoStarsCount(e.target.value);
+                      }}
+                      error={errors.twoStarsCount}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -278,7 +409,10 @@ class NewExperimentStep2 extends PureComponent {
                       type="number"
                       value={threeStarsCount}
                       placeholder="1.2.4"
-                      onChange={e => setThreeStarsCount(e.target.value)}
+                      onChange={e => {
+                        setThreeStarsCount(e.target.value);
+                      }}
+                      error={errors.threeStarsCount}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -286,8 +420,11 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       type="number"
                       value={fourStarsCount}
-                      placeholder="1.2.4"
-                      onChange={e => setFourStarsCount(e.target.value)}
+                      placeholder="4"
+                      onChange={e => {
+                        setFourStarsCount(e.target.value);
+                      }}
+                      error={errors.fourStarsCount}
                     />
                   </div>
                   <div className={classes["app-ver-inp"]}>
@@ -295,8 +432,11 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       type="number"
                       value={fiveStarsCount}
-                      placeholder="1.2.4"
-                      onChange={e => setFiveStarsCount(e.target.value)}
+                      placeholder="10"
+                      onChange={e => {
+                        setFiveStarsCount(e.target.value);
+                      }}
+                      error={errors.fiveStarsCount}
                     />
                   </div>
                 </div>

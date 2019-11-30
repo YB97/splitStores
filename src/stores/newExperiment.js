@@ -25,7 +25,7 @@ class NewExperimentStore {
   @observable appVersion;
   @observable userRating;
   @observable reviewsCount;
-  @observable downloadsCount = 0;
+  @observable downloadsCount;
   @observable androidRewiewsCount = 0;
   @observable iosRewiewsCount = 0;
   @observable oneStarsCount = 0;
@@ -209,7 +209,7 @@ class NewExperimentStore {
   @action.bound
   setUserRating(value) {
     if (value >= 0) {
-      this.userRating = value;
+      this.userRating = value > 5 ? 5 : value;
     }
   }
 
