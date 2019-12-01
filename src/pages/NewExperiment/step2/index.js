@@ -49,7 +49,7 @@ class NewExperimentStep2 extends PureComponent {
     const { history } = this.props;
 
     if (!isValid) {
-      // history.push(URI_TO_NEW_EXPERIMENT);
+      history.push(URI_TO_NEW_EXPERIMENT);
     }
   }
 
@@ -119,7 +119,8 @@ class NewExperimentStep2 extends PureComponent {
         {
           errors: {
             developerName: !Boolean(developerName),
-            appDesc: elementForTest !== 'Description' && !Boolean(appDesc) || false,
+            appDesc:
+              (elementForTest !== "Description" && !Boolean(appDesc)) || false,
             shortAppDesc: !Boolean(shortAppDesc),
             appCategory: !Boolean(appCategory),
             appRestrictions: !Boolean(appRestrictions),

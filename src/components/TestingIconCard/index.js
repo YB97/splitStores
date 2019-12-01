@@ -76,7 +76,7 @@ const TestingIconCard = ({
       )}
       {elementForTest === "Screenshots" && (
         <div className={classes.dropzone}>
-          <Dropzone />
+          <Dropzone onUpload={onChange} />
         </div>
       )}
       {elementForTest === "Description" && (

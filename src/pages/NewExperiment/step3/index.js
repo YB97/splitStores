@@ -75,7 +75,9 @@ class NewExperimentStep3 extends PureComponent {
       addNewVariation,
       deleteVariation,
       setDescriptionVariant,
-      setAppNameVariant
+      setAppNameVariant,
+      setScreenshotsVariant,
+      isValidVariations
     } = this.props.stores.newExperiments;
     const { history } = this.props;
 
@@ -85,6 +87,7 @@ class NewExperimentStep3 extends PureComponent {
     };
 
     const setIcon = variation => file => {
+      variation.isValid = true;
       variation.uploadedIcon = file;
     };
 
@@ -123,6 +126,11 @@ class NewExperimentStep3 extends PureComponent {
                         if (elementForTest === "App Name") {
                           setAppNameVariant(e.target.value, id);
                         }
+                        if (elementForTest === "Screenshots") {
+                          // e = array of {src, file}
+                          const data = e;
+                          setScreenshotsVariant(data, id);
+                        }
                       }}
                       id={id}
                       elementForTest={elementForTest}
@@ -142,10 +150,19 @@ class NewExperimentStep3 extends PureComponent {
                     </Button>
                   </div>
                   <div className={classes.butonGroupWrap}>
-                    <Button click={onClickHandler} size="small">
+                    <Button
+                      disabled={!isValidVariations}
+                      click={onClickHandler}
+                      size="small"
+                    >
                       Publish experiment
                     </Button>
-                    <Button click={() => {}} bg="#B0B0B0" size="small">
+                    <Button
+                      disabled={!isValidVariations}
+                      click={() => {}}
+                      bg="#B0B0B0"
+                      size="small"
+                    >
                       Save and publish later
                     </Button>
                   </div>

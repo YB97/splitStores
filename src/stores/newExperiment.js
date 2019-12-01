@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 
 class NewExperimentStore {
   @observable isValid = false;
@@ -39,22 +39,28 @@ class NewExperimentStore {
       id: 1,
       name: "Variation 1",
       uploadedIcon: {},
-      uploadedScreenshots: {},
+      uploadedScreenshots: [],
       appName: "",
-      description: ""
+      description: "",
+      isValid: false
     },
     {
       id: 2,
       name: "Variation 2",
       uploadedIcon: {},
-      uploadedScreenshots: {},
+      uploadedScreenshots: [],
       appName: "",
-      description: ""
+      description: "",
+      isValid: false
     }
   ];
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+  }
+
+  @computed get isValidVariations() {
+    return this.variations.every(v => v.isValid);
   }
 
   @action.bound
@@ -74,12 +80,22 @@ class NewExperimentStore {
 
   @action.bound
   setDescriptionVariant(desc, id) {
+    this.variations[id].isValid = true;
     this.variations[id].description = desc;
   }
 
   @action.bound
   setAppNameVariant(name, id) {
     this.variations[id].appName = name;
+    if (name.trim()) {
+      this.variations[id].isValid = true;
+    }
+  }
+
+  @action.bound
+  setScreenshotsVariant(screenshots, id) {
+    this.variations[id].isValid = true;
+    this.variations[id].uploadedScreenshots = screenshots;
   }
 
   @action.bound
