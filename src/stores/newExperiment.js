@@ -224,8 +224,9 @@ class NewExperimentStore {
 
   @action.bound
   setUserRating(value) {
-    if (value >= 0) {
-      this.userRating = value > 5 ? 5 : value;
+    const prepareValue = parseFloat(value);
+    if (prepareValue >= 0) {
+      this.userRating = prepareValue > 5 ? 5 : prepareValue;
     }
   }
 

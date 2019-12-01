@@ -372,10 +372,7 @@ class NewExperimentStep2 extends PureComponent {
                     placeholder="4.5"
                     onChange={e => {
                       setUserRating(e.target.value);
-                      this.setError(
-                        "userRating",
-                        e.target.value < 0 || e.target.value > 5
-                      );
+                      this.setError("userRating", e.target.value < 0);
                     }}
                     error={errors.userRating}
                   />
