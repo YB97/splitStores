@@ -1,0 +1,49 @@
+.wrapper {
+  background: #ffffff;
+  border: 1px solid #244bdd;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 41px 32px 48px;
+  position: relative;
+}
+
+.title {
+  color: #333;
+  text-align: center;
+}
+
+.cardLabel {
+  text-align: center;
+  font-size: 18px;
+  line-height: 21px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.delete {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+  line-height: 0.9;
+  font-weight: 300;
+  font-size: 26px;
+  transition: color 0.2s ease;
+  &:hover {
+    color: #e3603b;
+  }
+}
+
+.desc-wrapper {
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.item-title {
+  margin-bottom: 10px;
+}
+
+.dropzone {
+  margin-top: 20px;
+}

@@ -1,12 +1,12 @@
 import { observable, action, computed } from "mobx";
 
 class NewExperimentStore {
-  @observable isValid = false;
+  @observable isValid = true;
   @observable appName;
   @observable appStore;
   @observable device;
   @observable testPage;
-  @observable elementForTest;
+  @observable elementForTest = "Icon";
   @observable customLink;
   @observable experimentName;
   @observable actionOnInstall;
@@ -38,19 +38,13 @@ class NewExperimentStore {
     {
       id: 1,
       name: "Variation 1",
-      uploadedIcon: {},
-      uploadedScreenshots: [],
-      appName: "",
-      description: "",
+      testingItem: null,
       isValid: false
     },
     {
       id: 2,
       name: "Variation 2",
-      uploadedIcon: {},
-      uploadedScreenshots: [],
-      appName: "",
-      description: "",
+      testingItem: null,
       isValid: false
     }
   ];
@@ -287,6 +281,16 @@ class NewExperimentStore {
       this.screenshots = screenshots;
     }
   }
+
+  @action
+  setTestingItem = variation => {
+    console.log(variation);
+    return value => {
+      console.log(value, variation);
+      const variant = this.variations.find(v => v.id === variation.id);
+      console.log(variant, "sbfadkjl");
+    };
+  };
 }
 
 export default NewExperimentStore;

@@ -8,7 +8,7 @@ import Header from "../../../components/Header";
 import Title from "../../../components/Title";
 import Stepper from "../../../components/Stepper";
 import Button from "../../../components/Button";
-import TestingIconCard from "../../../components/TestingIconCard";
+import TestingCard from "../../../components/TestingCard";
 import Footer from "../../../components/Footer";
 import SimpleModal from "../../../components/Modal";
 import {
@@ -33,7 +33,7 @@ class NewExperimentStep3 extends PureComponent {
     const { history } = this.props;
 
     if (!isValid) {
-      history.push(URI_TO_NEW_EXPERIMENT);
+      // history.push(URI_TO_NEW_EXPERIMENT);
     }
   }
 
@@ -77,6 +77,7 @@ class NewExperimentStep3 extends PureComponent {
       setDescriptionVariant,
       setAppNameVariant,
       setScreenshotsVariant,
+      setTestingItem,
       isValidVariations
     } = this.props.stores.newExperiments;
     const { history } = this.props;
@@ -90,6 +91,28 @@ class NewExperimentStep3 extends PureComponent {
       variation.isValid = true;
       variation.uploadedIcon = file;
     };
+
+    const setItem = variation => {
+      console.log(variation);
+      return setTestingItem(variation);
+    };
+
+    const variantionsRender = variations.map((variation, id) => {
+      return (
+        <div className={classes.cardWrapper} key={id}>
+          <TestingCard
+            variationName={variation.name}
+            onInputChange={e => setVariationName(e.target.value, id)}
+            onDelete={() => deleteVariation(variation.id)}
+            testingItem={variation.testingItem}
+            setTestingItem={setItem(variation)}
+            elementForTest={elementForTest}
+          />
+        </div>
+      );
+    });
+
+    console.log("render");
 
     return (
       <div className={classes.newexperiment}>
@@ -108,35 +131,7 @@ class NewExperimentStep3 extends PureComponent {
                   <Title title={`Testing ${elementForTest} on ${testPage}`} />
                 </div>
 
-                {variations.map((variation, id) => (
-                  <div className={classes.cardWrapper} key={id}>
-                    <TestingIconCard
-                      variationName={variation.name}
-                      onInputChange={e => setVariationName(e.target.value, id)}
-                      icon={variation.uploadedIcon}
-                      setIcon={setIcon(variation)}
-                      screenshots={variation.uploadedScreenshots}
-                      description={variation.description}
-                      appName={variation.appName}
-                      onDelete={() => deleteVariation(variation.id)}
-                      onChange={e => {
-                        if (elementForTest === "Description") {
-                          setDescriptionVariant(e.target.value, id);
-                        }
-                        if (elementForTest === "App Name") {
-                          setAppNameVariant(e.target.value, id);
-                        }
-                        if (elementForTest === "Screenshots") {
-                          // e = array of {src, file}
-                          const data = e;
-                          setScreenshotsVariant(data, id);
-                        }
-                      }}
-                      id={id}
-                      elementForTest={elementForTest}
-                    />
-                  </div>
-                ))}
+                {variantionsRender}
 
                 <div className={classes.buttonsWrap}>
                   <div className={classes.fullwidthButton}>

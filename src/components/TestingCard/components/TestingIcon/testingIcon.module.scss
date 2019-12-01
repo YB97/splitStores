@@ -1,0 +1,58 @@
+.uploadWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+}
+
+.iconLabel {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.image {
+  max-width: 100px;
+  max-height: 100px;
+  //border-radius: 23px;
+  //object-fit: cover;
+  background-color: #f1f1f1;
+}
+
+.buttonLabel {
+  cursor: pointer;
+}
+
+.buttonWrap {
+  margin-left: 30px;
+}
+
+.buttonHelpText {
+  color: #aaaaaa;
+  font-size: 12px;
+  line-height: 14px;
+  float: left;
+
+  &:before {
+    clear: both;
+  }
+}
+
+.file {
+  visibility: hidden;
+  display: none;
+}
+
+.imageWait {
+  width: 100px;
+  height: 100px;
+  border-radius: 23px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+}
