@@ -33,6 +33,7 @@ class NewExperiment extends PureComponent {
   };
 
   componentDidMount() {
+    window.scrollTo({ top: 0 });
     const { getAllApps } = this.props.stores.apps;
     const { app } = this.props.stores.app;
     const { appStore, appName } = this.st;
