@@ -166,7 +166,8 @@ class NewExperiment extends PureComponent {
                       text:
                         appStore === "Google Play"
                           ? "Android Phone"
-                          : "Apple Phone"
+                          : "Apple Phone",
+                      disabled: false
                     },
                     {
                       value: "tablet",
@@ -177,7 +178,8 @@ class NewExperiment extends PureComponent {
                       text:
                         appStore === "Google Play"
                           ? "Android Tablet"
-                          : "Apple Tablet"
+                          : "Apple Tablet",
+                      disabled: true
                     }
                   ]}
                   currentValue={device}

@@ -14,12 +14,15 @@ export default ({
   const labelClass = error
     ? classes.label + " " + classes["error-label"]
     : classes.label;
-    
+
   return (
     <fieldset className={className + " " + classes.fieldset}>
       <legend className={classes.legend}>{title}</legend>
       <div className={classes.wrapper}>
-        {values.map(({ value, img, text, id }) => {
+        {values.map(({ value, img, text, id, disabled }) => {
+          const labelClasses = disabled
+            ? labelClass + " " + classes.disabled
+            : labelClass;
           return (
             <div key={id} className={classes.inputWrapper}>
               <input
@@ -30,8 +33,9 @@ export default ({
                 className={classes.input}
                 checked={currentValue === value}
                 onChange={handleChange}
+                disabled={disabled}
               />
-              <label htmlFor={id} className={labelClass}>
+              <label htmlFor={id} className={labelClasses}>
                 <img src={img} alt="" className={classes.image} />
                 <div className={classes.text}>{text}</div>
               </label>
