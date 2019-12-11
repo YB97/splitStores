@@ -1,12 +1,12 @@
 import { observable, action, computed } from "mobx";
 
 class NewExperimentStore {
-  @observable isValid = false;
+  @observable isValid = true;
   @observable appName;
   @observable appStore;
   @observable device;
   @observable testPage;
-  @observable elementForTest;
+  @observable elementForTest = "App Name";
   @observable customLink;
   @observable experimentName;
   @observable actionOnInstall;
@@ -34,6 +34,7 @@ class NewExperimentStore {
   @observable fourStarsCount = 0;
   @observable fiveStarsCount = 0;
   @observable screenshots = [];
+  @observable icon = {};
   @observable variations = [
     {
       id: 1,
@@ -288,6 +289,13 @@ class NewExperimentStore {
   setScreenshots(screenshots) {
     if (screenshots.length > 0) {
       this.screenshots = screenshots;
+    }
+  }
+
+  @action.bound
+  setIcon(icon) {
+    if (Object.values(icon).length) {
+      this.icon = icon;
     }
   }
 }

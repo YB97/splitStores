@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Icon } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
 
 import Header from "../../../components/Header";
@@ -13,6 +13,13 @@ import DatePicker from "../../../components/DatePicker";
 import Button from "../../../components/Button";
 import Footer from "../../../components/Footer";
 import Dropzone from "../../../components/Dropzone";
+import TestingIcon from "../../../components/TestingIcon";
+import {
+  TEST_ICON,
+  TEST_SCREENSHOTS,
+  TEST_APP_NAME,
+  TEST_DESCRIPTION
+} from "../../../constants";
 import {
   URI_TO_NEW_EXPERIMENT,
   URI_TO_NEW_EXPERIMENT_STEP_3
@@ -163,11 +170,48 @@ class NewExperimentStep2 extends PureComponent {
       fiveStarsCount,
       setFiveStarsCount,
       screenshots,
-      setScreenshots
+      setScreenshots,
+      icon,
+      setIcon
     } = this.props.stores.newExperiments;
     const { errors } = this.state;
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
+    const onClickHandler = () => {
+      this.setState(
+        {
+          errors: {
+            developerName: !Boolean(developerName),
+            appDesc:
+              (elementForTest !== TEST_DESCRIPTION && !Boolean(appDesc)) ||
+              false,
+            shortAppDesc: !Boolean(shortAppDesc),
+            appCategory: !Boolean(appCategory),
+            appRestrictions: !Boolean(appRestrictions),
+            releaseNotes: !Boolean(releaseNotes),
+            appSize: !Boolean(appSize),
+            appVersion: !Boolean(appVersion),
+            downloadsCount: !Boolean(downloadsCount && downloadsCount.length),
+            reviewsCount: !Boolean(reviewsCount && reviewsCount.length),
+            userRating: !Boolean(userRating && userRating >= 0),
+            oneStarsCount: oneStarsCount < 0,
+            twoStarsCount: twoStarsCount < 0,
+            threeStarsCount: threeStarsCount < 0,
+            fourStarsCount: fourStarsCount < 0,
+            fiveStarsCount: fiveStarsCount < 0,
+            price: !appIsFree && price === 0
+          }
+        },
+        () => {
+          console.log("erro", this.state.errors);
+          if (
+            Object.values(this.state.errors).every(error => error === false)
+          ) {
+            this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
+          }
+        }
+      );
+    };
 
     const onBackClickHandler = () => {
       this.props.history.push(URI_TO_NEW_EXPERIMENT);
@@ -250,7 +294,7 @@ class NewExperimentStep2 extends PureComponent {
                   checked={offersInApp}
                   onChange={() => setOffersInApp(!offersInApp)}
                 />
-                {elementForTest !== "Description" && (
+                {elementForTest !== TEST_DESCRIPTION && (
                   <div>
                     <div className={classes["label"]}>App Description</div>
                     <Input
@@ -452,13 +496,18 @@ class NewExperimentStep2 extends PureComponent {
                     />
                   </div>
                 </div>
-                {elementForTest !== "Screenshots" && (
+                {elementForTest !== TEST_SCREENSHOTS && (
                   <div className={classes.dropzone}>
                     <div className={classes["label"]}>Screenshots</div>
                     <Dropzone
                       screenshots={screenshots}
                       onUpload={setScreenshots}
                     />
+                  </div>
+                )}
+                {elementForTest !== TEST_ICON && (
+                  <div className={classes["test-icon"]}>
+                    <TestingIcon icon={icon} setIcon={setIcon} />
                   </div>
                 )}
                 <div className={classes.buttonWrap}>
