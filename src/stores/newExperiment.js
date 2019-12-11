@@ -6,7 +6,7 @@ class NewExperimentStore {
   @observable appStore;
   @observable device;
   @observable testPage;
-  @observable elementForTest = "App Name";
+  @observable elementForTest;
   @observable customLink;
   @observable experimentName;
   @observable actionOnInstall;
