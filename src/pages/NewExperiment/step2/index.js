@@ -450,6 +450,7 @@ class NewExperimentStep2 extends PureComponent {
                   </div>
                 )}
                 <div className={classes.buttonWrap}>
+                  <div className={classes["label"]}>Screenshots</div>
                   <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
                     Back
                   </Button>
