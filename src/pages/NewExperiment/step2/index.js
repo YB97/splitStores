@@ -45,6 +45,8 @@ class NewExperimentStep2 extends PureComponent {
     }
   };
   componentDidMount() {
+    // window.srrollTo({ top: 0 });
+    window.scrollTo({ top: 0 });
     const { isValid } = this.props.stores.newExperiments;
     const { history } = this.props;
 
