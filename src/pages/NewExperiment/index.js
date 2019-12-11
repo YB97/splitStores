@@ -41,6 +41,7 @@ class NewExperiment extends PureComponent {
     if (app) {
       this.st.setAppName(app.name || appName);
       this.st.setAppStore(app.store || appStore);
+      this.st.setAppCategory(app.store_category || "");
     }
   }
 

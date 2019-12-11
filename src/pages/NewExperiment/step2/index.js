@@ -62,6 +62,38 @@ class NewExperimentStep2 extends PureComponent {
     });
   }
 
+  onClickHandler = () => {
+    this.setState(
+      {
+        errors: {
+          developerName: !Boolean(developerName),
+          appDesc:
+            (elementForTest !== "Description" && !Boolean(appDesc)) || false,
+          shortAppDesc: !Boolean(shortAppDesc),
+          appCategory: !Boolean(appCategory),
+          appRestrictions: !Boolean(appRestrictions),
+          releaseNotes: !Boolean(releaseNotes),
+          appSize: !Boolean(appSize),
+          appVersion: !Boolean(appVersion),
+          downloadsCount: !Boolean(downloadsCount && downloadsCount.length),
+          reviewsCount: !Boolean(reviewsCount && reviewsCount.length),
+          userRating: !Boolean(userRating && userRating >= 0),
+          oneStarsCount: oneStarsCount < 0,
+          twoStarsCount: twoStarsCount < 0,
+          threeStarsCount: threeStarsCount < 0,
+          fourStarsCount: fourStarsCount < 0,
+          fiveStarsCount: fiveStarsCount < 0,
+          price: !appIsFree && price === 0
+        }
+      },
+      () => {
+        if (Object.values(this.state.errors).every(error => error === false)) {
+          this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
+        }
+      }
+    );
+  };
+
   render() {
     const {
       testPage,
@@ -114,40 +146,7 @@ class NewExperimentStep2 extends PureComponent {
     const { errors } = this.state;
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
-    const onClickHandler = () => {
-      this.setState(
-        {
-          errors: {
-            developerName: !Boolean(developerName),
-            appDesc:
-              (elementForTest !== "Description" && !Boolean(appDesc)) || false,
-            shortAppDesc: !Boolean(shortAppDesc),
-            appCategory: !Boolean(appCategory),
-            appRestrictions: !Boolean(appRestrictions),
-            releaseNotes: !Boolean(releaseNotes),
-            appSize: !Boolean(appSize),
-            appVersion: !Boolean(appVersion),
-            downloadsCount: !Boolean(downloadsCount && downloadsCount.length),
-            reviewsCount: !Boolean(reviewsCount && reviewsCount.length),
-            userRating: !Boolean(userRating && userRating >= 0),
-            oneStarsCount: oneStarsCount < 0,
-            twoStarsCount: twoStarsCount < 0,
-            threeStarsCount: threeStarsCount < 0,
-            fourStarsCount: fourStarsCount < 0,
-            fiveStarsCount: fiveStarsCount < 0,
-            price: !appIsFree && price === 0
-          }
-        },
-        () => {
-          console.log("erro", this.state.errors);
-          if (
-            Object.values(this.state.errors).every(error => error === false)
-          ) {
-            this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
-          }
-        }
-      );
-    };
+    const { appsList } = this.props.stores.apps;
 
     const onBackClickHandler = () => {
       this.props.history.push(URI_TO_NEW_EXPERIMENT);
@@ -267,9 +266,10 @@ class NewExperimentStep2 extends PureComponent {
                       value={appCategory}
                       placeholder="Games"
                       onChange={e => {
-                        setAppCategory(e.target.value);
-                        this.setError("appCategory", !Boolean(e.target.value));
+                        // setAppCategory(e.target.value);
+                        // this.setError("appCategory", !Boolean(e.target.value));
                       }}
+                      disabled
                       error={errors.appCategory}
                     />
                   </div>
@@ -451,7 +451,7 @@ class NewExperimentStep2 extends PureComponent {
                   <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
                     Back
                   </Button>
-                  <Button size="small" click={onClickHandler}>
+                  <Button size="small" click={this.onClickHandler}>
                     Next
                   </Button>
                 </div>
