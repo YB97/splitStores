@@ -12,7 +12,6 @@ class VariationStore {
     return new Promise(resolve => {
       setTimeout(() => {
         this.data = getVariationById(appId, expId, varId);
-        console.log(this.data);
         resolve();
       }, 300);
     });
@@ -42,7 +41,7 @@ class VariationStore {
     if (!this.data.reviews) {
       return null;
     }
-    console.log("reviews");
+    
     return this.data.reviews.reduce((total, statValue) => {
       total += statValue;
       return total;

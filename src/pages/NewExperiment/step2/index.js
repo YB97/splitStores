@@ -124,6 +124,10 @@ class NewExperimentStep2 extends PureComponent {
     );
   };
 
+  onBackClickHandler = () => {
+    this.props.history.push(URI_TO_NEW_EXPERIMENT);
+  };
+
   render() {
     const {
       testPage,
@@ -177,45 +181,6 @@ class NewExperimentStep2 extends PureComponent {
     const { errors } = this.state;
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
-    const onClickHandler = () => {
-      this.setState(
-        {
-          errors: {
-            developerName: !Boolean(developerName),
-            appDesc:
-              (elementForTest !== TEST_DESCRIPTION && !Boolean(appDesc)) ||
-              false,
-            shortAppDesc: !Boolean(shortAppDesc),
-            appCategory: !Boolean(appCategory),
-            appRestrictions: !Boolean(appRestrictions),
-            releaseNotes: !Boolean(releaseNotes),
-            appSize: !Boolean(appSize),
-            appVersion: !Boolean(appVersion),
-            downloadsCount: !Boolean(downloadsCount && downloadsCount.length),
-            reviewsCount: !Boolean(reviewsCount && reviewsCount.length),
-            userRating: !Boolean(userRating && userRating >= 0),
-            oneStarsCount: oneStarsCount < 0,
-            twoStarsCount: twoStarsCount < 0,
-            threeStarsCount: threeStarsCount < 0,
-            fourStarsCount: fourStarsCount < 0,
-            fiveStarsCount: fiveStarsCount < 0,
-            price: !appIsFree && price === 0
-          }
-        },
-        () => {
-          console.log("erro", this.state.errors);
-          if (
-            Object.values(this.state.errors).every(error => error === false)
-          ) {
-            this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
-          }
-        }
-      );
-    };
-
-    const onBackClickHandler = () => {
-      this.props.history.push(URI_TO_NEW_EXPERIMENT);
-    };
 
     return (
       <>
@@ -511,7 +476,11 @@ class NewExperimentStep2 extends PureComponent {
                   </div>
                 )}
                 <div className={classes.buttonWrap}>
-                  <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
+                  <Button
+                    bg="#B0B0B0"
+                    size="small"
+                    click={this.onBackClickHandler}
+                  >
                     Back
                   </Button>
                   <Button size="small" click={this.onClickHandler}>
