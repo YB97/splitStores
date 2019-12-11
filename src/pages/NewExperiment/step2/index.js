@@ -168,7 +168,6 @@ class NewExperimentStep2 extends PureComponent {
     const { errors } = this.state;
     const steps = ["set up", "details", "variations"];
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
-    const { appsList } = this.props.stores.apps;
 
     const onBackClickHandler = () => {
       this.props.history.push(URI_TO_NEW_EXPERIMENT);
@@ -399,7 +398,7 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>Users Stars 1</div>
                     <Input
-                      type="number"
+                      // type="number"
                       value={oneStarsCount}
                       placeholder="12"
                       onChange={e => {
@@ -411,9 +410,8 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>Users Stars 2</div>
                     <Input
-                      type="number"
                       value={twoStarsCount}
-                      placeholder="1.2.4"
+                      placeholder="14"
                       onChange={e => {
                         setTwoStarsCount(e.target.value);
                       }}
@@ -423,7 +421,6 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>Users Stars 3</div>
                     <Input
-                      type="number"
                       value={threeStarsCount}
                       placeholder="1.2.4"
                       onChange={e => {
@@ -435,7 +432,6 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>Users Stars 4</div>
                     <Input
-                      type="number"
                       value={fourStarsCount}
                       placeholder="4"
                       onChange={e => {
@@ -447,7 +443,6 @@ class NewExperimentStep2 extends PureComponent {
                   <div className={classes["app-ver-inp"]}>
                     <div className={classes["label"]}>Users Stars 5</div>
                     <Input
-                      type="number"
                       value={fiveStarsCount}
                       placeholder="10"
                       onChange={e => {

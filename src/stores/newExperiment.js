@@ -251,37 +251,37 @@ class NewExperimentStore {
 
   @action.bound
   setOneStarsCount(num) {
-    if (num >= 0) {
-      this.oneStarsCount = num;
-    }
+    const matchedVal = num.replace(/\D+/g, "");
+
+    this.oneStarsCount = Number(matchedVal);
   }
 
   @action.bound
   setTwoStarsCount(num) {
-    if (num >= 0) {
-      this.twoStarsCount = num;
-    }
+    const matchedVal = num.replace(/\D+/g, "");
+
+    this.twoStarsCount = Number(matchedVal);
   }
 
   @action.bound
   setThreeStarsCount(num) {
-    if (num >= 0) {
-      this.threeStarsCount = num;
-    }
+    const matchedVal = num.replace(/\D+/g, "");
+
+    this.threeStarsCount = Number(matchedVal);
   }
 
   @action.bound
   setFourStarsCount(num) {
-    if (num >= 0) {
-      this.fourStarsCount = num;
-    }
+    const matchedVal = num.replace(/\D+/g, "");
+
+    this.fourStarsCount = Number(matchedVal);
   }
 
   @action.bound
   setFiveStarsCount(num) {
-    if (num >= 0) {
-      this.fiveStarsCount = num;
-    }
+    const matchedVal = num.replace(/\D+/g, "");
+
+    this.fiveStarsCount = Number(matchedVal);
   }
 
   @action.bound
