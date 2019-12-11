@@ -14,3 +14,8 @@ export const URI_TO_NEW_EXPERIMENT = "/newexperiment";
 export const URI_TO_NEW_EXPERIMENT_STEP_2 = "/newexperiment/step2";
 export const URI_TO_NEW_EXPERIMENT_STEP_3 = "/newexperiment/step3";
 export const URI_TO_APP = "/apps/:id";
+
+export const TEST_ICON = "Icon";
+export const TEST_SCREENSHOTS = "SCREENSHOTS";
+export const TEST_APP_NAME = "App Name";
+export const TEST_DESCRIPTION = "Description";

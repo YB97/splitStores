@@ -3,9 +3,15 @@ import React from "react";
 import Input from "../Input";
 import Button from "../Button";
 import FileInput from "../../hocs/FileInput";
+import Dropzone from "../Dropzone";
+import {
+  TEST_APP_NAME,
+  TEST_DESCRIPTION,
+  TEST_ICON,
+  TEST_SCREENSHOTS
+} from "../../constants";
 
 import classes from "./testingiconcard.module.scss";
-import Dropzone from "../Dropzone";
 
 const TestingIconCard = ({
   variationName,
@@ -24,8 +30,6 @@ const TestingIconCard = ({
   const fileInputRef = React.createRef();
   const handleIconWrapped = changeHandlerWrapper(setIcon, fileInputRef);
 
-  const onClickHandler = () => {};
-
   return (
     <div className={classes.wrapper}>
       <Input
@@ -34,7 +38,7 @@ const TestingIconCard = ({
         title="Variation name"
         titleCentered
       />
-      {elementForTest === "Icon" && (
+      {elementForTest === TEST_ICON && (
         <>
           <div className={classes.iconLabel}>Icon</div>
           <div className={classes.uploadWrapper}>
@@ -43,9 +47,9 @@ const TestingIconCard = ({
                 <img src={icon.value} className={classes.image} alt="" />
               ) : (
                 <div className={classes.imageWait}>
-                  <span className={classes["file-content"]}>+</span>
+                  <span className={classes["file-content"]}>{null}</span>
                   <div className={classes["icon-text"]}>
-                    {icon.name || "Add icon"}
+                    {icon.name || null}
                   </div>
                 </div>
               )}
@@ -74,12 +78,12 @@ const TestingIconCard = ({
           </div>
         </>
       )}
-      {elementForTest === "Screenshots" && (
+      {elementForTest === TEST_SCREENSHOTS && (
         <div className={classes.dropzone}>
           <Dropzone onUpload={onChange} />
         </div>
       )}
-      {elementForTest === "Description" && (
+      {elementForTest === TEST_DESCRIPTION && (
         <div className={classes["desc-wrapper"]}>
           <div className={classes["item-title"]}>Description</div>
           <Input
@@ -90,7 +94,7 @@ const TestingIconCard = ({
           />
         </div>
       )}
-      {elementForTest === "App Name" && (
+      {elementForTest === TEST_APP_NAME && (
         <div className={classes["desc-wrapper"]}>
           <div className={classes["item-title"]}>App Name</div>
           <Input
