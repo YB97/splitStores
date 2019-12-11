@@ -65,6 +65,28 @@ class NewExperimentStep2 extends PureComponent {
   }
 
   onClickHandler = () => {
+    const {
+      elementForTest,
+      reviewsCount,
+      developerName,
+      appIsFree,
+      price,
+      appDesc,
+      shortAppDesc,
+      appCategory,
+      appRestrictions,
+      releaseNotes,
+      appSize,
+      appVersion,
+      userRating,
+      downloadsCount,
+      oneStarsCount,
+      twoStarsCount,
+      threeStarsCount,
+      fourStarsCount,
+      fiveStarsCount
+    } = this.props.stores.newExperiments;
+
     this.setState(
       {
         errors: {
@@ -72,7 +94,6 @@ class NewExperimentStep2 extends PureComponent {
           appDesc:
             (elementForTest !== "Description" && !Boolean(appDesc)) || false,
           shortAppDesc: !Boolean(shortAppDesc),
-          appCategory: !Boolean(appCategory),
           appRestrictions: !Boolean(appRestrictions),
           releaseNotes: !Boolean(releaseNotes),
           appSize: !Boolean(appSize),
@@ -118,7 +139,6 @@ class NewExperimentStep2 extends PureComponent {
       shortAppDesc,
       setShortAppDesc,
       appCategory,
-      setAppCategory,
       appRestrictions,
       setAppRestrictions,
       setReleaseDate,
@@ -439,6 +459,7 @@ class NewExperimentStep2 extends PureComponent {
                 </div>
                 {elementForTest !== "Screenshots" && (
                   <div className={classes.dropzone}>
+                    <div className={classes["label"]}>Screenshots</div>
                     <Dropzone
                       screenshots={screenshots}
                       onUpload={setScreenshots}
@@ -446,7 +467,6 @@ class NewExperimentStep2 extends PureComponent {
                   </div>
                 )}
                 <div className={classes.buttonWrap}>
-                  <div className={classes["label"]}>Screenshots</div>
                   <Button bg="#B0B0B0" size="small" click={onBackClickHandler}>
                     Back
                   </Button>

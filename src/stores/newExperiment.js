@@ -116,8 +116,10 @@ class NewExperimentStore {
 
   @action.bound
   deleteVariation(id) {
-    const idx = this.variations.findIndex(variation => variation.id === id);
-    this.variations.splice(idx, 1);
+    if (this.variations.length > 2) {
+      const idx = this.variations.findIndex(variation => variation.id === id);
+      this.variations.splice(idx, 1);
+    }
   }
 
   @action.bound
