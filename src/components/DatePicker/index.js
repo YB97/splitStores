@@ -28,7 +28,7 @@ const defaultMaterialTheme = createMuiTheme({
   }
 });
 
-function DatePicker({ label = "", onChange = date => {} }) {
+function DatePicker({ label = "", onChange = date => {}, autoOk = false }) {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = date => {
@@ -49,6 +49,7 @@ function DatePicker({ label = "", onChange = date => {} }) {
             label={label}
             value={selectedDate}
             onChange={handleDateChange}
+            autoOk={autoOk}
             KeyboardButtonProps={{
               "aria-label": "change date"
             }}

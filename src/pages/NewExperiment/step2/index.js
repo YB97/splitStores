@@ -267,10 +267,6 @@ class NewExperimentStep2 extends PureComponent {
                     <Input
                       value={appCategory}
                       placeholder="Games"
-                      onChange={e => {
-                        // setAppCategory(e.target.value);
-                        // this.setError("appCategory", !Boolean(e.target.value));
-                      }}
                       disabled
                       error={errors.appCategory}
                     />
@@ -293,7 +289,7 @@ class NewExperimentStep2 extends PureComponent {
                 </div>
                 <div>
                   <div className={classes["label"]}>Release Date</div>
-                  <DatePicker onChange={date => setReleaseDate(date)} />
+                  <DatePicker onChange={date => setReleaseDate(date)} autoOk />
                 </div>
                 <div>
                   <div className={classes["label"]}>Release Notes</div>
