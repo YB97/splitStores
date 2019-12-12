@@ -4,7 +4,7 @@ import Button from "../Button";
 import getUniqId from "../../helpers/getUniqueId";
 import classes from "./TestingIcon.module.scss";
 
-function TestingIcon({ icon, setIcon, changeHandlerWrapper }) {
+function TestingIcon({ icon, setIcon, changeHandlerWrapper, error }) {
   const fileInputRef = React.createRef();
 
   const handleIconWrapped = changeHandlerWrapper(setIcon, fileInputRef);
@@ -17,13 +17,15 @@ function TestingIcon({ icon, setIcon, changeHandlerWrapper }) {
           {icon.value ? (
             <img src={icon.value} className={classes.image} alt="" />
           ) : (
-            <div className={classes.imageWait}>
+            <div
+              className={`${classes.imageWait} ${error ? classes.error : null}`}
+            >
               <span className={classes["file-content"]}>{null}</span>
               <div className={classes["icon-text"]}>{icon.name || null}</div>
             </div>
           )}
         </div>
-        <div className={classes.buttonWrap}>
+        <div className={`${classes.buttonWrap}`}>
           <Button bg="#E3603B" size="small">
             <label
               htmlFor={"file" + (id !== undefined ? `_${id}` : "")}

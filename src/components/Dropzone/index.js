@@ -5,9 +5,9 @@ import Preview from "./Preview";
 
 import classes from "./dropzone.module.scss";
 const MAX_SIZE_FILE = 8e6;
-const MAX_NUMBER_FILES = 6;
+const MAX_NUMBER_FILES = 8;
 
-function Dropzone({ screenshots = [], onUpload = data => {} }) {
+function Dropzone({ screenshots = [], onUpload = data => {}, error }) {
   const [files, setFiles] = useState([]);
   const [errorText, setError] = useState(null);
 
@@ -23,19 +23,18 @@ function Dropzone({ screenshots = [], onUpload = data => {} }) {
 
   let message = files.length
     ? `${files.length} files added`
-    : "Drag 'n' drop some files here, or click to select files";
+    : "Drag 'n' drop some files here, or click to select files (image)";
 
   const onDrop = useCallback(acceptedFiles => {
-    if (acceptedFiles.length > MAX_NUMBER_FILES) {
-      acceptedFiles.length = 0;
-      setError("Max number files is six");
+    if (acceptedFiles.length <= MAX_NUMBER_FILES) {
+      setFiles(acceptedFiles);
     }
-    setFiles(acceptedFiles);
     Promise.all(acceptedFiles.map(uploadFile))
       .then(data => {
         if (data.length > MAX_NUMBER_FILES) {
-          setError("File numbers > MAX");
-          console.log("ksfaldkas");
+          setError(
+            `Number of files selected for upload (${data.length}) exceeds maximum allowed limit of 8`
+          );
           onUpload({});
         } else {
           setError(false);
@@ -50,7 +49,9 @@ function Dropzone({ screenshots = [], onUpload = data => {} }) {
 
   return (
     <div
-      className={`${classes.dropzone} ${errorText ? "dropzone_error" : null}`}
+      className={`${classes.dropzone} ${
+        errorText || error ? classes["dropzone_error"] : null
+      }`}
       {...getRootProps()}
     >
       <input
@@ -90,7 +91,6 @@ function Dropzone({ screenshots = [], onUpload = data => {} }) {
       reader.onerror = () => reject("file reading has failed");
       reader.onload = () => {
         const binaryStr = reader.result;
-        console.log({ file, src: binaryStr });
         resolve({ file, src: binaryStr });
       };
       reader.readAsDataURL(file);

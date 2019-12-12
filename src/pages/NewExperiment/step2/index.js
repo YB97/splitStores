@@ -26,6 +26,7 @@ import {
 } from "../../../constants";
 
 import classes from "./step2.module.scss";
+import { toJS } from "mobx";
 
 @inject("stores")
 @observer
@@ -48,7 +49,9 @@ class NewExperimentStep2 extends PureComponent {
       twoStarsCount: null,
       threeStarsCount: null,
       fourStarsCount: null,
-      fiveStarsCount: null
+      fiveStarsCount: null,
+      screenshots: null,
+      icon: null
     }
   };
   componentDidMount() {
@@ -80,7 +83,6 @@ class NewExperimentStep2 extends PureComponent {
       price,
       appDesc,
       shortAppDesc,
-      appCategory,
       appRestrictions,
       releaseNotes,
       appSize,
@@ -91,7 +93,9 @@ class NewExperimentStep2 extends PureComponent {
       twoStarsCount,
       threeStarsCount,
       fourStarsCount,
-      fiveStarsCount
+      fiveStarsCount,
+      screenshots,
+      icon
     } = this.props.stores.newExperiments;
 
     this.setState(
@@ -113,7 +117,9 @@ class NewExperimentStep2 extends PureComponent {
           threeStarsCount: threeStarsCount < 0,
           fourStarsCount: fourStarsCount < 0,
           fiveStarsCount: fiveStarsCount < 0,
-          price: !appIsFree && price === 0
+          price: !appIsFree && price === 0,
+          screenshots: screenshots && screenshots.length === 0,
+          icon: !toJS(icon).value
         }
       },
       () => {
@@ -467,12 +473,17 @@ class NewExperimentStep2 extends PureComponent {
                     <Dropzone
                       screenshots={screenshots}
                       onUpload={setScreenshots}
+                      error={errors.screenshots}
                     />
                   </div>
                 )}
                 {elementForTest !== TEST_ICON && (
                   <div className={classes["test-icon"]}>
-                    <TestingIcon icon={icon} setIcon={setIcon} />
+                    <TestingIcon
+                      icon={icon}
+                      setIcon={setIcon}
+                      error={errors.icon}
+                    />
                   </div>
                 )}
                 <div className={classes.buttonWrap}>
