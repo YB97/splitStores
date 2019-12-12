@@ -33,8 +33,14 @@ function Dropzone({ screenshots = [], onUpload = data => {} }) {
     setFiles(acceptedFiles);
     Promise.all(acceptedFiles.map(uploadFile))
       .then(data => {
-        setError(false);
-        onUpload(data);
+        if (data.length > MAX_NUMBER_FILES) {
+          setError("File numbers > MAX");
+          console.log("ksfaldkas");
+          onUpload({});
+        } else {
+          setError(false);
+          onUpload(data);
+        }
       })
       .catch(e => {
         console.log(e);
@@ -84,6 +90,7 @@ function Dropzone({ screenshots = [], onUpload = data => {} }) {
       reader.onerror = () => reject("file reading has failed");
       reader.onload = () => {
         const binaryStr = reader.result;
+        console.log({ file, src: binaryStr });
         resolve({ file, src: binaryStr });
       };
       reader.readAsDataURL(file);
