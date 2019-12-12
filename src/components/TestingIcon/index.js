@@ -7,7 +7,7 @@ import classes from "./TestingIcon.module.scss";
 function TestingIcon({ icon, setIcon, changeHandlerWrapper }) {
   const fileInputRef = React.createRef();
 
-  const handleIconWrapped = () => changeHandlerWrapper(setIcon, fileInputRef);
+  const handleIconWrapped = changeHandlerWrapper(setIcon, fileInputRef);
   const id = getUniqId();
   return (
     <>

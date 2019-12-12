@@ -1,9 +1,8 @@
 import optimizeImage from "../../helpers/optimizeImage";
 import React from "react";
 
-
-export default function FileInputHOC (ImportComponent) {
-  const handleFileAsDataUri = (file) => {
+export default function FileInputHOC(ImportComponent) {
+  const handleFileAsDataUri = file => {
     return new Promise(resolve => {
       const reader = new FileReader();
       reader.onload = (function(file) {
@@ -28,13 +27,9 @@ export default function FileInputHOC (ImportComponent) {
     });
   };
 
-
-  return (props) => {
+  return props => {
     return (
-      <ImportComponent
-        {...props}
-        changeHandlerWrapper={changeHandlerWrapper}
-      />
-    )
-  }
+      <ImportComponent {...props} changeHandlerWrapper={changeHandlerWrapper} />
+    );
+  };
 }

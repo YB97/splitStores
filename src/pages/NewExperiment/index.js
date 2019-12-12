@@ -12,6 +12,12 @@ import StyledSelect from "../../components/StyledSelect";
 import CardRadioControl from "../../components/CardRadioControl";
 import Footer from "../../components/Footer";
 import { URI_TO_NEW_EXPERIMENT_STEP_2 } from "../../constants";
+import {
+  TEST_SCREENSHOTS,
+  TEST_APP_NAME,
+  TEST_ICON,
+  TEST_DESCRIPTION
+} from "../../constants";
 
 import classes from "./newexperiment.module.scss";
 
@@ -111,10 +117,10 @@ class NewExperiment extends PureComponent {
       }));
     const selectPageData = [{ name: "Landing Pages" }];
     const selectElementData = [
-      { name: "Icon" },
-      { name: "Screenshots" },
-      { name: "Description" },
-      { name: "App Name" }
+      { name: TEST_ICON },
+      { name: TEST_SCREENSHOTS },
+      { name: TEST_DESCRIPTION },
+      { name: TEST_APP_NAME }
     ];
 
     return (
