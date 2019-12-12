@@ -1,7 +1,7 @@
 import { observable, action, computed } from "mobx";
 
 class NewExperimentStore {
-  @observable isValid = true;
+  @observable isValid;
   @observable appName;
   @observable appStore;
   @observable device;
