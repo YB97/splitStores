@@ -17,7 +17,6 @@ import TestingIcon from "../../../components/TestingIcon";
 import {
   TEST_ICON,
   TEST_SCREENSHOTS,
-  TEST_APP_NAME,
   TEST_DESCRIPTION
 } from "../../../constants";
 import {
@@ -126,6 +125,7 @@ class NewExperimentStep2 extends PureComponent {
         if (Object.values(this.state.errors).every(error => error === false)) {
           this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
         }
+        this.props.history.push(URI_TO_NEW_EXPERIMENT_STEP_3);
       }
     );
   };
@@ -138,8 +138,6 @@ class NewExperimentStep2 extends PureComponent {
     const {
       testPage,
       elementForTest,
-      // appName,
-      // setAppName,
       reviewsCount,
       setReviewsCount,
       developerName,
@@ -467,7 +465,7 @@ class NewExperimentStep2 extends PureComponent {
                     />
                   </div>
                 </div>
-                {elementForTest !== TEST_SCREENSHOTS && (
+                {/* {elementForTest !== TEST_SCREENSHOTS && (
                   <div className={classes.dropzone}>
                     <div className={classes["label"]}>Screenshots</div>
                     <Dropzone
@@ -476,7 +474,7 @@ class NewExperimentStep2 extends PureComponent {
                       error={errors.screenshots}
                     />
                   </div>
-                )}
+                )} */}
                 {elementForTest !== TEST_ICON && (
                   <div className={classes["test-icon"]}>
                     <TestingIcon

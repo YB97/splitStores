@@ -66,6 +66,16 @@ class NewExperimentStep3 extends PureComponent {
     }, 2000);
   };
 
+  onClickHandler = () => {
+    this.handleModalOpen();
+    // history.push(URI_TO_EXPERIMENTS);
+  };
+
+  setIcon = variation => file => {
+    variation.isValid = true;
+    variation.uploadedIcon = file;
+  };
+
   render() {
     const steps = ["set up", "details", "variations"];
     const {
@@ -81,16 +91,6 @@ class NewExperimentStep3 extends PureComponent {
       isValidVariations
     } = this.props.stores.newExperiments;
     const { history } = this.props;
-
-    const onClickHandler = () => {
-      this.handleModalOpen();
-      // history.push(URI_TO_EXPERIMENTS);
-    };
-
-    const setIcon = variation => file => {
-      variation.isValid = true;
-      variation.uploadedIcon = file;
-    };
 
     return (
       <div className={classes.newexperiment}>
@@ -115,7 +115,7 @@ class NewExperimentStep3 extends PureComponent {
                       variationName={variation.name}
                       onInputChange={e => setVariationName(e.target.value, id)}
                       icon={variation.uploadedIcon}
-                      setIcon={setIcon(variation)}
+                      setIcon={this.setIcon(variation)}
                       screenshots={variation.uploadedScreenshots}
                       description={variation.description}
                       appName={variation.appName}
@@ -153,7 +153,7 @@ class NewExperimentStep3 extends PureComponent {
                   <div className={classes.butonGroupWrap}>
                     <Button
                       disabled={!isValidVariations}
-                      click={onClickHandler}
+                      click={this.onClickHandler}
                       size="small"
                     >
                       Publish experiment
