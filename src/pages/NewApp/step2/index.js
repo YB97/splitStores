@@ -10,11 +10,12 @@ import StyledSelect from "../../../components/StyledSelect";
 import CheckboxCards from "../../../components/CheckboxCards";
 import Footer from "../../../components/Footer";
 import FileInput from "../../../components/FileInput";
+import withStore from "../../../hocs/withStore";
 import { URI_TO_NEW_APPS } from "../../../constants";
 
 import classes from "./step2.module.scss";
 
-export default function() {
+const AppStep2 = props => {
   const defaultStateStep2 = {
     appName: {
       value: ""
@@ -30,8 +31,8 @@ export default function() {
     history.push(URI_TO_NEW_APPS);
   };
 
-  const setImage = (file) => {
-    setStep2({ ...step2, file});
+  const setImage = file => {
+    setStep2({ ...step2, file });
   };
 
   const selectHandler = e => {
@@ -85,10 +86,7 @@ export default function() {
             </Grid>
             <Grid item lg={5} xs={12}>
               <div className={classes["icon-wrapper"]}>
-                <FileInput
-                  setImage={setImage}
-                  image={step2.file}
-                />
+                <FileInput setImage={setImage} image={step2.file} />
               </div>
             </Grid>
           </Grid>
@@ -97,10 +95,16 @@ export default function() {
           <Button>ADD APPLICATION</Button>
         </div>
       </Container>
-      <Footer />
+      {!props.stores.loading && (
+        <div className={classes.footer}>
+          <Footer />
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default withStore(AppStep2);
 
 const appleStoreData = [
   { name: "Books" },

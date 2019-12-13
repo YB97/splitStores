@@ -46,51 +46,57 @@ class Variation extends PureComponent {
         </div>
         <Spinner page>
           <Container>
-            <div className={classes.control}>
-              <Button
-                variant="outlined"
-                color="#244bdd"
-                click={this.backBtnHandler}
-              >
-                Back
-              </Button>
-            </div>
-            <div className={classes.tags}>
-              <Tags tags={data.tags || []} />
-            </div>
-            <div className={classes.info}>
-              <Info
-                title={data.name}
-                downloadsCount={data.downloads_count}
-                rating={this.stores.variations.avgRating || 0}
-                variationImgUrl={data && data.icon}
-                ageRating={data.age}
-              />
-            </div>
-            <div className={classes.overview}>
-              <Overview
-                screenshots={data.screenshots}
-                descriptionPreview={data.description_preview}
-                descriptionText={data.description_text}
-              />
-            </div>
-            <div className={classes.ratings}>
-              <Ratings
-                reviews={data.reviews || [0]}
-                rating={this.stores.variations.avgRating || 0}
-                reviewsCount={this.stores.variations.reviewsCount || 0}
-              />
-            </div>
-            <div className={classes.developer}>
-              <div className={classes["developer-title"]}>
-                <span className={classes["developer-title-text"]}>
-                  Developer
-                </span>
+            <div className={classes.wrapper}>
+              <div className={classes.control}>
+                <Button
+                  variant="outlined"
+                  color="#244bdd"
+                  click={this.backBtnHandler}
+                >
+                  Back
+                </Button>
               </div>
-              <h4 className={classes["developer-name"]}>{data.developer}</h4>
+              <div className={classes.tags}>
+                <Tags tags={data.tags || []} />
+              </div>
+              <div className={classes.info}>
+                <Info
+                  title={data.name}
+                  downloadsCount={data.downloads_count}
+                  rating={this.stores.variations.avgRating || 0}
+                  variationImgUrl={data && data.icon}
+                  ageRating={data.age}
+                />
+              </div>
+              <div className={classes.overview}>
+                <Overview
+                  screenshots={data.screenshots}
+                  descriptionPreview={data.description_preview}
+                  descriptionText={data.description_text}
+                />
+              </div>
+              <div className={classes.ratings}>
+                <Ratings
+                  reviews={data.reviews || [0]}
+                  rating={this.stores.variations.avgRating || 0}
+                  reviewsCount={this.stores.variations.reviewsCount || 0}
+                />
+              </div>
+              <div className={classes.developer}>
+                <div className={classes["developer-title"]}>
+                  <span className={classes["developer-title-text"]}>
+                    Developer
+                  </span>
+                </div>
+                <h4 className={classes["developer-name"]}>{data.developer}</h4>
+              </div>
             </div>
-            <Footer />
           </Container>
+          {!this.props.stores.loading && (
+            <div className={classes.footer}>
+              <Footer />
+            </div>
+          )}
         </Spinner>
       </div>
     );

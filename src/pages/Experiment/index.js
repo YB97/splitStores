@@ -222,7 +222,11 @@ class Experiment extends PureComponent {
             </Container>
           </div>
           <NavBar items={items} />
-          <Footer />
+          {!this.props.stores.loading && (
+            <div className={classes.footer}>
+              <Footer />
+            </div>
+          )}
         </Spinner>
       </div>
     );

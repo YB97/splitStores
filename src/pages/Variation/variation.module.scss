@@ -1,8 +1,14 @@
 .variation {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
+
 .control {
   margin-top: 42px;
+}
+
+.wrapper {
+  padding-bottom: 30px;
 }
 
 .tags {
@@ -32,4 +38,8 @@
   margin: 0;
   font-weight: bold;
   font-size: 18px;
+}
+
+.footer {
+  margin-top: auto;
 }

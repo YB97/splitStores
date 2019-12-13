@@ -1,6 +1,8 @@
 .newexperiment {
   color: #333;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -10,6 +12,7 @@
 .wrapper {
   margin-top: 70px;
   margin-bottom: 8px;
+  padding-bottom: 30px;
 }
 
 .mainTitleWrapper {
@@ -82,4 +85,7 @@
   margin-left: 8px;
   display: inline-flex;
   align-items: center;
+}
+.footer {
+  margin-top: auto;
 }

@@ -1,4 +1,6 @@
 .newapp {
+  display: flex;
+  flex-direction: column;
   background: #fafafa;
   min-height: 100vh;
 }
@@ -18,4 +20,10 @@
 }
 .content-title {
   text-align: center;
+}
+.footer {
+  margin-top: auto;
+}
+.content-wrapper {
+  padding-bottom: 30px;
 }

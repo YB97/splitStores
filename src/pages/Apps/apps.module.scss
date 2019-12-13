@@ -1,4 +1,6 @@
 .apps {
+  display: flex;
+  flex-direction: column;
   position: relative;
   background: #fafafa;
   min-height: 100vh;
@@ -30,4 +32,8 @@
 }
 .card {
   margin-top: 15px;
+}
+
+.footer {
+  margin-top: auto;
 }

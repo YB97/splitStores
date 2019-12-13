@@ -1,6 +1,8 @@
 .exp {
   background: #fafafa;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -41,4 +43,12 @@
 
 .no-exp-text {
   margin-bottom: 30px;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.content-wrapper {
+  padding-bottom: 30px;
 }

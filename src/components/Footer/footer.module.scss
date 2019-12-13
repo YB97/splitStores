@@ -1,3 +1,12 @@
-.footer {
-  padding-bottom: 70px;
+.copyright {
+  vertical-align: middle;
+  color: #7a7a7a;
+}
+
+.wrapper {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 15px;
 }

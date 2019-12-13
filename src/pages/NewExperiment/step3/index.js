@@ -193,7 +193,11 @@ class NewExperimentStep3 extends PureComponent {
             <Button click={this.backToExp}>back to experiments</Button>
           </SimpleModal>
         </Container>
-        <Footer />
+        {!this.props.stores.loading && (
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        )}
       </div>
     );
   }

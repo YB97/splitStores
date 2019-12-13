@@ -323,7 +323,11 @@ class NewExperiment extends PureComponent {
             </Grid>
           </Grid>
         </Container>
-        <Footer />
+        {!this.props.stores.loading && (
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        )}
       </div>
     );
   }

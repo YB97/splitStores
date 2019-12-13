@@ -75,7 +75,11 @@ class Apps extends PureComponent {
             </div>
           </Container>
         </Spinner>
-        <Footer />
+        {!this.props.stores.loading && (
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        )}
       </div>
     );
   }

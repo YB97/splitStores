@@ -187,7 +187,7 @@ class NewExperimentStep2 extends PureComponent {
     const currencyList = [{ name: "USD" }, { name: "EUR" }, { name: "RUB" }];
 
     return (
-      <>
+      <div className={classes['step-two']}>
         <div>
           <Header />
         </div>
@@ -500,8 +500,12 @@ class NewExperimentStep2 extends PureComponent {
             </Grid>
           </Grid>
         </Container>
-        <Footer />
-      </>
+        {!this.props.stores.loading && (
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        )}
+      </div>
     );
   }
 }

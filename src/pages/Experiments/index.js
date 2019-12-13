@@ -55,7 +55,7 @@ class Experiments extends PureComponent {
     const { getExperimentsByAppId } = this.props.stores.experiments;
 
     const app = appsList.find(app => app.name === name);
-    
+
     setApp(app);
     getExperimentsByAppId(app.id);
     history.push(urlBuilder("experiments", { id: app.id }));
@@ -75,50 +75,60 @@ class Experiments extends PureComponent {
         </div>
         <Spinner page>
           <Container>
-            <div className={classes.select}>
-              <StyledSelect
-                data={appsList}
-                setAsDefault={activeApp && activeApp.name}
-                onClickHandler={this.onAppSelect}
-                width="300px"
-                noBlankValue
-              />
-            </div>
-            <div className={classes.title}>
-              <div className={classes["title-text"]}>
-                <Title title="Experiments" />
-              </div>
-              {Boolean(experiments.length) && (
-                <Button click={this.clickHandler}>CREATE NEW EXPERIMENT</Button>
-              )}
-            </div>
-            {!experiments.length && (
-              <div className={classes["no-exp-wrapper"]}>
-                <strong className={classes["no-exp-text"]}>
-                  You don't have any experiments
-                </strong>
-                <Button click={this.clickHandler}>CREATE NEW EXPERIMENT</Button>
-              </div>
-            )}
-            {!!experiments.length &&
-              experiments.map(exp => (
-                <Card
-                  key={`${exp.experiment_name} ${exp.experiment_id}`}
-                  type="experiments"
-                  title={exp.experiment_name}
-                  variationsCount={exp.variations_count}
-                  visitorsCount={exp.visitors_count}
-                  clicksCount={exp.clicks_count}
-                  publishDate={moment(exp.creation_date).format("DD/MM/YYYY")}
-                  storeType={activeApp.store}
-                  onClickHandler={() =>
-                    this.onCardClickHandler(id, exp.experiment_id)
-                  }
+            <div className={classes['content-wrapper']}>
+              <div className={classes.select}>
+                <StyledSelect
+                  data={appsList}
+                  setAsDefault={activeApp && activeApp.name}
+                  onClickHandler={this.onAppSelect}
+                  width="300px"
+                  noBlankValue
                 />
-              ))}
+              </div>
+              <div className={classes.title}>
+                <div className={classes["title-text"]}>
+                  <Title title="Experiments" />
+                </div>
+                {Boolean(experiments.length) && (
+                  <Button click={this.clickHandler}>
+                    CREATE NEW EXPERIMENT
+                  </Button>
+                )}
+              </div>
+              {!experiments.length && (
+                <div className={classes["no-exp-wrapper"]}>
+                  <strong className={classes["no-exp-text"]}>
+                    You don't have any experiments
+                  </strong>
+                  <Button click={this.clickHandler}>
+                    CREATE NEW EXPERIMENT
+                  </Button>
+                </div>
+              )}
+              {!!experiments.length &&
+                experiments.map(exp => (
+                  <Card
+                    key={`${exp.experiment_name} ${exp.experiment_id}`}
+                    type="experiments"
+                    title={exp.experiment_name}
+                    variationsCount={exp.variations_count}
+                    visitorsCount={exp.visitors_count}
+                    clicksCount={exp.clicks_count}
+                    publishDate={moment(exp.creation_date).format("DD/MM/YYYY")}
+                    storeType={activeApp.store}
+                    onClickHandler={() =>
+                      this.onCardClickHandler(id, exp.experiment_id)
+                    }
+                  />
+                ))}
+            </div>
           </Container>
         </Spinner>
-        <Footer />
+        {!this.props.stores.loading && (
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        )}
       </div>
     );
   }
